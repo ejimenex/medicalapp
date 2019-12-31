@@ -1,0 +1,87 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'c.edit' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'name' | translate }}</label>
+              <span *ngIf='!user.name' class="text-danger"> * </span>
+              <input readonly [(ngModel)]='user.name' [placeholder]="'name' | translate" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'surName' | translate }}</label>
+              <span *ngIf='!user.surName' class="text-danger"> * </span>
+              <input readonly [(ngModel)]='user.surName' [placeholder]="'surName' | translate" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+           
+            <div class="col-md-6">
+              <label class="">{{ 'userName' | translate }}</label>
+              <span *ngIf='!user.userName' class="text-danger"> * </span>
+              <input readonly [(ngModel)]='user.userName' [placeholder]="'userName' | translate"  class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="">{{ 'password' | translate }}</label>
+                <span *ngIf='!user.password' class="text-danger"> * </span>
+                <input readonly type="password"  [placeholder]="'password' | translate" class="form-control">
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label class="">{{ 'mail' | translate }}</label>
+                <span *ngIf='!user.mail' class="text-danger"> * </span>
+                <input [(ngModel)]='user.mail' [placeholder]="'exampleMail' | translate" class="form-control">
+              </div>
+            <div class="col-md-6">
+            
+              <label class="switch switch-label switch-pill switch-primary"> {{ 'isProbatory' | translate }}
+                <input checked="" class="switch-input" [(ngModel)]='user.isProbatory' type="checkbox">
+                <span class="switch-slider" data-checked="✓" data-unchecked="✕"> </span>
+              </label></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label class="">{{ 'language' | translate }}</label>
+                <span *ngIf='!user.languageId' class="text-danger"> * </span>
+   <select disabled [(ngModel)]='user.languageId' class="form-control">
+       <option  *ngFor='let item of language' [ngValue]='item.code'>{{item.name}}</option>
+   </select>
+              </div>
+            <div class="col-md-6">
+              <label class="">{{ 'rol' | translate }}</label>
+              <select [(ngModel)]='user.rolId' class="form-control">
+                <option *ngFor='let item of role' [ngValue]='item.id'>{{item.rolName}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-md-6">
+            
+                <label class="switch switch-label switch-pill switch-primary"> {{ 'isActive' | translate }}
+                  <input checked="" class="switch-input" [(ngModel)]='user.isActive' type="checkbox">
+                  <span class="switch-slider" data-checked="✓" data-unchecked="✕"> </span>
+                </label></div>
+                <div class="col-md-6">
+            
+                    <label class="switch switch-label switch-pill switch-primary"> {{ 'isLocked' | translate }}
+                      <input checked="" class="switch-input" [(ngModel)]='user.isLocked' type="checkbox">
+                      <span class="switch-slider" data-checked="✓" data-unchecked="✕"> </span>
+                    </label></div>
+          </div>
+        
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost-info" (click)='edit()'><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">Cerrar</button>
+           
+        </div>
