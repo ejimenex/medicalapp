@@ -52,8 +52,31 @@
     "changePassword":"Change Password",
     "setting":"Setting",
     "ars":"Health Risk Managers",
-    "country":"Country"
-
-
+    "country":"Country",
+    "medicalCenter":"Medical Centers",
+    "phone1":"Phone 1",
+    "phone2":"Phone 2",
+    "slogan":"Slogan",
+    "city":"City",
+    "address":"Address",
+    "logo":"Logo",
+    "close":"Close",
+    "newPassword":"New Password",
+    "changepasswordSucess":"Password changed sucessfully",
+    "notcoins":"Old password are not the same",
+    "oldPassword":" Old Password",
+    "personalData":"Personal Data",
+    "profesionalData":"Profesional Data",
+    "userData":"User Data",
+    "exequatur":"Medical Code",
+    "male":"Male",
+    "female":"Female",
+    "nationality":"Nationality",
+    "medicalSpecialties":"Medical Specialties",
+    "specialties":"Specialties",
+    "treament":"Treament",
+    "bornDate":"Born Date",
+    "collegeDegree":"College Degree",
+    "doctors":"Doctors"
 
   }

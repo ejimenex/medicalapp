@@ -4,5 +4,8 @@ export const endpoint = {
     language:'language',
     role:'role',
     account:'account',
-    ars:'ars'
+    ars:'ars',
+    medicalCenter:'medicalCenter',
+    medicalSpeciality:'medicalSpecility',
+    doctor:'doctor'
   };

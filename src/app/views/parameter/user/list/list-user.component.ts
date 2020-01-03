@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit {
       { header: this.translate.instant('name'), value: 'name' },
       { header: this.translate.instant('userName'), value: 'userName' },
       { header: this.translate.instant('mail'), value: 'mail' },
-      { header: this.translate.instant('rol'), value: 'rolName' },
+      { header: this.translate.instant('rol'), value: 'rolName' }
     
     ];
   }

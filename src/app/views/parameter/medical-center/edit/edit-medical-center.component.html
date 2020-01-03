@@ -1,0 +1,77 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'c.edit' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+          
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'name' | translate }}</label>
+              <span *ngIf='!center.name' class="text-danger"> * </span>
+              <input [(ngModel)]='center.name' [placeholder]="'name' | translate" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'country' | translate }}</label>
+              <span *ngIf='!center.countryId' class="text-danger"> * </span>
+              <select [(ngModel)]='center.countryId' class="form-control">
+                  <option *ngFor='let item of country' [ngValue]='item.id'>{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'city' | translate }}</label>            
+              <input [(ngModel)]='center.city' [placeholder]="'city' | translate" class="form-control">
+            </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'address' | translate }}</label>            
+              <input [(ngModel)]='center.address' [placeholder]="'address' | translate" class="form-control">
+            </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'phone1' | translate }}</label>            
+              <input [(ngModel)]='center.phone1' [placeholder]="'phone1' | translate" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="">{{ 'phone2' | translate }}</label>            
+                <input [(ngModel)]='center.phone2' [placeholder]="'phone2' | translate" class="form-control">
+              </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'slogan' | translate }}</label>            
+              <input [(ngModel)]='center.slogan' [placeholder]="'slogan' | translate" class="form-control">
+            </div>
+          
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'logo' | translate }}</label>            
+              <input type="file" class="form-control">
+            </div>
+          
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost-info" (click)='edit()'><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">{{ 'close' | translate }}</button>
+           
+        </div>
+      </div>
+      <!--/.col-->
+  
+  

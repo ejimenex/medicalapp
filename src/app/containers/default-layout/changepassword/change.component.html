@@ -1,0 +1,43 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'changePassword' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+           
+            <div class="row">
+                <div class="col-md-12">
+                  <label class="">{{ 'oldPassword' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                
+                    <input [(ngModel)]='oldPassword' type="password" class="form-control">
+                  
+                
+                </div>
+         
+              </div>
+      
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'newPassword' | translate }}</label>
+              <span class="text-danger"> * </span>
+            
+                <input [(ngModel)]='newPassword' type="password" class="form-control">
+              
+            
+            </div>
+     
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost-info" (click)='changePassword()'><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">{{ 'close' | translate }}</button>
+           
+        </div>
+      </div>
+      <!--/.col-->
+  
+  

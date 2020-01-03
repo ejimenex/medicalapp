@@ -8,6 +8,11 @@ import { UserListComponent } from './user/list/list-user.component';
 import { UserAddComponent } from './user/create/create-user.component';
 import { ArsAddComponent } from './ars/create/create-ars.component';
 import { ArsListComponent } from './ars/list/list-ars.component';
+import { MedicalCenterService } from '../../service/medical-center.service';
+import { MedicalCenterListComponent } from './medical-center/list/medical-center-list.component';
+import { MedicalCenterAddComponent } from './medical-center/create/create-medical-center.component';
+import { DoctorListComponent } from './doctor/list/doctor-list.component';
+import { DoctorAddComponent } from './doctor/create/doctor-create.component';
 
 
 
@@ -59,7 +64,38 @@ const routes: Routes = [
         component: ArsAddComponent,
         data: {
           title: 'Add Ars'
+        },
+          
+      },
+      {
+        path: 'medicalcenter',
+        component: MedicalCenterListComponent,
+        data: {
+          title: 'Medical Center'
         }      
+      },
+      {
+        path: 'medicalcenter/add',
+        component: MedicalCenterAddComponent,
+        data: {
+          title: 'Add Medical Center'
+        },
+          
+      },
+      {
+        path: 'doctor',
+        component: DoctorListComponent,
+        data: {
+          title: 'Doctor'
+        }      
+      },
+      {
+        path: 'doctor/add',
+        component: DoctorAddComponent,
+        data: {
+          title: 'Add Doctor'
+        },
+          
       },
     ]
   }

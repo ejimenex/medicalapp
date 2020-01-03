@@ -52,7 +52,32 @@
     "changePassword":"Cambiar Contraseña",
     "setting":"Configuracion",
     "ars":"Administradoras de Riesgo de Salud",
-    "country":"Pais"
+    "country":"Pais",
+    "medicalCenter":"Centros Medicos",
+    "phone1":"Teléfono 1",
+    "phone2":"Teléfono 2",
+    "slogan":"Eslogan",
+    "city":"Ciudad",
+    "address":"Dirección",
+    "logo":"Logo",
+    "close":"Cerrar",
+    "newPassword":"Nueva Contraseña",
+   "changepasswordSucess":"Cambio de Contrasena exitoso",
+   "notcoins":"La vieja contraseña no coincide",
+   "oldPassword":"Vieja Contraseña",
+   "personalData":"Datos Personales",
+   "profesionalData":"Datos Profesionales",
+   "userData":"Datos Usuarios",
+   "exequatur":"Código de Medico",
+   "male":"Masculino",
+  "female":"Femenino",
+  "nationality":"Nacionalidad",
+  "medicalSpecialties":"Especialidades Medicas",
+  "specialties":"Especialidades",
+  "treament":"Tratamiento",
+  "bornDate":"Fecha Nacimiento",
+  "collegeDegree":"Titulo Universitario",
+  "doctors":"Medicos"
 
 
   }

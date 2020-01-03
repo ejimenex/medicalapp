@@ -28,14 +28,19 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
   }
 
   getAll(initialLoad: boolean, filter: any, page: number): Observable<TEntity[]> {
+    debugger
+
+    if(filter.orderBy)
+     filter.orderBy=` &$orderby=${filter.orderBy} desc`
+     else filter.orderBy= ''
 
     if (!initialLoad) {
       
-      let url = this.baseUrl + `?$top=10&$skip=${page}&$filter=contains(${filter.field},'${filter.value}') eq true`
+      let url = this.baseUrl + `?$top=10&$skip=${page}&$filter=contains(${filter.field},'${filter.value}') eq true ${filter.orderBy}`
       return this._httpClient.get<TEntity[]>(url);
     }
-    return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0');
-    //return  this.requestResolver(data);
+    return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0 '+ filter.orderBy);
+
   }
 
   get(): Observable<TEntity[]> {

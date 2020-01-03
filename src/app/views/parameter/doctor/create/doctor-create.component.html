@@ -1,0 +1,169 @@
+<div class="animated fadeIn">
+
+ 
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header bg-dark">
+            <i class="fa fa-plus"></i> {{ 'addNew' | translate }}
+
+        
+          </div>
+          <div class="card-body">
+            <div class="col-lg-12">
+            <div class="text-right">
+              <button class="btn btn-ghost-info" (click)='save()'><i class="fa fa-save"></i> {{ 'c.add' | translate }}</button>
+            </div>
+          </div>
+     
+          <hr>
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+        
+          <fieldset><legend>{{ 'personalData' | translate }}</legend>
+            <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'name' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.name' class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="">{{ 'surName' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.surName' class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'phone1' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.phone1' class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="">{{ 'phone2' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.phone2' class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'mail' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.mail' class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="">{{ 'country' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.exequatur' class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'city' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.mail' class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="">{{ 'nationality' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.exequatur' class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'document' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.documentId' class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="">{{ 'bornDate' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input type=date [(ngModel)]='doctor.bornDate' class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'sex' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <select class="form-control" [(ngModel)]='doctor.sex'>
+                      <option *ngFor='let item of sexList' [ngValue]='item.value'>{{item.header}}</option>
+                  </select>
+                </div>
+            
+              </div>
+        </fieldset>
+        <fieldset>
+            <legend>{{ 'profesionalData' | translate }}</legend>
+            <div class="row">
+                <div class="col-md-4">
+                  <label class="">{{ 'treament' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <select class="form-control" [(ngModel)]='doctor.treament'>
+                    <option *ngFor='let item of treament' [ngValue]='item.value'>{{item.header}}</option>
+                </select>
+                </div>
+                <div class="col-md-4">
+                  <label class="">{{ 'exequatur' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.exequatur' class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="">{{ 'collegeDegree' | translate }}</label>
+                    <span class="text-danger"> * </span>
+                    <input type="file" class="form-control">
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="">{{ 'medicalSpecialties' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <select class="form-control" [(ngModel)]='doctor.treament'>
+                    <option *ngFor='let item of treament' [ngValue]='item.value'>{{item.header}}</option>
+                </select>
+                </div>
+              
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+              <table class="table table-striped">
+                  <thead><tr>
+                      <th> {{ 'specialties' | translate }} </th>
+                      <th>  {{ 'c.delete' | translate }}</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+              </table>
+                </div>
+              
+              </div>
+        </fieldset>
+        <fieldset><legend>{{ 'userData' | translate }}</legend>
+            <div class="row">
+                <div class="col-md-6">
+                  <label class="">{{ 'userName' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input [(ngModel)]='doctor.documentId' class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="">{{ 'password' | translate }}</label>
+                  <span class="text-danger"> * </span>
+                  <input type=date [(ngModel)]='doctor.bornDate' class="form-control">
+                </div>
+              </div>
+        </fieldset>
+      
+     
+     
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+  

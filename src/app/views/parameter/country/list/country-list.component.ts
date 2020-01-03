@@ -27,6 +27,7 @@ export class CountryListComponent implements OnInit {
   
   }
   ngOnInit() {
+    
     this.getAll();
     this.filters = [
       { header: this.translate.instant('name'), value: 'name' },
@@ -50,18 +51,21 @@ export class CountryListComponent implements OnInit {
     this.router.navigate(['parameter/country/add'])
   }
   getAll( ) {
+    this.filter.orderBy='id';
     this.countryService.getAll(true,this.filter,this.page).subscribe(response => {
 
       this.countries = response;
     })
   }
   getFiltered(){
+    this.filter.orderBy='id';
     this.countryService.getAll(false,this.filter,this.page).subscribe(response => {
 
       this.countries = response;
     })
   }
   changePage(next:boolean){
+    this.filter.orderBy='id';
     this.filter.value=!this.filter.value?'':!this.filter.value;
     
     if(!this.filter.field)this.filter.field='name';

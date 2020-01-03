@@ -5,14 +5,14 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header bg-dark">
-            <i class="fa fa-align-justify"></i> {{ 'ars' | translate }}
+            <i class="fa fa-align-justify"></i> {{ 'medicalCenter' | translate }}
 
         
           </div>
           <div class="card-body">
             <div class="col-lg-12">
               <div class="text-right">
-                <button class="btn btn-success btn-square" (click)='newArs()'><i class="fa fa-plus"></i> {{ 'new' | translate }}</button>
+                <button class="btn btn-success btn-square" (click)='newMedicalCenter()'><i class="fa fa-plus"></i> {{ 'new' | translate }}</button>
               </div>
             </div>
             <hr>
@@ -55,16 +55,18 @@
               <thead>
                 <tr>
                     <th>{{ 'name' | translate }}</th>
+                    <th>{{ 'city' | translate }}</th>
                   <th>{{ 'country' | translate }}</th>
-
+                  <th>{{ 'phone1' | translate }}</th>
                   <th>{{ 'actions' | translate }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor='let item of arss'>
+                <tr *ngFor='let item of medicalCenter'>
                   <td>{{item.name}}</td>
-                  <td>{{item.country}}</td>
-                 
+                  <td>{{item.city}}</td>
+                  <td>{{item.countryName}}</td>
+                  <td>{{item.phone1}}</td>
                   <td>
                     <button (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-square"><i class="fa fa-trash"></i> {{ 'c.delete' | translate }}</button>
                     <button (click)=(openEditView(item.id)) class="btn btn-outline-primary btn-square"><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>

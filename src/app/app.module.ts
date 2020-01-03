@@ -16,8 +16,10 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import { DefaultLayoutComponent } from './containers';
+import { ChangePasswordComponent} from './containers/default-layout/changepassword/change.component';
 
 import { P404Component } from './views/error/404.component';
+
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { AccountService } from './service/account.service';
@@ -45,7 +47,7 @@ import {
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 import { FormsModule } from '@angular/forms';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -66,6 +68,8 @@ export function token() {
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgbModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: token
@@ -105,7 +109,7 @@ export function token() {
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,ChangePasswordComponent
   ],
   providers: [AlertToast,  AlertService,AccountService,TokenService
     , {
@@ -113,7 +117,7 @@ export function token() {
     useClass: HashLocationStrategy,
 
   }
-],
+],entryComponents:[ChangePasswordComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
