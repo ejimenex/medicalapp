@@ -10,7 +10,7 @@ import {TokenService} from './service/tokenService';
 })
 export class AppComponent implements OnInit {
   constructor(private router: Router, private translate:TranslateService, private tokenService:TokenService) {
-    debugger
+    
     if(!this.verify()) this.router.navigate(['/login'])
     let lang='en';
     if(localStorage.getItem("currentUser")){

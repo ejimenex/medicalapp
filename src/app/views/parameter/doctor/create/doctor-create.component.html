@@ -1,169 +1,189 @@
 <div class="animated fadeIn">
 
- 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header bg-dark">
-            <i class="fa fa-plus"></i> {{ 'addNew' | translate }}
 
-        
-          </div>
-          <div class="card-body">
-            <div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <i class="fa fa-plus"></i> {{ 'addNew' | translate }}
+
+
+        </div>
+        <div class="card-body">
+          <div class="col-lg-12">
             <div class="text-right">
-              <button class="btn btn-ghost-info" (click)='save()'><i class="fa fa-save"></i> {{ 'c.add' | translate }}</button>
+              <button class="btn btn-ghost-info" (click)='save()'><i class="fa fa-save"></i>
+                {{ 'c.add' | translate }}</button>
             </div>
           </div>
-     
+
           <hr>
           <div class="row">
             <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
           </div>
-        
-          <fieldset><legend>{{ 'personalData' | translate }}</legend>
+
+          <fieldset>
+            <legend>{{ 'personalData' | translate }}</legend>
             <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'name' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.name' class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="">{{ 'surName' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.surName' class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="">{{ 'name' | translate }}</label>
+                <span *ngIf='!doctor.name' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.name' class="form-control">
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'phone1' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.phone1' class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="">{{ 'phone2' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.phone2' class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="">{{ 'surName' | translate }}</label>
+                <span *ngIf='!doctor.surName' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.surName' class="form-control">
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'mail' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.mail' class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="">{{ 'country' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.exequatur' class="form-control">
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="">{{ 'phone1' | translate }}</label>
+                <span  class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.phone1' class="form-control">
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'city' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.mail' class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="">{{ 'nationality' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.exequatur' class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="">{{ 'phone2' | translate }}</label>
+                <span *ngIf='!doctor.cellPhone' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.cellPhone' class="form-control">
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'document' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.documentId' class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="">{{ 'bornDate' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input type=date [(ngModel)]='doctor.bornDate' class="form-control">
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="">{{ 'mail' | translate }}</label>
+                <span *ngIf='!doctor.mail' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.mail' class="form-control">
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'sex' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <select class="form-control" [(ngModel)]='doctor.sex'>
-                      <option *ngFor='let item of sexList' [ngValue]='item.value'>{{item.header}}</option>
-                  </select>
-                </div>
-            
+              <div class="col-md-6">
+                <label class="">{{ 'country' | translate }}</label>
+                <span *ngIf='!selectedCountry' class="text-danger"> * </span>
+
+                <input class="text" [ngbTypeahead]="searchCountries" [(ngModel)]="selectedCountry"
+                  (selectItem)="selectCountries($event)" [resultFormatter]="countriesFormatter"
+                  [inputFormatter]="countriesFormatter" class="form-control">
               </div>
-        </fieldset>
-        <fieldset>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="">{{ 'city' | translate }}</label>
+                <span class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.city' class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="">{{ 'nationality' | translate }}</label>
+                <span class="text-danger"> * </span>
+                <input class="text" [ngbTypeahead]="searchNationalities" [(ngModel)]="selectedNationality"
+                  (selectItem)="selectNationalities($event)" [resultFormatter]="nationalitiesFormatter"
+                  [inputFormatter]="nationalitiesFormatter" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="">{{ 'document' | translate }}</label>
+                <span *ngIf='!doctor.documentId' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.documentId' class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="">{{ 'bornDate' | translate }}</label>
+                <span *ngIf='!doctor.bornDate' class="text-danger"> * </span>
+                <input type=date [(ngModel)]='doctor.bornDate' class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="">{{ 'sex' | translate }}</label>
+                <span *ngIf='!doctor.usex' class="text-danger"> * </span>
+                <select class="form-control" [(ngModel)]='doctor.sex'>
+                  <option *ngFor='let item of sexList' [ngValue]='item.value'>{{item.header}}</option>
+                </select>
+              </div>
+
+            </div>
+          </fieldset>
+          <fieldset>
             <legend>{{ 'profesionalData' | translate }}</legend>
             <div class="row">
-                <div class="col-md-4">
-                  <label class="">{{ 'treament' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <select class="form-control" [(ngModel)]='doctor.treament'>
-                    <option *ngFor='let item of treament' [ngValue]='item.value'>{{item.header}}</option>
+              <div class="col-md-4">
+                <label class="">{{ 'treament' | translate }}</label>
+                <span class="text-danger"> * </span>
+                <select class="form-control" [(ngModel)]='doctor.treament'>
+                  <option *ngFor='let item of treament' [ngValue]='item.value'>{{item.header}}</option>
                 </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="">{{ 'exequatur' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.exequatur' class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label class="">{{ 'collegeDegree' | translate }}</label>
-                    <span class="text-danger"> * </span>
-                    <input type="file" class="form-control">
-                  </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label class="">{{ 'medicalSpecialties' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <select class="form-control" [(ngModel)]='doctor.treament'>
-                    <option *ngFor='let item of treament' [ngValue]='item.value'>{{item.header}}</option>
-                </select>
-                </div>
-              
+              <div class="col-md-4">
+                <label class="">{{ 'exequatur' | translate }}</label>
+                <span *ngIf='!doctor.exequatur' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.exequatur' class="form-control">
               </div>
-              <div class="row">
-                <div class="col-md-12">
-              <table class="table table-striped">
-                  <thead><tr>
-                      <th> {{ 'specialties' | translate }} </th>
-                      <th>  {{ 'c.delete' | translate }}</th>
-                    </tr></thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-              </table>
-                </div>
-              
+              <div class="col-md-4">
+                <label class="">{{ 'collegeDegree' | translate }}</label>
+                <span class="text-danger"> * </span>
+                <input type="file" class="form-control">
               </div>
-        </fieldset>
-        <fieldset><legend>{{ 'userData' | translate }}</legend>
+            </div>
             <div class="row">
-                <div class="col-md-6">
-                  <label class="">{{ 'userName' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input [(ngModel)]='doctor.documentId' class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="">{{ 'password' | translate }}</label>
-                  <span class="text-danger"> * </span>
-                  <input type=date [(ngModel)]='doctor.bornDate' class="form-control">
-                </div>
+              <div class="col-md-12">
+                <label class="">{{ 'medicalSpecialties' | translate }}</label>
+                <span class="text-danger"> * </span>
+           
+                <input class="text" [ngbTypeahead]="searchMedicalSpecialties" [(ngModel)]="selectedCliente"
+                  (selectItem)="selectMedicalSpecialties($event)" [resultFormatter]="spelciatiesFormatter"
+                  [inputFormatter]="spelciatiesFormatter" class="form-control m-input">
               </div>
-        </fieldset>
-      
-     
-     
-          </div>
+
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th> {{ 'specialties' | translate }} </th>
+                      <th> {{ 'c.delete' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let item of doctor.medicalSpecialityDoctor;let i=index'>
+                      <td>{{item.name}}</td>
+                      <td><button class="btn btn-outline-danger btn-pill" (click)=deleteRow(i)><i class="fa fa-trash"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>{{ 'userData' | translate }}</legend>
+            <div class="row">
+               <div class="col-md-6">
+                <label class="">{{ 'userName' | translate }}</label>
+                <span *ngIf='!doctor.users.userName' class="text-danger"> * </span>
+                <input [(ngModel)]='doctor.users.userName' class="form-control">
+              </div> 
+               <div class="col-md-6">
+                  <label class="">{{ 'password' | translate }}</label>
+                  <span *ngIf='!doctor.users.password' class="text-danger"> * </span>
+                  <input type=password [(ngModel)]='doctor.users.password' class="form-control">
+                </div> 
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+               <label class="">{{ 'langPrefferApp' | translate }}</label>
+               <span *ngIf='!doctor.users.languageId' class="text-danger"> * </span>
+               <select  class="form-control" [(ngModel)]='doctor.users.languageId'>
+                <option *ngFor='let item of lang' [ngValue]='item.code'>{{item.name}}</option>
+              </select>
+             </div> 
+            </div>  
+          </fieldset>
+
+
+
         </div>
       </div>
-      <!--/.col-->
     </div>
-    <!--/.row-->
+    <!--/.col-->
   </div>
-  
+  <!--/.row-->
+</div>

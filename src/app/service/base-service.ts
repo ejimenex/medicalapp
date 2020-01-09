@@ -28,7 +28,7 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
   }
 
   getAll(initialLoad: boolean, filter: any, page: number): Observable<TEntity[]> {
-    debugger
+    
 
     if(filter.orderBy)
      filter.orderBy=` &$orderby=${filter.orderBy} desc`
@@ -90,7 +90,7 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
 
 
   requestResolver(request: any): Observable<TEntity[]> {
-    debugger
+    
     let entity = from<TEntity[][]>(request.pipe(map(d => d["data"])))
 
     if (!isNullOrUndefined(entity)) {

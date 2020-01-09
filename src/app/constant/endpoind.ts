@@ -6,6 +6,6 @@ export const endpoint = {
     account:'account',
     ars:'ars',
     medicalCenter:'medicalCenter',
-    medicalSpeciality:'medicalSpecility',
+    medicalSpeciality:'MedicalSpeciality',
     doctor:'doctor'
   };

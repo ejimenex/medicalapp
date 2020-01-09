@@ -77,6 +77,8 @@
     "treament":"Treament",
     "bornDate":"Born Date",
     "collegeDegree":"College Degree",
-    "doctors":"Doctors"
+    "doctors":"Doctors",
+    "langPrefferApp":"Language in witch you preffer the application",
+    "lUserExist":"User Name already exists"
 
   }
