@@ -22,27 +22,39 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
       'Content-Type': 'application/json'
     })
   };
-  userId: number=0;
+  userId: number = 0;
   constructor(protected _httpClient: HttpClient, private _baseUrl: string) {
-    if(JSON.parse(localStorage.getItem("currentUser"))) this.userId = JSON.parse(localStorage.getItem("currentUser")).id;
+    if (JSON.parse(localStorage.getItem("currentUser"))) this.userId = JSON.parse(localStorage.getItem("currentUser")).id;
   }
 
   getAll(initialLoad: boolean, filter: any, page: number): Observable<TEntity[]> {
-    
 
-    if(filter.orderBy)
-     filter.orderBy=` &$orderby=${filter.orderBy} desc`
-     else filter.orderBy= ''
+
+    if (filter.orderBy)
+      filter.orderBy = ` &$orderby=${filter.orderBy} desc`
+    else filter.orderBy = ''
 
     if (!initialLoad) {
-      
+
       let url = this.baseUrl + `?$top=10&$skip=${page}&$filter=contains(${filter.field},'${filter.value}') eq true ${filter.orderBy}`
       return this._httpClient.get<TEntity[]>(url);
     }
-    return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0 '+ filter.orderBy);
+    return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0 ' + filter.orderBy);
 
   }
+  getBySpecifiedParam(initialLoad: boolean, filter: any, page: number, specifiedField: string): Observable<TEntity[]> {
+    if (filter.orderBy)
+      filter.orderBy = ` &$orderby=${filter.orderBy} desc`
+    else filter.orderBy = ''
 
+    if (!initialLoad) {
+
+      let url = this.baseUrl + `?$top=10&$skip=${page}&$filter=contains(${filter.field} ,'${filter.value}') and ${specifiedField} eq ${filter.specifiedField} eq true ${filter.orderBy}`
+      return this._httpClient.get<TEntity[]>(url);
+    }
+    return this._httpClient.get<TEntity[]>(this.baseUrl + `?$top=10&$skip=0&$filter=${specifiedField} eq ${filter.specifiedField} ` + filter.orderBy);
+
+  }
   get(): Observable<TEntity[]> {
 
     return this._httpClient.get<TEntity[]>(this.baseUrl);
@@ -53,24 +65,24 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
   }
 
   post(entity: TEntity): Observable<Object> {
-    entity['createBy']=this.userId;
+    entity['createBy'] = this.userId;
     return this._httpClient.post(this.baseUrl, entity, this.httpOptions);
   }
 
   patch(entity: TEntity, id: TKey): Observable<Object> {
-    entity['modifiedBy']=this.userId;
+    entity['modifiedBy'] = this.userId;
     return this._httpClient
       .patch(this.baseUrl + id, entity);
   }
 
   put(id: TKey, entity: TEntity, ): Observable<Object> {
-    entity['modifiedBy']=this.userId;
+    entity['modifiedBy'] = this.userId;
     return this._httpClient
       .put(this.baseUrl, entity);
   }
 
   delete(id: TKey): Observable<Object> {
-  
+
     return this._httpClient.delete(this.baseUrl + '/' + id);
   }
 
@@ -90,7 +102,7 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
 
 
   requestResolver(request: any): Observable<TEntity[]> {
-    
+
     let entity = from<TEntity[][]>(request.pipe(map(d => d["data"])))
 
     if (!isNullOrUndefined(entity)) {

@@ -13,6 +13,9 @@ import { MedicalCenterListComponent } from './medical-center/list/medical-center
 import { MedicalCenterAddComponent } from './medical-center/create/create-medical-center.component';
 import { DoctorListComponent } from './doctor/list/doctor-list.component';
 import { DoctorAddComponent } from './doctor/create/doctor-create.component';
+import { MedicalScheduleComponent } from './medicalSchedule/medicalSchedule.component';
+import { RoleGuard } from '../../service/guard';
+import { Permission } from '../../model/enum/permission.enum';
 
 
 
@@ -26,74 +29,93 @@ const routes: Routes = [
    
       {
         path: 'country',
+        canActivate:[RoleGuard],
         component: CountryListComponent,
         data: {
-          title: 'Country'
+          title: 'Country',expectedPermission: Permission.countryList
         }      
       },      
       {
         path: 'country/add',
         component: CountryAddComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Add Country'
+          title: 'Add Country',expectedPermission: Permission.countryCreate
         }      
       },
       {
         path: 'user',
+        canActivate:[RoleGuard],
         component: UserListComponent,
         data: {
-          title: 'User'
+          title: 'User',expectedPermission: Permission.userList
         }      
       },
       {
         path: 'user/add',
         component: UserAddComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Add User'
+          title: 'Add User',expectedPermission: Permission.userCreate
         }      
       },
       {
         path: 'ars',
         component: ArsListComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Ars'
+          title: 'Ars',expectedPermission: Permission.arsList
         }      
       },
       {
         path: 'ars/add',
         component: ArsAddComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Add Ars'
+          title: 'Add Ars',expectedPermission: Permission.arsCreate
         },
           
       },
       {
         path: 'medicalcenter',
         component: MedicalCenterListComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Medical Center'
+          title: 'Medical Center',expectedPermission: Permission.medicalCenterList
         }      
+      },
+      {
+        path: 'medicalschedule',
+        component: MedicalScheduleComponent,
+        canActivate:[RoleGuard],
+        data: {
+          title: 'Medical Schedule',expectedPermission: Permission.scheduleList
+        },
+          
       },
       {
         path: 'medicalcenter/add',
         component: MedicalCenterAddComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Add Medical Center'
+          title: 'Add Medical Center',expectedPermission: Permission.medicalCenterCreate
         },
           
       },
       {
         path: 'doctor',
         component: DoctorListComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Doctor'
+          title: 'Doctor',expectedPermission: Permission.doctorList
         }      
       },
       {
         path: 'doctor/add',
         component: DoctorAddComponent,
+        canActivate:[RoleGuard],
         data: {
-          title: 'Add Doctor'
+          title: 'Add Doctor',expectedPermission: Permission.doctorCreate
         },
           
       },

@@ -59,6 +59,18 @@ export const routes: Routes = [
         loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
       },
       {
+        path: 'patient',
+        loadChildren: () => import('./views/patient/patient.module').then(m => m.PatientModule)
+      },
+      {
+        path: 'not-authorized',
+        loadChildren: () => import('./views/not-auth/not-auth.module').then(m => m.NotAuthorizedModule)
+      },
+      {
+        path: 'office',
+        loadChildren: () => import('./views/doctor-office/doctor-office.module').then(m => m.DoctorOfficeModule)
+      },
+      {
         path: 'parameter',
         loadChildren: () => import('./views/parameter/parameter.module').then(m => m.ParamenterModule)
       },

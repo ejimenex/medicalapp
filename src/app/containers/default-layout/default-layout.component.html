@@ -32,8 +32,9 @@
         <div class="dropdown-header text-center"><strong>Account</strong></div>
 
 
-
+        <a class="dropdown-item" *ngIf='rol==2 || rol==3' (click)='openModalOffices()'><i class="fa fa-building-o"></i> {{'officesMyDoctor' | translate}}</a>
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> {{'perfil' | translate}}</a>
+        
         <a class="dropdown-item" (click)='openChangePassView()'><i class="fa fa-wrench"></i> {{'changePassword' | translate}}</a>
 
         <div class="divider"></div>

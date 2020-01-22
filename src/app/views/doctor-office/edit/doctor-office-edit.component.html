@@ -1,0 +1,60 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'c.edit' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+      
+        
+       
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'name' | translate }}</label>
+              <span *ngIf='!office.name' class="text-danger"> * </span>
+              <input [(ngModel)]='office.name' class="form-control">
+            </div>
+          
+          </div>
+          <div class="row">               
+            <div class="col-md-12">
+              <label class="">{{ 'specification' | translate }}</label>               
+              <input [(ngModel)]='office.specification' class="form-control">
+            </div>
+          </div>
+          <div class="row">               
+            <div class="col-md-12">
+              <label class="">{{ 'medicalCenter' | translate }}</label>               
+              <input type="text" 
+                  [ngbTypeahead]="searchMedicalCenter" 
+                  (selectItem)="selectOneMedicalCenter($event)"
+                  [(ngModel)]='selectedMedicalCenter'
+                  [resultFormatter]="formatterMedicalCenter"
+                  [inputFormatter]="formatterMedicalCenter" class="form-control m-input"
+                  >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <label class="">{{ 'urlOffice' | translate }}</label>
+               
+                <input [(ngModel)]='office.urlMapsAddress' type="text" class="form-control">
+              </div>
+            
+
+          </div>
+          <iframe *ngIf='office.urlMapsAddress' class="embed-responsive-item" style="width:100%; " frameborder="0" allowfullscreen
+          [src]="iframe"></iframe>
+      </div>
+          
+    
+          <div class="modal-footer">
+            <button class="btn btn-ghost-info" (click)='edit()'><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">Cerrar</button>
+           
+        </div>

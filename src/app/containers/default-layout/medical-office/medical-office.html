@@ -1,0 +1,34 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'officesMyDoctor' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+           
+         
+            <p>{{doctorName}}</p>
+            <hr>
+            <div *ngFor='let item of office' style="background-color:whitesmoke; margin: 10px; padding: 10PX;">
+              <p>{{item.medicalCenterName}}</p>
+              <hr>
+            <p>{{item.name}}</p>
+            <hr>
+            <p>{{item.specification}}</p>
+            <hr>
+            <iframe *ngIf='item.urlMapsAddress' class="embed-responsive-item" style="width:100%; " frameborder="0" allowfullscreen
+            [src]="transformUrl(item.urlMapsAddress)"></iframe>
+          </div>
+
+          </div>
+          <div class="modal-footer">
+    
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">{{ 'close' | translate }}</button>
+           
+        </div>
+      </div>
+      <!--/.col-->
+  
+  

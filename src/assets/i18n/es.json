@@ -54,6 +54,7 @@
     "ars":"Administradoras de Riesgo de Salud",
     "country":"Pais",
     "medicalCenter":"Centros Medicos",
+    "medicalCenterSingular":"Centro Medico",
     "phone1":"Teléfono 1",
     "phone2":"Teléfono 2",
     "slogan":"Eslogan",
@@ -79,7 +80,27 @@
   "collegeDegree":"Titulo Universitario",
   "doctors":"Medicos",
   "langPrefferApp":"Idioma en el que prefiee el sistema",
-  "lUserExist":"Nombre de Usuario ya existe"
+  "lUserExist":"Nombre de Usuario ya existe",
+"patient":"Paciente",
+"ssn":"Numero de Seguro Social",
+"documentNumber":"Numero Documento",
+"ref1":"Referencia 1",
+"ref2":"Referencia 2",
+"ref3":"Referencia 3",
+"notars":"No hay administradoras de salud para esge pais",
+"monday":"Lunes",
+"tuesday":"Martes",
+"wednesday":"Miercoles",
+"thursday":"Jueves",
+"friday":"Viernes",
+"saturday":"Sabado",
+"sunday":"Domindo",
+"maxQty":"Maxima Cantidad",
+"dotorSchedule":"Horario del Doctor",
+"doctorOffice":"Consultorio Medico",
+"specification":"Especificaciones",
+"urlOffice":"Direccion de la Oficina",
+"officesMyDoctor":"Oficinas de mi Doctor"
 
 
   }

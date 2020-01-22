@@ -21,22 +21,28 @@ export class UserListComponent implements OnInit {
 
   users = [];
   filters: ITableColumn[];
-  filter:any={};
-  page:number=0;
+  filter: any = {};
+  page: number = 0;
+  rol: number;
   constructor(private translate: TranslateService, private router: Router,
-     private alert: AlertService, private _modalService: NgbModal,
-      private userService: UserService) {
+    private alert: AlertService, private _modalService: NgbModal,
+    private userService: UserService) {
 
 
   }
   ngOnInit() {
+    this.rol = JSON.parse(localStorage.getItem("currentUser")).rol;
+    if (this.rol == 2 || this.rol == 3) {
+      this.filter.specifiedField = JSON.parse(localStorage.getItem("currentUser")).doctorId     
+
+    }
     this.getAll();
     this.filters = [
       { header: this.translate.instant('name'), value: 'name' },
       { header: this.translate.instant('userName'), value: 'userName' },
       { header: this.translate.instant('mail'), value: 'mail' },
       { header: this.translate.instant('rol'), value: 'rolName' }
-    
+
     ];
   }
   confirmDelete(id) {
@@ -54,26 +60,39 @@ export class UserListComponent implements OnInit {
   newUser() {
     this.router.navigate(['parameter/user/add'])
   }
-  getAll( ) {
-    this.userService.getAll(true,this.filter,this.page).subscribe(response => {
-
-      this.users = response;
-    })
+  getAll() {
+    if (this.rol == 1) {
+      this.userService.getAll(true, this.filter, this.page).subscribe(response => {
+        this.users = response;
+      })
+    }
+    if (this.rol == 2 || this.rol == 3) {
+      this.userService.getBySpecifiedParam(true, this.filter, this.page, 'doctorId').subscribe(response => {
+        this.users = response;
+      })
+    }
   }
-  getFiltered(){
-    this.userService.getAll(false,this.filter,this.page).subscribe(response => {
+  getFiltered() {
+    if (this.rol == 1) {
+      this.userService.getAll(false, this.filter, this.page).subscribe(response => {
+        this.users = response;
+      })
+    }
+    if (this.rol == 2 || this.rol == 3) {
+      this.userService.getBySpecifiedParam(false, this.filter, this.page, 'doctorId').subscribe(response => {
+        this.users = response;
+      })
+    }
 
-      this.users = response;
-    })
   }
-  changePage(next:boolean){
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
-    if(this.page<0) this.page=0;
-    
-    this.userService.getAll(false,this.filter,this.page).subscribe(response => {
+  changePage(next: boolean) {
+    this.filter.value = !this.filter.value ? '' : !this.filter.value;
+
+    if (!this.filter.field) this.filter.field = 'name';
+    this.page = next ? this.page += 10 : this.page -= 10;
+    if (this.page < 0) this.page = 0;
+
+    this.userService.getAll(false, this.filter, this.page).subscribe(response => {
       this.users = response;
     })
   }

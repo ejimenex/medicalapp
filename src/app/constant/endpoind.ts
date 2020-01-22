@@ -7,5 +7,10 @@ export const endpoint = {
     ars:'ars',
     medicalCenter:'medicalCenter',
     medicalSpeciality:'MedicalSpeciality',
-    doctor:'doctor'
+    doctor:'doctor',
+    patient:'patient',
+    medicalSchedule:'medicalSchedule',
+    doctorOffice:'doctorOffice',
+    permission:'permission'
+
   };

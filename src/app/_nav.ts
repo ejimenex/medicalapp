@@ -54,8 +54,24 @@ export const navItems: INavData[] = [
         name: 'Medical Center',
         url: '/parameter/medicalcenter',
         icon: 'icon-tag'
+      },
+      {
+        name: 'Medical Schedule',
+        url: '/parameter/medicalschedule',
+        icon: 'icon-tag'
       }
     ]},
+    {
+      name: 'Patients',
+      url: '/patient',
+      icon: 'icon-people',
+    }
+    ,
+    {
+      name: 'Doctor Office',
+      url: '/office',
+      icon: 'icon-people',
+    },
   {
     name: 'Base',
     url: '/base',

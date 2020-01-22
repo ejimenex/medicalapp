@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 import { ChangePasswordComponent} from './containers/default-layout/changepassword/change.component';
+import { DoctorOfficeComponent} from './containers/default-layout/medical-office/medical-office';
 
 import { P404Component } from './views/error/404.component';
 
@@ -56,6 +57,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertToast } from './service/alert-toast.service';
 import { AlertService } from './service/alert-sweet.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { DoctorOfficeService } from './service/doctorOffice.service';
+import { PermissionService } from './service/permission.service';
+import { RoleGuard } from './service/guard';
 
 export function token() {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -109,15 +113,16 @@ export function token() {
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,ChangePasswordComponent
+    DefaultLayoutComponent,
+    RegisterComponent,ChangePasswordComponent,DoctorOfficeComponent
   ],
-  providers: [AlertToast,  AlertService,AccountService,TokenService
+  providers: [AlertToast,  AlertService,AccountService,TokenService,DoctorOfficeService,RoleGuard
     , {
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
 
   }
-],entryComponents:[ChangePasswordComponent],
+],entryComponents:[ChangePasswordComponent,DoctorOfficeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

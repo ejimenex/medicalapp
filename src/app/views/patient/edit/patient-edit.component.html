@@ -1,0 +1,103 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'c.edit' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'name' | translate }}</label>
+              <span *ngIf='!patient.name' class="text-danger"> * </span>
+              <input [(ngModel)]='patient.name' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'documentNumber' | translate }}</label>
+           
+              <input [(ngModel)]='patient.documentNumber' class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span *ngIf='!patient.phone' class="text-danger"> * </span>
+              <label class="">{{ 'phone1' | translate }}</label>
+     
+              <input [(ngModel)]='patient.phone' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'ssn' | translate }}</label>
+             
+              <input [(ngModel)]='patient.sSN' class="form-control">
+            </div>
+          </div>
+        
+       
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'bornDate' | translate }}</label>
+             
+              <input [(ngModel)]='patient.bornDate' type="date" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="">{{ 'ars' | translate }}</label>
+              <span *ngIf='arss.length==0'><label class="text-primary">({{ 'notars' | translate }})</label></span>
+                <select class="form-control" [(ngModel)]='patient.arsId'>
+                  <option value=null >N/A</option>
+                  <option *ngFor='let item of arss' [ngValue]='item.id'>{{item.name}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label class="">{{ 'mail' | translate }}</label>
+               
+                <input [(ngModel)]='patient.mail'  class="form-control">
+              </div>
+            
+              
+                <div class="col-md-6">
+                  <label class="">{{ 'sex' | translate }}</label>
+               
+                  <select class="form-control" [(ngModel)]='patient.sex'>
+                    <option *ngFor='let item of sexList' [ngValue]='item.value'>{{item.header}}</option>
+                  </select>
+                </div>
+  
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <label class="">{{ 'ref1' | translate }}</label>
+               
+                <input [(ngModel)]='patient.reference1' type="text" class="form-control">
+              </div>
+            
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <label class="">{{ 'ref2' | translate }}</label>
+               
+                <input [(ngModel)]='patient.reference2'  class="form-control">
+              </div>            
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <label class="">{{ 'ref3' | translate }}</label>
+               
+                <input [(ngModel)]='patient.reference3'  class="form-control">
+              </div>
+            
+
+          </div>
+    
+          <div class="modal-footer">
+            <button class="btn btn-ghost-info" (click)='edit()'><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">Cerrar</button>
+           
+        </div>

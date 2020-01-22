@@ -21,7 +21,7 @@ export class DoctorAddComponent implements OnInit {
   sexList = [];
   treament = [];
   spelcialties = [];
-  lang=[];
+  lang = [];
   countries = [];
   nationalities = [];
   selectedCliente = {};
@@ -40,7 +40,7 @@ export class DoctorAddComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    
+
     this.doctor.medicalSpecialityDoctor = [];
   }
   //autocomplete
@@ -117,19 +117,26 @@ export class DoctorAddComponent implements OnInit {
       this.spelcialties = response;
 
     })
-    this.langService.get().subscribe(respo=>{this.lang=respo})
+    this.langService.get().subscribe(respo => { this.lang = respo })
     this.getCountries();
 
   }
+  validateRequidesFileds() {
+    let result = (!this.doctor.name || !this.doctor.surName || !this.doctor.cellPhone
+      || !this.doctor.exequatur || !this.doctor.sex || !this.doctor.mail
+      || !this.doctor.users.userName || !this.doctor.users.password || !this.doctor.users.languageId)
+
+      return result;
+  }
   getCountries() {
-    
+
     this.countryService.get().subscribe(response => {
       this.nationalities = response;
       this.countries = response
     });
   }
   save() {
-    if (!this.doctor.name || !this.doctor.surName)
+    if (this.validateRequidesFileds())
       return this.alertService.error(this.translate.instant("vreqFiled"), 'Error')
     this.doctorService.post(this.doctor).subscribe(response => {
       this.router.navigate(['parameter/doctor'])

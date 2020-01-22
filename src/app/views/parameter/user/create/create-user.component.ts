@@ -22,13 +22,13 @@ export class UserAddComponent implements OnInit {
         private roleService: RoleService,
         private langService: LanguageService,
         private userService: UserService) {
- 
+
     }
     ngOnInit() {
         this.getLanguage();
         this.getRole();
     }
-
+   
     async getLanguage() {
 
         this.language = await this.langService.get().toPromise();

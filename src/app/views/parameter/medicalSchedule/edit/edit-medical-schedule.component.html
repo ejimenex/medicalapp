@@ -1,0 +1,130 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'c.edit' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+           
+     
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'medicalCenterSingular' | translate }}</label>
+            
+              <input type="text" 
+              [ngbTypeahead]="searchMedicalCenter" 
+              (selectItem)="selectOneMedicalCenter($event)"
+              [(ngModel)]='selectedMedicalCenter'
+              [resultFormatter]="formatterMedicalCenter"
+              [inputFormatter]="formatterMedicalCenter" class="form-control m-input"
+              >
+            </div>
+      
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'monday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.monday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantityMonday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'tuesday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.tuesday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantityTuesday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'wednesday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.wednesday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantityWednesday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'thursday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.thursday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantityThursday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'friday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.friday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantityFriday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'saturday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.saturday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantitySaturday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'sunday' | translate }}</label>
+            
+              <input [(ngModel)]='schedule.sunday' class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'maxQty' | translate }}</label>
+             
+              <input [(ngModel)]='schedule.maxQuantitySunday' type="number" class="form-control">
+            </div>
+          </div>
+          <hr>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost-info" (click)='edit()'><i class="fa fa-save"></i> {{ 'c.edit' | translate }}</button>
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">Cerrar</button>
+           
+        </div>
+      </div>
+      <!--/.col-->
+  
+  
