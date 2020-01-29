@@ -1,0 +1,124 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header bg-info">
+            <i class="fa fa-plus"></i> {{ 'c.edit' | translate }}
+  
+  
+          </div>
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="text-right">
+                <button class="btn btn-info btn-square" (click)='confirm()'><i class="fa fa-save"></i>
+                  {{ 'c.edit' | translate }}</button>
+                  <button class="btn btn-primary btn-square"><i class="fa fa-list"></i>
+                    {{ 'recMedical' | translate }}</button>
+                    <button class="btn btn-success btn-square"><i class="fa fa-seach"></i>
+                        {{ 'viewExp' | translate }}</button>
+              </div>
+            </div>
+  
+            <hr>
+           
+            <fieldset><legend>{{'patientData' | translate}}</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                      <label class="">{{ 'name' | translate }}</label>
+                      <span *ngIf='!patient.name' class="text-danger"> * </span>
+                      <input [readonly]=true [(ngModel)]='patient.name' class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label  class="">{{ 'documentNumber' | translate }}</label>
+                   
+                      <input [readonly]=true [(ngModel)]='patient.documentNumber' class="form-control">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span *ngIf='!patient.phone' class="text-danger"> * </span>
+                      <label class="">{{ 'phone1' | translate }}</label>
+             
+                      <input [readonly]=true [(ngModel)]='patient.phone' class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="">{{ 'ssn' | translate }}</label>
+                     
+                      <input [readonly]=true [(ngModel)]='patient.sSN' class="form-control">
+                    </div>
+                  </div>
+                
+               
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="">{{ 'bornDate' | translate }}</label>
+                     
+                      <input [readonly]=true [(ngModel)]='patient.bornDate' type="date" class="form-control">
+                    </div>
+     
+                  </div>
+            
+                </fieldset>
+        
+        <fieldset><legend>{{'consData' | translate}}</legend>
+            <div class="row">
+                <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+              </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="">{{ 'consultorio' | translate }}</label>
+                  <select class="form-control" [(ngModel)]='cons.officeId'>
+                      <option *ngFor='let item of offices' [ngValue]='item.id'>{{item.name}}</option>
+                  </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="">{{ 'reasonConsultation' | translate }}</label>
+                  <select class="form-control" [(ngModel)]='cons.reasonVisitId'>
+                      <option *ngFor='let item of reasonList' [ngValue]='item.id'>{{item.key | translate}}</option>
+                  </select>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="">{{ 'reasonConsultationPatient' | translate }}</label>
+                    <textarea style="height: 50px;" [(ngModel)]='cons.reasonConsultation'  class="form-control"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="">{{ 'diagnosis' | translate }}</label>
+                    <textarea style="height: 100px;" [(ngModel)]='cons.diagnosis'  class="form-control"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="">{{ 'medicalIndication' | translate }}</label>
+                    <textarea style="height: 100px;" [(ngModel)]='cons.medicalIndication'  class="form-control"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="">{{ 'medicalObservation1' | translate }}</label>
+                    <textarea style="height: 100px;" [(ngModel)]='cons.medicalObservation1'  class="form-control"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="">{{ 'medicalObservation2' | translate }}</label>
+                    <textarea style="height: 100px;" [(ngModel)]='cons.medicalObservation2'  class="form-control"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="">{{ 'nextConsDate' | translate }}</label>
+                    <input class="form-control" [(ngModel)]='cons.nextDateVisit' type="date">
+                  </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>

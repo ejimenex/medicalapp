@@ -66,10 +66,6 @@
                   <td>{{item.phone}}</td>
                 
                   <td>
-                
-                    <button (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-square"><i class="fa fa-trash"></i> {{ 'c.delete' | translate }}</button>
-                    <button (click)=(openEditView(item.id)) class="btn btn-outline-primary btn-square"><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
-                    <a  [routerLink]="['/appointment/create/',item.id]" class="btn btn-outline-success btn-square"><i class="fa fa-plus"></i> {{ 'newAppointment' | translate }}</a>
                     <button (click)='newConsultaton(item.id)'  class="btn btn-outline-primary btn-square"><i class="fa fa-hand-o-left"></i> {{ 'newConsultation' | translate }}</button>
                   </td>
                 </tr>

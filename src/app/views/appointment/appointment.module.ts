@@ -16,15 +16,15 @@ import { RoleService } from '../../service/role.service';
 import { ArsService } from '../../service/ars.service';
 
 
- import { PatientListComponent } from './list/patient-list.component';
- import { PatientAddComponent } from './create/patient-create.component';
-
- import { EditPatientComponent } from './edit/patient-edit.component';
+import { AppointmentListComponent } from './list/appointment-list.component';
 
 import { PatientService } from '../../service/patient.service';
-import { PatientRoutingModule } from './patient.route';
+import { AppintmentRoutingModule } from './appointment.route';
 
-import {AppointmentService} from '../../service/appointment.service';
+import { AppointmentService } from '../../service/appointment.service';
+import { ApointmentAddComponent } from './create/create-appointment.component';
+import { ApointmentEditComponent } from './edit/edit-appointment.component';
+
 
 
 @NgModule({
@@ -32,17 +32,16 @@ import {AppointmentService} from '../../service/appointment.service';
     CommonModule,
     FormsModule,
     NgbModule,
-    PatientRoutingModule,
+    AppintmentRoutingModule,
     TranslateModule
 
   ],
   declarations: [
-  PatientAddComponent,
-  PatientListComponent,
-  EditPatientComponent
-  
-  
-  ], entryComponents: [EditPatientComponent ],
-  providers: [ UserService, LanguageService, RoleService, ArsService, PatientService,AppointmentService]
+    AppointmentListComponent,
+    ApointmentAddComponent,
+    ApointmentEditComponent
+
+  ], entryComponents: [],
+  providers: [UserService, LanguageService, RoleService, ArsService, PatientService, AppointmentService]
 })
-export class PatientModule { }
+export class AppointmentModule { }

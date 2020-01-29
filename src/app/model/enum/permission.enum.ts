@@ -22,5 +22,11 @@ export enum Permission {
   medicalCenterEdit,
   arsList,
   arsCreate,
-  arsEdit
+  arsEdit,
+  appointmentList,
+  appointMentCreate,
+  appointMentEdit,
+  consultationList,
+  consultationEdit,
+  consultationCreate
 }

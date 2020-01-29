@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../../../service/alert-sweet.service';
 import { PatientModel } from '../../../model/patient.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PatientService } from '../../../service/patient.service';
 import { ArsService } from '../../../service/ars.service';
 
@@ -24,7 +24,7 @@ export class PatientAddComponent implements OnInit {
   constructor(private translate: TranslateService,
     private router: Router,
     private alertService: AlertService,
-  
+    
     private patientService: PatientService,
     private arsService: ArsService
     ) {
@@ -42,7 +42,7 @@ export class PatientAddComponent implements OnInit {
   
 
   getData() {
-    
+   
     this.arsService.getByCountry(JSON.parse(localStorage.getItem("currentUser")).countryId).subscribe(response => {
          this.arss = response as any;
 

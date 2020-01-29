@@ -17,7 +17,7 @@ export class EditPatientComponent implements OnInit {
     id: number;
     patient: PatientModel = new PatientModel();
     arss = [];
-    sexList=[];
+    sexList = [];
 
     constructor(
         private alertService: AlertService,
@@ -33,7 +33,7 @@ export class EditPatientComponent implements OnInit {
         this.sexList = [
             { header: this.translate.instant('male'), value: 'M' },
             { header: this.translate.instant('female'), value: 'F' }
-          ];
+        ];
 
     }
 
@@ -44,7 +44,7 @@ export class EditPatientComponent implements OnInit {
     }
 
     async getArs() {
-      this.arss=  await this.arsService.getByCountry(JSON.parse(localStorage.getItem("currentUser")).countryId).toPromise() as any
+        this.arss = await this.arsService.getByCountry(JSON.parse(localStorage.getItem("currentUser")).countryId).toPromise() as any
     }
     edit() {
 

@@ -11,6 +11,9 @@ export const endpoint = {
     patient:'patient',
     medicalSchedule:'medicalSchedule',
     doctorOffice:'doctorOffice',
-    permission:'permission'
+    permission:'permission',
+    appointment:'appointment',
+    consultation:'consultation',
+    reasonConsultation:'reasonConsultation'
 
   };

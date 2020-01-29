@@ -32,9 +32,7 @@ const routes: Routes = [
         data: {
           title: 'Add Patient',expectedPermission: Permission.patientCreate
         }      
-      },
-    
-      
+      }
     ]
   }
 ];

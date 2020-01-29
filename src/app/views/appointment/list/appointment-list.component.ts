@@ -2,30 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router'
 import { AlertService } from '../../../service/alert-sweet.service';
-import { PatientService } from '../../../service/patient.service'
-import {EditPatientComponent} from '../edit/patient-edit.component';
+import { AppointmentService } from '../../../service/appointment.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../../../constant/param';
-
-
-
 interface ITableColumn {
   header: string;
   value?: string;
 }
 
 @Component({
-  templateUrl: './patient-list.component.html'
+  templateUrl: './appointment-list.component.html'
 })
-export class PatientListComponent implements OnInit {
+export class AppointmentListComponent implements OnInit {
 
-  patients = [];
+  appointment = [];
   filters: ITableColumn[];
   filter:any={};
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,private _modalService: NgbModal,
      private alert: AlertService,
-      private patientService: PatientService) {
+      private appointmentService: AppointmentService) {
 
 
   }
@@ -34,26 +30,17 @@ export class PatientListComponent implements OnInit {
     //this.filter.orderBy='id'
     this.getAll();
     this.filters = [
-      { header: this.translate.instant('name'), value: 'name' },
-      { header: this.translate.instant('phone1'), value: 'phone' }    
+      { header: this.translate.instant('patient'), value: 'patient' },
+      { header: this.translate.instant('doctorOffice'), value: 'officeName' } 
     ];  
     
   }
-  openEditView(id: number): void {
-    let modal = this._modalService.open(
-      EditPatientComponent,
-      config.modalConfig
-    )
-    modal.componentInstance.id = id
-    modal.componentInstance.notifyParent.subscribe(result => {
-      this.getAll();
-    })
-  }
+
   confirmDelete(id) {
     this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
   }
   delete(id) {
-    this.patientService.delete(id).subscribe(response => {
+    this.appointmentService.delete(id).subscribe(response => {
       this.alert.success(this.translate.instant('sucessDelete'));
       this.getAll();
     }, error => {
@@ -61,28 +48,25 @@ export class PatientListComponent implements OnInit {
     })
   }
 
-  newPatient() {
-    this.router.navigate(['patient/add'])
-  }
-  newAppointment(id){
-    this.router.navigate(['appointment/create/'+id])
-  }
+ 
   getAll( ) {
-    this.patientService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.appointmentService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.patients = response;
+      this.appointment = response.map(res=>{
+          res['class']=res.appointmentStateId==1?'badge badge-danger':res['class'];
+          res['class']=res.appointmentStateId==2?'badge badge-sucsess':res['class'];
+          res['class']=res.appointmentStateId==3?'badge badge-primary':res['class'];
+          res['class']=res.appointmentStateId==4?'badge badge-warning':res['class'];
+          return res
+      });
     })
   }
   getFiltered(){
-    this.patientService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.appointmentService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.patients = response;
+      this.appointment = response;
     })
   }
-  newConsultaton(id) {
-    this.router.navigate(['consultation/add/' + id])
-  
-}
   changePage(next:boolean){
     this.filter.value=!this.filter.value?'':!this.filter.value;
     
@@ -90,8 +74,8 @@ export class PatientListComponent implements OnInit {
     this.page=next?this.page +=10:this.page -=10;
     if(this.page<0) this.page=0;
     
-    this.patientService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.patients = response;
+    this.appointmentService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
+      this.appointment = response;
     })
   }
 

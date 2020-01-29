@@ -31,8 +31,8 @@ export class ArsAddComponent implements OnInit {
     }
 
     save() {
-        if (!this.ars.name || !this.ars.countryId)
-            return this.alertService.error(this.translate.instant("vreqFiled"), 'Error')
+        if ( !this.ars.countryId)
+           return this.alertService.error(this.translate.instant("vreqFiled"), 'Error')
         this.arsService.post(this.ars).subscribe(response => {
 
             this.router.navigate(['parameter/ars'])
