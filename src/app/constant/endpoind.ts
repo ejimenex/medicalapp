@@ -14,6 +14,7 @@ export const endpoint = {
     permission:'permission',
     appointment:'appointment',
     consultation:'consultation',
-    reasonConsultation:'reasonConsultation'
+    reasonConsultation:'reasonConsultation',
+    menu:'menu'
 
   };

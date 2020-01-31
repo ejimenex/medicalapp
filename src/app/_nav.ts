@@ -1,27 +1,16 @@
 import { INavData } from '@coreui/angular';
 
 
-export const navItems: INavData[] = [
+export const navItems: INavData[] =
+
+[
   {
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer'
   
   },
-  // {
-  //   title: true,
-  //   name: 'Theme'
-  // },
-  // {
-  //   name: 'Colors',
-  //   url: '/theme/colors',
-  //   icon: 'icon-drop'
-  // },
-  // {
-  //   name: 'Typography',
-  //   url: '/theme/typography',
-  //   icon: 'icon-pencil'
-  // },
+
   {
     title: true,
     name: 'Options'
@@ -54,7 +43,8 @@ export const navItems: INavData[] = [
       {
         name: 'Medical Center',
         url: '/parameter/medicalcenter',
-        icon: 'icon-tag'
+        icon: 'icon-tag',
+        class:'display:none;'
       },
       {
         name: 'Medical Schedule',
@@ -284,7 +274,8 @@ export const navItems: INavData[] = [
     badge: {
       variant: 'secondary',
       text: 'NEW'
-    },
-    attributes: { disabled: true },
-  }
+    }
+    ,
+     attributes: { disabled: true },
+   }
 ];

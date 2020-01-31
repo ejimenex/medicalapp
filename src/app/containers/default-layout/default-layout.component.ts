@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {ChangePasswordComponent} from './changepassword/change.component';
 import {DoctorOfficeComponent} from './medical-office/medical-office';
 import { config } from '../../constant/param';
+import { MenuService } from '../../service/menu.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +20,38 @@ export class DefaultLayoutComponent {
   user:string;
   rol:number=0;
   newPasword:string;
-constructor (private _router:Router, private translate:TranslateService,private _modalService: NgbModal,
+constructor (private _router:Router, private translate:TranslateService,private _modalService: NgbModal,private menuService:MenuService,
    private accService:AccountService){    this.user=JSON.parse(localStorage.getItem("currentUser")).userName;
    this.rol=JSON.parse(localStorage.getItem("currentUser")).rol;
+   this.menuService.getById(this.rol).subscribe(res=>{
+ 
+  
+     this.navItems=[];
+    //  res.forEach(element => {
+    //    debugger
+    //   if(element.children)
+    //   element.children.map(e=>{
+    //    e.name=this.translate.instant(e.name);
+    //    return e
+    //   })
+    // });
+     this.navItems=res.map(r=>{
+       r.name=this.translate.instant(r.name);
+       if(r.children)
+       r.children.map(e=>{
+        e.name=this.translate.instant(e.name);
+        return e
+       })
+       return r;
+     })
+  
+   })
+  
+   if(localStorage.getItem("currentUser")){
+   let lang=JSON.parse(localStorage.getItem("currentUser")).language;   
+    translate.setDefaultLang(lang.toLowerCase())
+    }
+    ;
 }
   toggleMinimize(e) {
     this.sidebarMinimized = e;

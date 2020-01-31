@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     lang=JSON.parse(localStorage.getItem("currentUser")).language;   
     }
     translate.setDefaultLang(lang.toLowerCase());
+   
    }
    verify(): boolean {
   

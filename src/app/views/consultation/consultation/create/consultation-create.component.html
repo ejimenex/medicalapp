@@ -14,7 +14,7 @@
                   {{ 'c.add' | translate }}</button>
                   <button class="btn btn-primary btn-square" (click)='save()'><i class="fa fa-list"></i>
                     {{ 'recMedical' | translate }}</button>
-                    <button class="btn btn-success btn-square" (click)='save()'><i class="fa fa-seach"></i>
+                    <button class="btn btn-success btn-square" (click)='save()'><i class="fa fa-search"></i>
                         {{ 'viewExp' | translate }}</button>
               </div>
             </div>
@@ -24,12 +24,12 @@
             <fieldset><legend>{{'patientData' | translate}}</legend>
                 <div class="row">
                     <div class="col-md-6">
-                      <label class="">{{ 'name' | translate }}</label>
+                      <label ><b>{{ 'name' | translate }}</b></label>
                       <span *ngIf='!patient.name' class="text-danger"> * </span>
                       <input [readonly]=true [(ngModel)]='patient.name' class="form-control">
                     </div>
                     <div class="col-md-6">
-                      <label  class="">{{ 'documentNumber' | translate }}</label>
+                      <label><b>{{ 'documentNumber' | translate }}</b></label>
                    
                       <input [readonly]=true [(ngModel)]='patient.documentNumber' class="form-control">
                     </div>
@@ -37,12 +37,12 @@
                   <div class="row">
                     <div class="col-md-6">
                       <span *ngIf='!patient.phone' class="text-danger"> * </span>
-                      <label class="">{{ 'phone1' | translate }}</label>
+                      <label ><b>{{ 'phone1' | translate }}</b></label>
              
                       <input [readonly]=true [(ngModel)]='patient.phone' class="form-control">
                     </div>
                     <div class="col-md-6">
-                      <label class="">{{ 'ssn' | translate }}</label>
+                      <label><b>{{ 'ssn' | translate }}</b></label>
                      
                       <input [readonly]=true [(ngModel)]='patient.sSN' class="form-control">
                     </div>
@@ -51,7 +51,7 @@
                
                   <div class="row">
                     <div class="col-md-6">
-                      <label class="">{{ 'bornDate' | translate }}</label>
+                      <label><b>{{ 'bornDate' | translate }}</b></label>
                      
                       <input [readonly]=true [(ngModel)]='patient.bornDate' type="date" class="form-control">
                     </div>
@@ -66,51 +66,163 @@
               </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label class="">{{ 'consultorio' | translate }}</label>
+                    <label class="text-primary"><b>{{ 'consultorio' | translate }}</b></label>
                   <select class="form-control" [(ngModel)]='cons.officeId'>
                       <option *ngFor='let item of offices' [ngValue]='item.id'>{{item.name}}</option>
                   </select>
                   </div>
                   <div class="col-md-6">
-                    <label class="">{{ 'reasonConsultation' | translate }}</label>
+                    <label class="text-primary"><b>{{ 'reasonConsultation' | translate }}</b></label>
                   <select class="form-control" [(ngModel)]='cons.reasonVisitId'>
                       <option *ngFor='let item of reasonList' [ngValue]='item.id'>{{item.key | translate}}</option>
                   </select>
                   </div>
               </div>
+              <hr>
               <div class="row">
                 <div class="col-md-12">
-                    <label class="">{{ 'reasonConsultationPatient' | translate }}</label>
+                    <label class="text-primary"><b>{{ 'reasonConsultationPatient' | translate }}</b></label>
                     <textarea style="height: 50px;" [(ngModel)]='cons.reasonConsultation'  class="form-control"></textarea>
                   </div>
               </div>
+              <hr>
               <div class="row">
                 <div class="col-md-12">
-                    <label class="">{{ 'diagnosis' | translate }}</label>
-                    <textarea style="height: 100px;" [(ngModel)]='cons.diagnosis'  class="form-control"></textarea>
+                    <label class="text-primary"><b>{{ 'diagnosis' | translate }}</b></label>
+                    <textarea style="height: 50px;" [(ngModel)]='cons.diagnosis'  class="form-control"></textarea>
                   </div>
               </div>
+              <hr>
               <div class="row">
-                <div class="col-md-12">
-                    <label class="">{{ 'medicalIndication' | translate }}</label>
-                    <textarea style="height: 100px;" [(ngModel)]='cons.medicalIndication'  class="form-control"></textarea>
+                  <div class="col-md-4">
+                   <p class="text-primary"><b>{{ 'haveTakenMedication' | translate }}</b></p> 
+                    <label class="switch switch-label switch-primary">
+                        <input type="checkbox" [(ngModel)]='cons.haveTakenMedications' class="switch-input" checked>
+                        <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                      </label>
+                  </div>
+                  <div *ngIf='cons.haveTakenMedications' class="col-md-8">                   
+                        <label class="text-primary"><b>{{ 'haveTakenMedicationDet' | translate }}</b></label>
+                       <input class="form-control" [(ngModel)]='cons.haveTakenMedicationsDetails'>
+                      
                   </div>
               </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-4">
+                <p class="text-primary"> <b>{{ 'haveBeenThatProblemBeforeDet' | translate }}</b></p> 
+                  <label class="switch switch-label switch-primary">
+                      <input type="checkbox" [(ngModel)]='cons.haveBeenThatProblemBefore' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                </div>
+                <div *ngIf='cons.haveBeenThatProblemBefore' class="col-md-8">                   
+                      <label class="text-primary"><b>{{ 'haveTakenMedicationDet' | translate }}></b></label>
+                     <input class="form-control" [(ngModel)]='cons.haveBeenThatProblemBeforeDetail'>
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-4">
+              <p class="text-primary"> <b>{{ 'recentlyIngestedAlcohol' | translate }}</b></p> 
+                <label class="switch switch-label switch-primary">
+                    <input type="checkbox" [(ngModel)]='cons.recentlyIngestedAlcohol' class="switch-input" checked>
+                    <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                  </label>
+              </div>
+              <div class="col-md-8">                   
+                    <label class="text-primary"><b>{{ 'whenDidItStart' | translate }}></b></label>
+                   <input class="form-control" [(ngModel)]='cons.wendDidItStart'>
+                  
+              </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+            <p class="text-primary"> <b>{{ 'vomit' | translate }}</b></p> 
+              <label class="switch switch-label switch-primary">
+                  <input type="checkbox" [(ngModel)]='cons.vomit' class="switch-input" checked>
+                  <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                </label>
+            </div>
+            <div class="col-md-3">
+                <p class="text-primary"> <b>{{ 'fainting' | translate }}</b></p> 
+                  <label class="switch switch-label switch-primary">
+                      <input type="checkbox" [(ngModel)]='cons.fainting' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <p class="text-primary"> <b>{{ 'diarrhea' | translate }}</b></p> 
+                      <label class="switch switch-label switch-primary">
+                          <input type="checkbox" [(ngModel)]='cons.diarrhea' class="switch-input" checked>
+                          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-primary"> <b>{{ 'sickness' | translate }}</b></p> 
+                          <label class="switch switch-label switch-primary">
+                              <input type="checkbox" [(ngModel)]='cons.sickness' class="switch-input" checked>
+                              <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                            </label>
+                        </div>
+        
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+            <p class="text-primary"> <b>{{ 'fever' | translate }}</b></p> 
+              <label class="switch switch-label switch-primary">
+                  <input type="checkbox" [(ngModel)]='cons.fever' class="switch-input" checked>
+                  <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                </label>
+            </div>
+            <div class="col-md-3">
+                <p class="text-primary"> <b>{{ 'lackAppetite' | translate }}</b></p> 
+                  <label class="switch switch-label switch-primary">
+                      <input type="checkbox" [(ngModel)]='cons.lackAppetite' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <p class="text-primary"> <b>{{ 'otherS' | translate }}</b></p> 
+                      <label class="switch switch-label switch-primary">
+                          <input type="checkbox" [(ngModel)]='cons.other' class="switch-input" checked>
+                          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-primary"> <b>{{ 'otherDetail' | translate }}</b></p> 
+                        <input class="form-control" [(ngModel)]='cons.otherDetail'>
+                        </div>
+        
+        </div>
+            <hr>
               <div class="row">
                 <div class="col-md-12">
-                    <label class="">{{ 'medicalObservation1' | translate }}</label>
-                    <textarea style="height: 100px;" [(ngModel)]='cons.medicalObservation1'  class="form-control"></textarea>
+                    <label class="text-primary"><b>{{ 'medicalIndication' | translate }}</b></label>
+                    <textarea style="height: 50px;" [(ngModel)]='cons.medicalIndication'  class="form-control"></textarea>
                   </div>
               </div>
+              <hr>
               <div class="row">
                 <div class="col-md-12">
-                    <label class="">{{ 'medicalObservation2' | translate }}</label>
-                    <textarea style="height: 100px;" [(ngModel)]='cons.medicalObservation2'  class="form-control"></textarea>
+                    <label class="text-primary"><b>{{ 'medicalObservation1' | translate }}</b></label>
+                    <textarea style="height: 50px;" [(ngModel)]='cons.medicalObservation1'  class="form-control"></textarea>
                   </div>
               </div>
+              <hr>
               <div class="row">
                 <div class="col-md-12">
-                    <label class="">{{ 'nextConsDate' | translate }}</label>
+                    <label class="text-primary"><b>{{ 'medicalObservation2' | translate }}</b></label>
+                    <textarea style="height: 50px;" [(ngModel)]='cons.medicalObservation2'  class="form-control"></textarea>
+                  </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="text-primary"><b>{{ 'nextConsDate' | translate }}</b></label>
                     <input class="form-control" [(ngModel)]='cons.nextDateVisit' type="date">
                   </div>
               </div>

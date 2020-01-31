@@ -60,6 +60,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { DoctorOfficeService } from './service/doctorOffice.service';
 import { PermissionService } from './service/permission.service';
 import { RoleGuard } from './service/guard';
+import { MenuService } from './service/menu.service';
 
 export function token() {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -116,7 +117,7 @@ export function token() {
     DefaultLayoutComponent,
     RegisterComponent,ChangePasswordComponent,DoctorOfficeComponent
   ],
-  providers: [AlertToast,  AlertService,AccountService,TokenService,DoctorOfficeService,RoleGuard
+  providers: [AlertToast,  AlertService,AccountService,TokenService,DoctorOfficeService,RoleGuard,MenuService
     , {
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
