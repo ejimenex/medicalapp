@@ -18,9 +18,9 @@ export class DoctorOfficeComponent {
     office: DoctorOffice[];
     map: string
     doctor: number
-    doctorName:string
-    iframe:SafeResourceUrl;
-    constructor(private translate: TranslateService, public activeModal: NgbActiveModal,private sanitizer: DomSanitizer,
+    doctorName: string
+    iframe: SafeResourceUrl;
+    constructor(private translate: TranslateService, public activeModal: NgbActiveModal, private sanitizer: DomSanitizer,
         private alert: AlertService, private officeService: DoctorOfficeService) {
         this.doctor = JSON.parse(localStorage.getItem("currentUser")).doctorId;
         this.getOffices();
@@ -28,13 +28,12 @@ export class DoctorOfficeComponent {
     getOffices() {
         this.officeService.getByDoctor(this.doctor).subscribe(respon => {
             this.office = respon as any
-      
-            this.doctorName=this.office[0].doctorName;})
+            this.doctorName = this.office[0].doctorName;
+        })
     }
-    transformUrl(url)
-    {
-      
-      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    transformUrl(url) {
+
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
     close() { this.activeModal.close() }
 

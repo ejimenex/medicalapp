@@ -9,6 +9,7 @@ import { ReasonConsultationService } from '../../../../service/reason-consultati
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PatientComponent } from './new/patient.component';
 import { config } from '../../../../constant/param';
+import { ListPrescripcionComponent } from '../../../prescription/list/list-prescription.component';
 
 
 interface ITableColumn {
@@ -50,7 +51,7 @@ export class ConsultationListComponent implements OnInit {
     this.getAll();
    
     this.filters = [
-      { header: this.translate.instant('patientName'), value: 'patinetName' },
+      { header: this.translate.instant('patientName'), value: 'patientName' },
       { header: this.translate.instant('officeName'), value: 'officeName' }    
     ];  
     
@@ -70,7 +71,7 @@ export class ConsultationListComponent implements OnInit {
       this.alert.success(this.translate.instant(''));
     })
   }
-
+ 
   newPatient() {
     this.router.navigate(['consultation/add'])
   }

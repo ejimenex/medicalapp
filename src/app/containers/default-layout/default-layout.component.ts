@@ -1,11 +1,11 @@
-import {Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {AccountService} from '../../service/account.service';
+import { AccountService } from '../../service/account.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {ChangePasswordComponent} from './changepassword/change.component';
-import {DoctorOfficeComponent} from './medical-office/medical-office';
+import { ChangePasswordComponent } from './changepassword/change.component';
+import { DoctorOfficeComponent } from './medical-office/medical-office';
 import { config } from '../../constant/param';
 import { MenuService } from '../../service/menu.service';
 
@@ -16,63 +16,53 @@ import { MenuService } from '../../service/menu.service';
 export class DefaultLayoutComponent {
 
   public sidebarMinimized = false;
-  public navItems = navItems;
-  user:string;
-  rol:number=0;
-  newPasword:string;
-constructor (private _router:Router, private translate:TranslateService,private _modalService: NgbModal,private menuService:MenuService,
-   private accService:AccountService){    this.user=JSON.parse(localStorage.getItem("currentUser")).userName;
-   this.rol=JSON.parse(localStorage.getItem("currentUser")).rol;
-   this.menuService.getById(this.rol).subscribe(res=>{
- 
-  
-     this.navItems=[];
-    //  res.forEach(element => {
-    //    debugger
-    //   if(element.children)
-    //   element.children.map(e=>{
-    //    e.name=this.translate.instant(e.name);
-    //    return e
-    //   })
-    // });
-     this.navItems=res.map(r=>{
-       r.name=this.translate.instant(r.name);
-       if(r.children)
-       r.children.map(e=>{
-        e.name=this.translate.instant(e.name);
-        return e
-       })
-       return r;
-     })
-  
-   })
-  
-   if(localStorage.getItem("currentUser")){
-   let lang=JSON.parse(localStorage.getItem("currentUser")).language;   
-    translate.setDefaultLang(lang.toLowerCase())
+  public navItems =[];// navItems;
+  user: string;
+  rol: number = 0;
+  newPasword: string;
+  constructor(private _router: Router, private translate: TranslateService, private _modalService: NgbModal, private menuService: MenuService,
+    private accService: AccountService) {
+    this.user = JSON.parse(localStorage.getItem("currentUser")).userName;
+    this.rol = JSON.parse(localStorage.getItem("currentUser")).rol;
+    this.menuService.getById(this.rol).subscribe(res => {
+      this.navItems = res.map(r => {
+        r.name = this.translate.instant(r.name);
+        if (r.children)
+          r.children.map(e => {
+            e.name = this.translate.instant(e.name);
+            return e
+          })
+        return r;
+      })
+
+    })
+
+    if (localStorage.getItem("currentUser")) {
+      let lang = JSON.parse(localStorage.getItem("currentUser")).language;
+      translate.setDefaultLang(lang.toLowerCase())
     }
     ;
-}
+  }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
 
 
   }
   openChangePassView(): void {
-    let modal = this._modalService.open(
+    this._modalService.open(
       ChangePasswordComponent,
-     config.modalConfig
+      config.modalConfig
     )
-  
+
   }
   openModalOffices(): void {
-    let modal = this._modalService.open(
+    this._modalService.open(
       DoctorOfficeComponent,
-     config.modalConfig
+      config.modalConfig
     )
-  
+
   }
-  logOut(){
+  logOut() {
     localStorage.removeItem('currentUser');
     this._router.navigate(['/login']);
     window.location.reload();

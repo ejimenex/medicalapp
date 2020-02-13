@@ -7,6 +7,7 @@ import { PatientService } from '../../../service/patient.service';
 import { AppointmentService } from '../../../service/appointment.service';
 import { DoctorOfficeService } from '../../../service/doctorOffice.service';
 import * as moment from 'moment';
+import { MedicalScheduleService } from '../../../service/medicalSchedule.service';
 
 
 
@@ -18,18 +19,22 @@ export class ApointmentEditComponent implements OnInit {
     cita: AppointmentModel = new AppointmentModel();
     office = [];
     patient: any = {};
-    id: any = 0;
+    schedule = [];
+  id: any = 0;
+  numberDay=0;
     constructor(private translate: TranslateService,
         private router: Router,
         private alertService: AlertService,
         private officeService: DoctorOfficeService,
         private route: ActivatedRoute,
         private patientService: PatientService,
-        private citaService: AppointmentService
+        private citaService: AppointmentService,
+        private scheduleService: MedicalScheduleService
     ) {
     }
 
     ngOnInit() {
+        this.schedule=[];
         this.id = this.route.snapshot.paramMap.get('id')        
        
         this.getData()
@@ -49,7 +54,14 @@ export class ApointmentEditComponent implements OnInit {
         let result = (!this.cita.date || !this.cita.officeId)
         return result;
     }
-
+    getNumberDay(){
+        this.numberDay=new Date(this.cita.date).getDay()
+      }
+      getSchedule(id) {
+        this.scheduleService.getByOffice(id).subscribe(res => {
+          this.schedule = res as any;
+        })
+      }
     save() {
         if (this.validateRequidesFileds())
             return this.alertService.error(this.translate.instant("vreqFiled"), 'Error')

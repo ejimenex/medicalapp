@@ -14,15 +14,12 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <label class="">{{ 'medicalCenterSingular' | translate }}</label>
+              <label class="">{{ 'officeName' | translate }}</label>
             
-              <input type="text" 
-              [ngbTypeahead]="searchMedicalCenter" 
-              (selectItem)="selectOneMedicalCenter($event)"
-              [(ngModel)]='selectedMedicalCenter'
-              [resultFormatter]="formatterMedicalCenter"
-              [inputFormatter]="formatterMedicalCenter" class="form-control m-input"
-              >
+              <select class="form-control" [(ngModel)]='schedule.medicalOfficeId'>
+                <option *ngFor='let i of offices' [ngValue]='i.id'>{{i.name}}</option>
+              </select>
+          
             </div>
       
           </div>
@@ -57,12 +54,12 @@
             <div class="col-md-6">
               <label class="">{{ 'wednesday' | translate }}</label>
             
-              <input [(ngModel)]='schedule.wednesday' class="form-control">
+              <input [(ngModel)]='schedule.wednesady' class="form-control">
             </div>
             <div class="col-md-6">
               <label class="">{{ 'maxQty' | translate }}</label>
              
-              <input [(ngModel)]='schedule.maxQuantityWednesday' type="number" class="form-control">
+              <input [(ngModel)]='schedule.maxQuantityWednesady' type="number" class="form-control">
             </div>
           </div>
           <hr>

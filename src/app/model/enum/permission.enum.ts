@@ -28,5 +28,7 @@ export enum Permission {
   appointMentEdit,
   consultationList,
   consultationEdit,
-  consultationCreate
+  consultationCreate,
+  personalSchedule,
+  personalScheduleCreate,
 }

@@ -10,6 +10,7 @@
     "code":"Código",
     "status":"Estado",
     "saveChanges":"Guardar Cambios",
+    "save":"Guardar",
     "parameter":"Paramtros",
     "countries":"Paises",
     "new":"Nuevo",
@@ -156,6 +157,20 @@
 "Medical Center":"Centros Medicos",
 "Country":"Paises",
 "Parameters":"Parametros",
-"Patients":"Pacientes"
+"Patients":"Pacientes",
+"valueForSearch":"Valor para la busqueda",
+"filters":"Filtros",
+"medicine":"Medicamento",
+"medicineUse":"Uso del Medicamento",
+"prescriptionDate":"Fecha Receta",
+"prescriptionM":"Prescripciones Medicas",
+"cannotaddappointmentinnulldate":"No puede agregar esta cita porque el doctor no ha configurado este horario para este dia en este centro medico",
+"ShortPassword":"La contraseña es muy corta, intente con una contraseña mas grande (+ 6 caracteres)",
+"cancelApp":"Cancelar Cita",
+"sureCancel":"Esta seguro que desea cancelar esta cita?",
+"perSchedule":"Agenda Personal",
+"eventType":"Tipo Evento",
+"newEvent":"Nuevo Evento",
+"ready":"Listo"
 
   }

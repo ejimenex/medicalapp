@@ -10,4 +10,5 @@ appointmentStateId:number
 patientName:string
 officeName:string
 appointmentStateName:string
+scheduleId:number;
 }

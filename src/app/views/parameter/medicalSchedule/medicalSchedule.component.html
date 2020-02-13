@@ -21,7 +21,7 @@
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th>{{'medicalCenterSingular' | translate}}</th>
+                  <th>{{'officeName' | translate}}</th>
                   <th>{{ 'monday' | translate }}
                 
                   </th>
@@ -37,14 +37,14 @@
               </thead>
               <tbody>
                 <tr *ngFor='let item of medicalSchedules'>
-                  <td>{{item.medicalCenterName}}</td>
+                  <td>{{item.medicalOfficeName}}</td>
                   <td>{{item.monday}}
                     <br>
                     {{ 'maxQty' | translate }}:   {{ item.maxQuantityMonday}}</td>
                   <td>{{item.tuesday}} <br>
                     {{ 'maxQty' | translate }}:   {{ item.maxQuantityTuesday}}</td>
-                  <td>{{item.wednesday}} <br>
-                    {{ 'maxQty' | translate }}:   {{ item.maxQuantityWednesday}}</td>
+                  <td>{{item.wednesady}} <br>
+                    {{ 'maxQty' | translate }}:   {{ item.maxQuantityWednesady}}</td>
                   <td>{{item.thursday}} <br>
                     {{ 'maxQty' | translate }}:   {{ item.maxQuantityThursday}}</td>
                   <td>{{item.friday}} <br>

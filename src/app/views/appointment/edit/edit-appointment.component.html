@@ -40,18 +40,18 @@
            
               <div class="row">
                 <div class="col-md-6">
-                  <label class="">{{ 'date' | translate }}</label>
-                  <span *ngIf='!cita.date' class="text-danger">  * </span>
-                  <input [(ngModel)]='cita.date' type="date" class="form-control">
+                  <label class="">{{ 'medicalOffice' | translate }}</label>
+                  <span *ngIf='!cita.officeId' class="text-danger"> * </span>
+                  <select class="form-control" [(ngModel)]='cita.officeId' (ngModelChange)='getSchedule(cita.officeId)'>
+                    <option value=null>N/A</option>
+                    <option *ngFor='let item of office' [ngValue]='item.id'>{{item.name}}</option>
+                  </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="">{{ 'medicalCenterSingular' | translate }}</label>
-         <span *ngIf='!cita.officeId' class="text-danger">  * </span>
-                    <select class="form-control" [(ngModel)]='cita.officeId'>
-                      <option value=null >N/A</option>
-                      <option *ngFor='let item of office' [ngValue]='item.id'>{{item.name}}</option>
-                    </select>
-                  </div>
+                  <label class="">{{ 'date' | translate }}</label>
+                  <span *ngIf='!cita.date' class="text-danger"> * </span>
+                  <input [disabled]='!cita.officeId' [(ngModel)]='cita.date' (change)='getNumberDay()' type="date" class="form-control">
+                </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
@@ -68,7 +68,82 @@
                     <textarea [(ngModel)]='cita.note'  class="form-control"></textarea>
                   </div>
               </div>
-            
+              <table class="table table-striped table-hover" *ngIf='schedule.length>0'>
+                <thead>
+                  <tr>
+                    <th>{{'officeName' | translate}}</th>
+                    <th *ngIf='numberDay==0'>{{ 'monday' | translate }}
+                  
+                    </th>
+                    <th *ngIf='numberDay==1'>{{ 'tuesday' | translate }}</th>
+                    <th *ngIf='numberDay==2'>{{ 'wednesday' | translate }}</th>
+                    <th *ngIf='numberDay==3'>{{ 'thursday' | translate }}</th>
+                    <th *ngIf='numberDay==4'>{{ 'friday' | translate }}</th>
+                    <th *ngIf='numberDay==5'>{{ 'saturday' | translate }}</th>
+                    <th *ngIf='numberDay==6'>{{ 'sunday' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let item of schedule'>
+                    <td>{{item.medicalOfficeName}}</td>
+                    <td *ngIf='numberDay==0'>{{item.monday}}
+                      <br>
+                      {{ 'maxQty' | translate }}:  | {{ item.maxQuantityMonday}}</td>
+                    <td *ngIf='numberDay==1'>{{item.tuesday}} <br>
+                      {{ 'maxQty' | translate }}: |  {{ item.maxQuantityTuesday}}</td>
+                    <td *ngIf='numberDay==2'>{{item.wednesday}} <br>
+                      {{ 'maxQty' | translate }}: |  {{ item.maxQuantityWednesday}}</td>
+                    <td *ngIf='numberDay==3'>{{item.thursday}} <br>
+                      {{ 'maxQty' | translate }}: |  {{ item.maxQuantityThursday}}</td>
+                    <td *ngIf='numberDay==4'>{{item.friday}} <br>
+                      {{ 'maxQty' | translate }}: |  {{ item.maxQuantityFriday}}</td>
+                    <td *ngIf='numberDay==5'>{{item.saturday}} <br>
+                      {{ 'maxQty' | translate }}:  | {{ item.maxQuantitySaturday}}</td>
+                    <td *ngIf='numberDay==6'>{{item.sunday}} <br>
+                      {{ 'maxQty' | translate }}: |  {{ item.maxQuantitySunday}}</td>
+                  
+                    
+                  
+                  </tr>
+                 
+                </tbody>
+              </table>
+    <div  *ngFor='let item of schedule'>
+      <div *ngIf='schedule.length>0'>
+      <p>{{'officeName' | translate}} : <label class="text-primary">{{item.medicalOfficeName}}</label></p>
+      <div class="row">
+        <div class="col-md-6">
+          <p>{{'monday' | translate}} : <span *ngIf='item.monday' class="badge badge-success"> {{item.monday}} ,  {{ item.maxQuantityMonday}}</span><span *ngIf='!item.monday' class="badge badge-danger">No Work</span></p>
+        </div>
+        <div class="col-md-6">
+          <p>{{'tuesday' | translate}} : <span *ngIf='item.tuesday' class="badge badge-success"> {{item.tuesday}} ,  {{ item.maxQuantityTuesday}}</span><span *ngIf='!item.tuesday' class="badge badge-danger">No Work</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>{{'wednesday' | translate}} : <span *ngIf='item.wednesday' class="badge badge-success"> {{item.wednesday}} ,({{ item.maxQuantityWednesday}})</span> <span *ngIf='!item.wednesday' class="badge badge-danger">No Work</span></p>
+        </div>
+        <div class="col-md-6">
+          <p>{{'thursday' | translate}} : <span *ngIf='item.thursday' class="badge badge-success"> {{item.thursday}} , ({{ item.maxQuantityThursday}})</span><span *ngIf='!item.thursday' class="badge badge-danger">No Work</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>{{'friday' | translate}} :  <span *ngIf='item.friday' class="badge badge-success">{{item.friday}} ,({{ item.maxQuantityFriday}})</span><span *ngIf='!item.thursday' class="badge badge-danger">No Work</span></p>
+        </div>
+        <div class="col-md-6">
+          <p>{{'saturday' | translate}} :  <span *ngIf='item.saturday' class="badge badge-success">{{item.saturday}} , ({{ item.maxQuantitySaturday}})</span><span *ngIf='!item.saturday' class="badge badge-danger">No Work</span> </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>{{'sunday' | translate}} : <span *ngIf='item.sunday' class="badge badge-success">{{item.friday}} ,  ({{ item.maxQuantitySunday}})</span><span *ngIf='!item.sunday' class="badge badge-danger">No Work</span></p>
+        </div>
+      
+      </div>
+    
+    </div>
+    </div>
           </div>
         </div>
       </div>

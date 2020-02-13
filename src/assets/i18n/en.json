@@ -23,6 +23,7 @@
     "internalError":"An internal error has ocurred, please try again",
     "confirm":"Confirmation",
     "sure":"Are you sure?",
+    "save":"Save",
     "sureTextRemove":"Are you sure you want to remove this item?",
     "sureTextEdit":"Are you sure you want to edit this register?",
     "l.exist":"This register already exist",
@@ -155,7 +156,21 @@
 "Users":"Users",
 "Medical Center":"Medical Center",
 "Country":"Countries",
-"Patients":"Pacientes",
-"Parameters":"Parameters"
+"Patients":"Patients",
+"Parameters":"Parameters",
+"valueForSearch":"Value for Search",
+"filters":"Filters",
+"medicine":"Medicine",
+"medicineUse":"Medication Use",
+"prescriptionDate":"Prescription Date",
+"prescriptionM":"Prescriptions Medical",
+"cannotaddappointmentinnulldate":"You cannot add this appointment because the doctor has not set up this schedule for this day at this medical center",
+"ShortPassword":"The password is too short, try with a more large password (+ 6 characters)",
+"cancelApp":"Cancel Appointment",
+"sureCancel":"Are sure you want to cancel this appointment?",
+"perSchedule":"Personal Schedule",
+"eventType":"Event Type",
+"newEvent":"New Event",
+"ready":"Ready"
 
   }

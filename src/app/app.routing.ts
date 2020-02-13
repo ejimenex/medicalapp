@@ -79,6 +79,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/doctor-office/doctor-office.module').then(m => m.DoctorOfficeModule)
       },
       {
+        path: 'personal-schedule',
+        loadChildren: () => import('./views/personal-schedule/personalSchedule.module').then(m => m.PersonalScheduleModule)
+      },
+      {
         path: 'parameter',
         loadChildren: () => import('./views/parameter/parameter.module').then(m => m.ParamenterModule)
       },

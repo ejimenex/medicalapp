@@ -15,6 +15,7 @@ import {
 } from 'rxjs/operators'
 import { MedicalCenterService } from '../../../../service/medical-center.service';
 import { of, Observable } from 'rxjs';
+import { DoctorOfficeService } from '../../../../service/doctorOffice.service';
 
 
 @Component({
@@ -26,10 +27,10 @@ export class EditMedicaScheduleComponent implements OnInit {
     id: number;
     schedule: MedicalSchedule = new MedicalSchedule();
     filter: any = {};
-    country:number
-    selectedMedicalCenter: any = {}
+    country: number
+    offices = []
 
-    constructor(private alertService: AlertService,private medicalCenterService: MedicalCenterService, 
+    constructor(private alertService: AlertService, private officeService: DoctorOfficeService,
         public activeModal: NgbActiveModal, private scheduleService: MedicalScheduleService, private translate: TranslateService) { }
 
     ngOnInit() {
@@ -37,50 +38,23 @@ export class EditMedicaScheduleComponent implements OnInit {
         this.filter.specifiedField = JSON.parse(localStorage.getItem("currentUser")).countryId
         this.filter.field = 'name';
         this.filter.value = '';
-            this.getOne();
-            
+        this.getOne();
+
     }
 
+    getOffices() {
+        let doctor = JSON.parse(localStorage.getItem("currentUser")).doctorId;
+        this.officeService.getByDoctor(doctor).subscribe(res => this.offices = res as [])
+    }
     getOne() {
         this.scheduleService.getById(this.id).subscribe(response => {
             this.schedule = response;
+            this.getOffices()
             console.log(response)
-            this.selectedMedicalCenter.name=response.medicalCenterName
-            this.selectedMedicalCenter.id=response.medicalCenterId
-            console.log(this.selectedMedicalCenter)
         })
     }
-    selectOneMedicalCenter(data: any) {
-        if (data.hasOwnProperty('item')) {
-          data = data.item
-        }
-    
-        this.schedule.medicalCenterId = data.id
-      }
-    formatterMedicalCenter = (result: any) => result.name
-    searchMedicalCenter = (text$: Observable<any[]>) =>
-        text$.pipe(
-            debounceTime(300),
-            distinctUntilChanged(),
-            switchMap(term =>
 
-                this.medicalCenterService.getBySpecifiedParam(false, this.applyFilter(term), 0, 'countryId')
-            ),
-            map(x => {
-                return x
-            }),
-            catchError(() => {
-                return of([])
-            })
-        )
-
-      
-
-    applyFilter(term: any) {
-     this.filter.value=term
-     return this.filter
-    }
-    edit() {
+    edit() {debugger
         this.scheduleService.put(this.id, this.schedule).subscribe(response => {
             this.alertService.success(this.translate.instant('sucessEdition'));
             this.notifyParent.emit();

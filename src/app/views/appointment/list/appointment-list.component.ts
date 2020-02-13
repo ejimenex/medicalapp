@@ -39,6 +39,9 @@ export class AppointmentListComponent implements OnInit {
   confirmDelete(id) {
     this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
   }
+  confirmCancel(id,item) {
+    this.alert.question(() => { this.cancel(id,item) }, this.translate.instant('confirm'), this.translate.instant('sureCancel'))
+  }
   delete(id) {
     this.appointmentService.delete(id).subscribe(response => {
       this.alert.success(this.translate.instant('sucessDelete'));
@@ -48,13 +51,21 @@ export class AppointmentListComponent implements OnInit {
     })
   }
 
- 
+  cancel(id,item) {
+    item.appointmentStateId=1;
+    this.appointmentService.put(id,item).subscribe(response => {
+      this.alert.success(this.translate.instant('sucessDelete'));
+      this.getAll();
+    }, error => {
+      this.alert.success(this.translate.instant(''));
+    })
+  }
   getAll( ) {
     this.appointmentService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
 
       this.appointment = response.map(res=>{
           res['class']=res.appointmentStateId==1?'badge badge-danger':res['class'];
-          res['class']=res.appointmentStateId==2?'badge badge-sucsess':res['class'];
+          res['class']=res.appointmentStateId==2?'badge badge-success':res['class'];
           res['class']=res.appointmentStateId==3?'badge badge-primary':res['class'];
           res['class']=res.appointmentStateId==4?'badge badge-warning':res['class'];
           return res

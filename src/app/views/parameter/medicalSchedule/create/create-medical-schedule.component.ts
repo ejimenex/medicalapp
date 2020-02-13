@@ -14,6 +14,7 @@ import {
     map,
     catchError
 } from 'rxjs/operators'
+import { DoctorOfficeService } from '../../../../service/doctorOffice.service';
 
 
 @Component({
@@ -25,17 +26,17 @@ export class CreateMedicaScheduleComponent implements OnInit {
     id: number;
     filter: any = {};
     country: number
-    selectedMedicalCenter: any = {}
+    offices = [];
     schedule: MedicalSchedule = new MedicalSchedule();
 
     constructor(private alertService: AlertService,
-        private medicalCenterService: MedicalCenterService,
+        private officeService: DoctorOfficeService,
         public activeModal: NgbActiveModal, private scheduleService: MedicalScheduleService, private translate: TranslateService) { }
 
     ngOnInit() {
         if (this.id != 0)
             this.getOne(this.id);
-
+        this.getOffices();
         this.country = JSON.parse(localStorage.getItem("currentUser")).countryId;
         this.filter.specifiedField = JSON.parse(localStorage.getItem("currentUser")).countryId
         this.filter.field = 'name';
@@ -58,35 +59,35 @@ export class CreateMedicaScheduleComponent implements OnInit {
 
         })
     }
-    selectOneMedicalCenter(data: any) {
-        if (data.hasOwnProperty('item')) {
-          data = data.item
-        }
-    
-        this.schedule.medicalCenterId = data.id
-      }
-    formatterMedicalCenter = (result: any) => result.name
-    searchMedicalCenter = (text$: Observable<any[]>) =>
-        text$.pipe(
-            debounceTime(300),
-            distinctUntilChanged(),
-            switchMap(term =>
-
-                this.medicalCenterService.getBySpecifiedParam(false, this.applyFilter(term), 0, 'countryId')
-            ),
-            map(x => {
-                return x
-            }),
-            catchError(() => {
-                return of([])
-            })
-        )
-
-      
-
-    applyFilter(term: any) {
-     this.filter.value=term
-     return this.filter
+    getOffices() {
+        let doctor = JSON.parse(localStorage.getItem("currentUser")).doctorId;
+        
+        this.officeService.getByDoctor(doctor).subscribe(res => {
+            
+            this.offices = res as []})
     }
+    //formatterMedicalCenter = (result: any) => result.name
+    // searchMedicalCenter = (text$: Observable<any[]>) =>
+    //     text$.pipe(
+    //         debounceTime(300),
+    //         distinctUntilChanged(),
+    //         switchMap(term =>
+
+    //             this.medicalCenterService.getBySpecifiedParam(false, this.applyFilter(term), 0, 'countryId')
+    //         ),
+    //         map(x => {
+    //             return x
+    //         }),
+    //         catchError(() => {
+    //             return of([])
+    //         })
+    //     )
+
+
+
+    // applyFilter(term: any) {
+    //  this.filter.value=term
+    //  return this.filter
+    // }
     close() { this.activeModal.close() }
 }

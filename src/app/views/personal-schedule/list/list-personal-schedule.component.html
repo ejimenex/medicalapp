@@ -1,0 +1,44 @@
+<div class="animated fadeIn">
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <i class="fa fa-align-justify"></i> {{ 'perSchedule' | translate }}
+  
+          
+            </div>
+            <div class="card-body">
+              <div class="col-lg-12">
+                <div class="text-right">
+                  <button class="btn btn-success btn-square" (click)='openEditView()'><i class="fa fa-plus"></i> {{ 'new' | translate }}</button>
+                </div>
+              </div>
+              <hr>
+
+        <input class="form-control" [(ngModel)]='filter.date' (change)='getAll()' type="date">
+        <br>
+        <div class="row">
+            <div class="col-md-4" style="width: 30%;" *ngFor='let item of data' class={{item.cl}}>
+                <div *ngIf='item.state' class="text-right">
+                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <button (click)='openEditView(item.id)' class="btn btn-info"><i class="fa fa-edit"></i></button>
+            </div>
+                <p>{{item.eventDate | date}}</p>
+                <p>{{item.eventName}}</p>
+                <p>{{item.patientName}}</p>
+                <p>{{item.note}}</p>
+                <button *ngIf='item.state' (click)='putReady(item)' class="btn btn-primary">{{ 'ready' | translate }}</button>
+            </div>
+        </div>
+              </div>
+          
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+      </div>
+      <!--/.row-->
+
+    

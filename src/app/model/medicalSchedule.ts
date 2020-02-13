@@ -2,7 +2,7 @@ import { BaseModel } from './base-model'
 
 export class MedicalSchedule extends BaseModel{
 
-    medicalCenterId:number
+    medicalOfficeId:number
     doctorId:number
     monday:string
     maxQuantityMonday:number
@@ -19,5 +19,5 @@ export class MedicalSchedule extends BaseModel{
     sunday:string
     maxQuantitySunday:number
     medicalScheduleName:string
-    medicalCenterName:string
+    medicalOfficeName:string
 }

@@ -1,0 +1,66 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'prescriptionM' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+          <div class="modal-body">
+            <div class="row">
+              <div class="text-right">
+                <button class="btn btn-outline-info" (click)='save()'><i class="fa fa-save"></i>
+                  {{ 'save' | translate }}</button>
+              </div>
+              <div class="col-md-12">
+                <label class="">{{ 'medicine' | translate }}</label>               
+                <textarea [(ngModel)]='pre.medicine' type="date" class="form-control"></textarea>
+   
+              </div>
+              <div class="col-md-12">
+                <label class="">{{ 'medicineUse' | translate }}</label>
+                <input [(ngModel)]='pre.medicineUse' type="text" class="form-control">
+              </div>
+              <div class="col-md-12">
+                <label class="">{{ 'time' | translate }}</label>
+                <input [(ngModel)]='pre.time' type="text" class="form-control">
+              </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>{{ 'patientName' | translate }}</th>
+                      <th>{{ 'medicine' | translate }}</th>
+                    <th>{{ 'medicineUse' | translate }}</th>
+                    <th>{{ 'prescriptionDate' | translate }}</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let item of list' (click)=getOne(item)>
+                    <td>{{item.id}}</td>
+                    <td>{{item.patientName}}</td>
+                    <td>{{item.medicine}}</td>
+                    <td>{{item.medicineUse}}</td>
+                    <td>{{item.prescriptionDate | date}}</td>
+                    
+                  </tr>
+                 
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination">
+                  
+                  <li class="page-item"><a (click)=changePage(false) class="page-link">Prev</a></li>
+  
+                  <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>
+                </ul>
+              </nav>
+          </div>
+    
+          <div class="modal-footer">
+           
+            <button type="button" class="btn btn-ghost-danger" (click)="close()">{{ 'close' | translate }}</button>
+           
+        </div>

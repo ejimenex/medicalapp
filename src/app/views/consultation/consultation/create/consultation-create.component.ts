@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
 import { ReasonConsultationService } from '../../../../service/reason-consultation.service';
 import { ConsultationService } from '../../../../service/consultation.service';
 import { ConsultationModel } from '../../../../model/consultation.model';
+import {ListPrescripcionComponent} from '../../../prescription/list/list-prescription.component';
+import { config } from '../../../../constant/param';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     templateUrl: './consultation-create.component.html'
@@ -34,6 +37,7 @@ export class ConsultationAddComponent implements OnInit {
         private doctorOfficeService:DoctorOfficeService,
         private route: ActivatedRoute,
         private patientService: PatientService,
+        private _modalService: NgbModal
     ) {
     }
 
@@ -46,7 +50,14 @@ export class ConsultationAddComponent implements OnInit {
         this.getPatient();
 
     }
-
+    openPrescriptionList(): void {
+        let modal = this._modalService.open(
+          ListPrescripcionComponent,
+          config.modalConfig
+        )
+        modal.componentInstance.id = this.cons.patientId
+        
+      }
     async getPatient() {
         this.patient = await this.patientService.getById(this.patientId).toPromise();
         this.patient.bornDate=moment(this.patient.bornDate).format('YYYY-MM-DD') as any;

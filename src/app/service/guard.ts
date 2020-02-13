@@ -16,7 +16,12 @@ export class RoleGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
 
         const expectedPermission = route.data.expectedPermission;
+        if(!JSON.parse(localStorage.getItem("currentUser"))) 
+        { 
+          this._router.navigate(['/login']);
+        }
         let rolId= JSON.parse(localStorage.getItem("currentUser")).rol
+     
         return this._httpClient.get(environment.url+endpoint.permission+`/getPermision?rolid=${rolId}&permissionid=${expectedPermission}`).pipe(
             map(res => {
               if (!res) {

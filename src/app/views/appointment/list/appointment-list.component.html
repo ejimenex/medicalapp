@@ -1,103 +1,119 @@
 <div class="animated fadeIn">
 
- 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header bg-dark">
-            <i class="fa fa-align-justify"></i> {{ 'appointment' | translate }}
 
-        
-          </div>
-          <div class="card-body">
-            <div class="col-lg-12">
-              <div class="text-right">
-                <button class="btn btn-success btn-square" (click)='newPatient()'><i class="fa fa-plus"></i> {{ 'new' | translate }}</button>
-              </div>
+  <div class="card" *ngIf='filterVisible'>
+    <div class="card-header bg-success animated fadeIn">
+      <i class="fa fa-search"></i> {{ 'filter' | translate }}
+
+  
+    </div>
+    <div class="card-body">
+      <p>{{ 'filterBy' | translate }}</p>
+      <div class="input-prepend input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>
+        <select [(ngModel)]='filter.field' aria-placeholder="k" class="form-control">
+          <option *ngFor='let item of filters' [ngValue]="item.value">{{item.header}}</option>
+        </select>
+        <input [(ngModel)]="filter.value" (keydown.enter)='getFiltered()' placeholder="{{ 'valueForSearch' | translate }}" class="form-control">
+        <span class="input-group-append">
+          <button (click)='getFiltered()' class="btn btn-info" type="button">{{ 'search' | translate }}</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <i class="fa fa-align-justify"></i> {{ 'appointment' | translate }}
+
+
+        </div>
+        <div class="card-body">
+          <div class="col-lg-12">
+            <div class="text-right">
+              <button class="btn btn-success btn-square" (click)='newPatient()'><i class="fa fa-plus"></i>
+                {{ 'new' | translate }}</button>
             </div>
-            <hr>
-           
-            <label class="switch switch-label switch-primary">
-              <input checked="" [(ngModel)]='filterVisible' class="switch-input" type="checkbox">
-              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-            </label>
-           
-            <div class="card card-accent-secondary" *ngIf='filterVisible'>
-              <div class="card-header">
-                <i class="fa fa-search"></i> {{ 'filter' | translate }}
-    
-            
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-5">
-                    <label class="">{{ 'filterBy' | translate }}</label>
-                  
-                    <select [(ngModel)]='filter.field' class="form-control">
-                      <option *ngFor='let item of filters' [ngValue]="item.value">{{item.header}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-5">
-                    <label class="">{{ 'field' | translate }}</label>
-              
-                    <input [(ngModel)]="filter.value"  class="form-control">
-                  </div>
-                  <div class="col-md-2">
-                    <div class="text-right">
-                      <button class="btn btn-primary btn-square" (click)='getFiltered()'><i class="fa fa-search"></i> {{ 'search' | translate }}</button>
+          </div>
+          <hr>
+          <p>{{ 'filters' | translate }}</p>
+        
+          <label class="switch switch-label switch-pill switch-primary">
+            <input type="checkbox"  [(ngModel)]='filterVisible' class="switch-input" checked>
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+          <div class="card card-accent-secondary" *ngIf='filterVisible'>
+            <div class="card-header">
+              <i class="fa fa-search"></i> {{ 'filter' | translate }}
+
+
+            </div>
+     
+          </div>
+
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>{{ 'patient' | translate }}</th>
+                <th>{{ 'doctorOffice' | translate }}</th>
+                <th>{{ 'date' | translate }}</th>
+                <th>{{ 'time' | translate }}</th>
+                <th>{{ 'note' | translate }}</th>
+                <th>{{ 'appointmentState' | translate }}</th>
+                <th>{{ 'actions' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let item of appointment'>
+                <td>{{item.patientName}}</td>
+                <td>{{item.officeName}}</td>
+                <td>{{item.date | date}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.note}}</td>
+                <td>
+                  <span class={{item.class}}>
+                    <label>{{item.appointmentStateName}}</label>
+                  </span>
+                </td>
+
+
+                <td>
+                  <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-dark" id="dropdownBasic1" ngbDropdownToggle>{{ 'actions' | translate }}</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <a *ngIf='item.appointmentStateId==4' [routerLink]="['/appointment/edit/',item.id]"ngbDropdownItem><i
+                          class="fa fa-edit"></i> {{ 'c.edit' | translate }}</a>
+                          <button *ngIf='item.appointmentStateId==4' (click)=confirmCancel(item.id,item) ngbDropdownItem><i
+                            class="fa fa-close"></i> {{ 'cancelApp' | translate }}</button>
+                        
+                        <button *ngIf='item.appointmentStateId==4' (click)=confirmDelete(item.id) ngbDropdownItem><i
+                          class="fa fa-trash"></i> {{ 'c.delete' | translate }}</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-           
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                    <th>{{ 'patient' | translate }}</th>
-                  <th>{{ 'doctorOffice' | translate }}</th>
-                  <th>{{ 'date' | translate }}</th>
-                  <th>{{ 'time' | translate }}</th>
-                  <th>{{ 'note' | translate }}</th>
-                  <th>{{ 'appointmentState' | translate }}</th>
-                  <th>{{ 'actions' | translate }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor='let item of appointment'>
-                  <td>{{item.patientName}}</td>
-                  <td>{{item.officeName}}</td>
-                  <td>{{item.date | date}}</td>
-                  <td>{{item.time}}</td>
-                  <td>{{item.note}}</td>
-                  <td>
-                    <span class={{item.class}}>
-                        <label>{{item.appointmentStateName}}</label>
-                       </span>  
-                    </td>
+                 
                   
-                
-                  <td>
-                    <button (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-square"><i class="fa fa-trash"></i> {{ 'c.delete' | translate }}</button>
-                    <a [routerLink]="['/appointment/edit/',item.id]" class="btn btn-outline-primary btn-square"><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</a>
-                  </td>
-                </tr>
-               
-              </tbody>
-            </table>
-            <nav>
-              <ul class="pagination">
-                
-                <li class="page-item"><a (click)=changePage(false) class="page-link">Prev</a></li>
+                </td>
+              </tr>
 
-                <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>
-              </ul>
-            </nav>
-          </div>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination">
+
+              <li class="page-item"><a (click)=changePage(false) class="page-link">Prev</a></li>
+
+              <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
-      <!--/.col-->
     </div>
-    <!--/.row-->
+    <!--/.col-->
   </div>
-  
+  <!--/.row-->
+</div>

@@ -24,6 +24,7 @@ import { AppintmentRoutingModule } from './appointment.route';
 import { AppointmentService } from '../../service/appointment.service';
 import { ApointmentAddComponent } from './create/create-appointment.component';
 import { ApointmentEditComponent } from './edit/edit-appointment.component';
+import { MedicalScheduleService } from '../../service/medicalSchedule.service';
 
 
 
@@ -42,6 +43,6 @@ import { ApointmentEditComponent } from './edit/edit-appointment.component';
     ApointmentEditComponent
 
   ], entryComponents: [],
-  providers: [UserService, LanguageService, RoleService, ArsService, PatientService, AppointmentService]
+  providers: [UserService, LanguageService,MedicalScheduleService, RoleService, ArsService, PatientService, AppointmentService]
 })
 export class AppointmentModule { }

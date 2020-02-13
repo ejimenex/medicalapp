@@ -26,6 +26,8 @@ import { ConsultationRoutingModule } from './consultation.route';
 import { DoctorOfficeService } from '../../service/doctorOffice.service';
 import { PatientComponent } from './consultation/list/new/patient.component';
 import { ConsultationEditComponent } from './consultation/edit/edit-consultation.component';
+import { ListPrescripcionComponent } from '../prescription/list/list-prescription.component';
+import { PrescriptionService } from '../../service/prescription.service';
 
 
 @NgModule({
@@ -41,9 +43,10 @@ import { ConsultationEditComponent } from './consultation/edit/edit-consultation
         ConsultationAddComponent,
         ConsultationListComponent,
         ConsultationEditComponent,
-        PatientComponent
+        PatientComponent,
+        ListPrescripcionComponent
 
-    ], entryComponents: [PatientComponent],
-    providers: [UserService, LanguageService, DoctorOfficeService, RoleService, ReasonConsultationService, ConsultationService, PatientService, AppointmentService]
+    ], entryComponents: [PatientComponent,ListPrescripcionComponent],
+    providers: [UserService, LanguageService, DoctorOfficeService, RoleService, ReasonConsultationService, ConsultationService, PatientService, AppointmentService,PrescriptionService]
 })
 export class ConsultationModule { }

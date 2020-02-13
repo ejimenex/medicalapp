@@ -15,6 +15,8 @@ export const endpoint = {
     appointment:'appointment',
     consultation:'consultation',
     reasonConsultation:'reasonConsultation',
-    menu:'menu'
-
+    menu:'menu',
+    prescription:'prescription',
+    eventType:'eventType',
+    personalSchedule:'personalSchedule'
   };
