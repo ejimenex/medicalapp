@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+
+ 
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header bg-dark">
+            <i class="fa fa-plus"></i> {{ 'addNew' | translate }}
+
+        
+          </div>
+          <div class="card-body">
+            <div class="col-lg-12">
+            <div class="text-right">
+              <button class="btn btn-success btn-square" (click)='save()'><i class="fa fa-plus"></i> {{ 'c.add' | translate }}</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'order' | translate }}</label>
+              
+              <input [(ngModel)]='model.noOrder' type="number" [placeholder]="'order' | translate" class="form-control">
+            </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="">{{ 'question' | translate }}</label>
+              <span *ngIf='!model.question' class="text-danger"> * </span>
+              <textarea [(ngModel)]='model.question' [placeholder]="'question' | translate" class="form-control"></textarea>
+            </div>
+          
+          </div>
+     
+         
+          <div class="row">
+          
+            <div class="col-md-12">
+              <label class="">{{ 'typeData' | translate }}</label>
+              <span *ngIf='!model.type' class="text-danger"> * </span>
+              <select [(ngModel)]='model.type' class="form-control">
+                  <option *ngFor='let item of types' [ngValue]='item.id'>{{item.value}}</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+  

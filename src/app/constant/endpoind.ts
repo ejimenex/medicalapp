@@ -18,5 +18,9 @@ export const endpoint = {
     menu:'menu',
     prescription:'prescription',
     eventType:'eventType',
-    personalSchedule:'personalSchedule'
+    personalSchedule:'personalSchedule',    
+    medicalService:'medicalService',
+    currency:'currency',
+    medicalForm:'medicalForm',
+    patientForm:'patientForm'
   };

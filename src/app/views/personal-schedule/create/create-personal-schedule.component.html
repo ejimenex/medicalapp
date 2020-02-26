@@ -40,7 +40,10 @@
           
           </div>
           <div class="row">               
-           
+           <label>{{ 'patientName' | translate }}</label>
+           <select class="form-control" [(ngModel)]='per.patientId'>
+             <option *ngFor='let item of patients' [ngValue]='item.id'>{{item.name}}</option>
+           </select>
           </div>
           <div class="row"> 
             <label>{{ 'note' | translate }}</label>            
@@ -49,5 +52,5 @@
       </div>
           <div class="modal-footer">
             <button class="btn btn-info" (click)='save()'><i class="fa fa-edit"></i> {{ 'c.add' | translate }}</button>
-            <button type="button" class="btn btn-ghost-danger" (click)="close()"> {{ 'close' | translate }}</button>           
+            <button type="button" class="btn btn-danger" (click)="close()"> {{ 'close' | translate }}</button>           
         </div>

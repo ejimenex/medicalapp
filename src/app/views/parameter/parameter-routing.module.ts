@@ -16,6 +16,10 @@ import { DoctorAddComponent } from './doctor/create/doctor-create.component';
 import { MedicalScheduleComponent } from './medicalSchedule/medicalSchedule.component';
 import { RoleGuard } from '../../service/guard';
 import { Permission } from '../../model/enum/permission.enum';
+import { MedicalServiceListComponent } from './medical-service/list/medical-service-list.component';
+import { MedicalServiceCreateComponent } from './medical-service/create/medical-service-create.component';
+import { MedicalFormListComponent } from './form-question/list/list-question.component';
+import { CreateQuestionComponent } from './form-question/create/create-question.component';
 
 
 
@@ -57,6 +61,38 @@ const routes: Routes = [
         canActivate:[RoleGuard],
         data: {
           title: 'Add User',expectedPermission: Permission.userCreate
+        }      
+      },
+      {
+        path: 'medical-question',
+        canActivate:[RoleGuard],
+        component: MedicalFormListComponent,
+        data: {
+          title: 'Medical Question',expectedPermission: Permission.questionMedicalList
+        }      
+      },
+      {
+        path: 'medical-question/add/:id',
+        canActivate:[RoleGuard],
+        component: CreateQuestionComponent,
+        data: {
+          title: 'Medical Question',expectedPermission: Permission.questionMedicalCreate
+        }      
+      },
+      {
+        path: 'medical-service',
+        canActivate:[RoleGuard],
+        component: MedicalServiceListComponent,
+        data: {
+          title: 'Medical Service',expectedPermission: Permission.medicalServiceList
+        }      
+      },
+      {
+        path: 'medical-service/add/:id',
+        component: MedicalServiceCreateComponent,
+        canActivate:[RoleGuard],
+        data: {
+          title: 'Add Service',expectedPermission: Permission.medicalServiceCreate
         }      
       },
       {

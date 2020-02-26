@@ -25,8 +25,9 @@
                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                 <button (click)='openEditView(item.id)' class="btn btn-info"><i class="fa fa-edit"></i></button>
             </div>
+               
+                <p><b>{{item.eventName}}</b></p>
                 <p>{{item.eventDate | date}}</p>
-                <p>{{item.eventName}}</p>
                 <p>{{item.patientName}}</p>
                 <p>{{item.note}}</p>
                 <button *ngIf='item.state' (click)='putReady(item)' class="btn btn-primary">{{ 'ready' | translate }}</button>

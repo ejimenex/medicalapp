@@ -30,7 +30,7 @@ export class PersonalScheduleComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private personalScheduleService: PersonalScheduleService,
         private eventService: EventTypeService,
-        private translate: TranslateService,
+        private translate: TranslateService,            
         private patientService:PatientService) { }
 
     ngOnInit() {
@@ -44,7 +44,7 @@ export class PersonalScheduleComponent implements OnInit {
     }
 
     getPatiens(){
-        this.patientService.get().subscribe(resp=>this.patients=resp)
+        this.patientService.getByDoctor(this.doctor.doctorId).subscribe(resp=>this.patients=resp as any)
     }
     getEvents() {
         let id = this.doctor.doctorId;

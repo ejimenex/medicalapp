@@ -171,6 +171,20 @@
 "perSchedule":"Personal Schedule",
 "eventType":"Event Type",
 "newEvent":"New Event",
-"ready":"Ready"
+"ready":"Ready",
+"price":"Price",
+"applyInsurance":"Apply Insurance",
+"insurancePrice":"Insurance Price",
+"currency":"Currency",
+"doctorService":"Doctor Service",
+"Medical Service":"Medical Service",
+"Personal Schedule":"Personal Schedule",
+"question":"Question",
+"typeData":"Type Data",
+"medicalFormQuestion":"Question for medical form",
+"text":"Text",
+"number":"Number",
+"check":"Yes or No (Check)",
+"questionText":"Medical Questions Form"
 
   }

@@ -29,14 +29,14 @@ export class ConsultationEditComponent implements OnInit {
         private alertService: AlertService,
         private reasonConsultationService: ReasonConsultationService,
         private consultationService: ConsultationService,
-        private doctorOfficeService:DoctorOfficeService,
+        private doctorOfficeService: DoctorOfficeService,
         private route: ActivatedRoute,
         private patientService: PatientService,
     ) {
     }
 
     ngOnInit() {
-        this.id =parseInt(this.route.snapshot.paramMap.get('id') )
+        this.id = parseInt(this.route.snapshot.paramMap.get('id'))
         this.cons.doctorId = JSON.parse(localStorage.getItem("currentUser")).doctorId;
         this.getReasons();
         this.getData();
@@ -44,20 +44,20 @@ export class ConsultationEditComponent implements OnInit {
     }
 
     async getData() {
-        this.cons=await this.consultationService.getById(this.id).toPromise();
+        this.cons = await this.consultationService.getById(this.id).toPromise();
         this.patient = await this.patientService.getById(this.cons.patientId).toPromise();
-        this.patient.bornDate=moment(this.patient.bornDate).format('YYYY-MM-DD') as any;
-        this.cons.nextDateVisit=moment(this.cons.nextDateVisit).format('YYYY-MM-DD') as any;
+        this.patient.bornDate = moment(this.patient.bornDate).format('YYYY-MM-DD') as any;
+        this.cons.nextDateVisit = moment(this.cons.nextDateVisit).format('YYYY-MM-DD') as any;
     }
     async getReasons() {
         this.reasonList = await this.reasonConsultationService.get().toPromise();
-        this.offices=await this.doctorOfficeService.getByDoctor(this.cons.doctorId).toPromise() as [];
+        this.offices = await this.doctorOfficeService.getByDoctor(this.cons.doctorId).toPromise() as [];
     }
-    
-confirm(){this.alertService.question(()=>{this.save()},this.translate.instant('confirm'), this.translate.instant('sureTextEdit'))}
+
+    confirm() { this.alertService.question(() => { this.save() }, this.translate.instant('confirm'), this.translate.instant('sureTextEdit')) }
     save() {
-    
-        this.consultationService.put(this.id,this.cons).subscribe(response => {
+
+        this.consultationService.put(this.id, this.cons).subscribe(response => {
             this.router.navigate(['/consultation'])
             this.alertService.success(this.translate.instant("sucessRegister"))
         }, error => {

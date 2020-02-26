@@ -5,6 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import {TranslateService, TranslateModule} from '@ngx-translate/core';
 import {PersonalScheduleService} from '../../service/personalSchedule.service';
+import {PatientService} from '../../service/patient.service';
 import {EventTypeService} from '../../service/eventType.service';
 import { PersonalScheduleComponent } from './create/create-personal-schedule.component';
 import { PersonalScheduleRoutingModule } from './personal-schedule.route';
@@ -23,7 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TranslateModule,
     NgbModule,
   ],
-  providers:[PersonalScheduleService,EventTypeService],
+  providers:[PersonalScheduleService,EventTypeService,PatientService],
   declarations: [ PersonalScheduleComponent,PersonalScheduleListComponent ],
   entryComponents:[PersonalScheduleComponent]
 })

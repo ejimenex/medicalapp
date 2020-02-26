@@ -38,6 +38,12 @@ import { MedicalScheduleService } from '../../service/medicalSchedule.service';
 import { CreateMedicaScheduleComponent } from './medicalSchedule/create/create-medical-schedule.component';
 import { EditMedicaScheduleComponent } from './medicalSchedule/edit/edit-medical-schedule.component';
 import { DoctorOfficeService } from '../../service/doctorOffice.service';
+import { MedicalServiceListComponent } from './medical-service/list/medical-service-list.component';
+import { MedicalServiceService } from '../../service/medicalService.service';
+import { MedicalServiceCreateComponent } from './medical-service/create/medical-service-create.component';
+import { MedicalFormService } from '../../service/medical-form.service';
+import { MedicalFormListComponent } from './form-question/list/list-question.component';
+import { CreateQuestionComponent } from './form-question/create/create-question.component';
 
 @NgModule({
   imports: [
@@ -61,13 +67,17 @@ import { DoctorOfficeService } from '../../service/doctorOffice.service';
     MedicalCenterAddComponent,
     MedicalCenterListComponent,
     EditMedicalCenterComponent,
+    MedicalServiceCreateComponent,
+    MedicalServiceListComponent,
+    CreateQuestionComponent,
     DoctorAddComponent,
     DoctorListComponent,
     MedicalScheduleComponent,
     CreateMedicaScheduleComponent,
-    EditMedicaScheduleComponent
+    EditMedicaScheduleComponent,
+    MedicalFormListComponent
   ], entryComponents: [EditCountryComponent, EditUserComponent, EditArsComponent, EditMedicalCenterComponent,CreateMedicaScheduleComponent,EditMedicaScheduleComponent],
   providers: [CountryService, UserService, LanguageService, RoleService, ArsService,
-     MedicalCenterService,MedicalScheduleService, MedicalSpecilityService,DoctorService]
+     MedicalCenterService,MedicalScheduleService, MedicalSpecilityService,DoctorService,MedicalServiceService,MedicalFormService]
 })
 export class ParamenterModule { }

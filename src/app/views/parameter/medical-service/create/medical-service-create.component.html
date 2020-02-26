@@ -1,0 +1,67 @@
+<div class="animated fadeIn">
+
+ 
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header bg-dark">
+            <i class="fa fa-plus"></i> {{ 'addNew' | translate }}
+
+        
+          </div>
+          <div class="card-body">
+            <div class="col-lg-12">
+            <div class="text-right">
+              <button class="btn btn-success btn-square" (click)='save()'><i class="fa fa-plus"></i> {{ 'c.add' | translate }}</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="">{{ 'name' | translate }}</label>
+              <span *ngIf='!serviceModel.name' class="text-danger"> * </span>
+              <input [(ngModel)]='serviceModel.name' [placeholder]="'name' | translate" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="">{{ 'price' | translate }}</label>
+              <span *ngIf='!serviceModel.price' class="text-danger"> * </span>
+              <input type="number" [(ngModel)]='serviceModel.price' [placeholder]="'price' | translate" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+           
+            <div class="col-md-6">
+                <p>{{ 'applyInsurance' | translate }}</p>
+          
+                <label class="switch switch-label switch-pill switch-primary">
+                  <input type="checkbox"  [(ngModel)]='serviceModel.applyInsurance' class="switch-input" checked>
+                  <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                </label>
+            </div>
+            <div class="col-md-6" *ngIf='serviceModel.applyInsurance'>
+                <label class="">{{ 'insurancePrice' | translate }}</label>
+                <input  type="number" [(ngModel)]='serviceModel.insurancePrice' [placeholder]="'insurancePrice' | translate" class="form-control">
+              </div>
+          </div>
+         
+          <div class="row">
+          
+            <div class="col-md-6">
+              <label class="">{{ 'currency' | translate }}</label>
+              <span *ngIf='!serviceModel.currencyId' class="text-danger"> * </span>
+              <select [(ngModel)]='serviceModel.currencyId' class="form-control">
+                  <option *ngFor='let item of currency' [ngValue]='item.code'>{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+  

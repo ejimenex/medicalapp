@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { endpoint } from '../constant/endpoind';
 import { BaseService } from './base-service';
-
-import { PatientModel } from '../model/patient.model';
+import { MedicalService } from '../model/medicalService';
 
 @Injectable()
-export class PatientService extends BaseService<PatientModel, number> {
+export class MedicalServiceService extends BaseService<MedicalService, number> {
 
   constructor(_httpClient: HttpClient) {
-    super(_httpClient, environment.url + endpoint.patient);
+    super(_httpClient, environment.url + endpoint.medicalService);
   }
-getByDoctor(id){
-  return this._httpClient.get(environment.url + endpoint.patient+'/allByDoctor?id='+id)
-}
+  getCurrency() {
+    return this._httpClient.get(environment.url + endpoint.currency);
+  }
+
 }

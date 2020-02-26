@@ -28,6 +28,9 @@ import { PatientComponent } from './consultation/list/new/patient.component';
 import { ConsultationEditComponent } from './consultation/edit/edit-consultation.component';
 import { ListPrescripcionComponent } from '../prescription/list/list-prescription.component';
 import { PrescriptionService } from '../../service/prescription.service';
+import { QuestionComponent } from './consultation/form-patient/form-patient.component';
+import { MedicalFormService } from '../../service/medical-form.service';
+import { PatientFormService } from '../../service/patientForm.service';
 
 
 @NgModule({
@@ -44,9 +47,10 @@ import { PrescriptionService } from '../../service/prescription.service';
         ConsultationListComponent,
         ConsultationEditComponent,
         PatientComponent,
-        ListPrescripcionComponent
+        ListPrescripcionComponent,
+        QuestionComponent
 
-    ], entryComponents: [PatientComponent,ListPrescripcionComponent],
-    providers: [UserService, LanguageService, DoctorOfficeService, RoleService, ReasonConsultationService, ConsultationService, PatientService, AppointmentService,PrescriptionService]
+    ], entryComponents: [PatientComponent,ListPrescripcionComponent,QuestionComponent],
+    providers: [UserService, LanguageService,MedicalFormService,PatientFormService, DoctorOfficeService, RoleService, ReasonConsultationService, ConsultationService, PatientService, AppointmentService,PrescriptionService]
 })
 export class ConsultationModule { }
