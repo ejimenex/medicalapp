@@ -68,8 +68,8 @@
                   <td>{{item.country}}</td>
                   <td>{{item.city}}</td>
                   <td>
-                    <button (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-square"><i class="fa fa-trash"></i> {{ 'c.delete' | translate }}</button>
-                    <button (click)=(openEditView(item.id)) class="btn btn-outline-primary btn-square"><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+                    <button (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-pill"><i class="fa fa-trash"></i> </button>
+                    <button (click)=(openEditView(item.id)) class="btn btn-outline-primary btn-pill"><i class="fa fa-edit"></i> </button>
                   </td>
                 </tr>
                
@@ -83,6 +83,7 @@
                 <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>
               </ul>
             </nav>
+            <label>{{'totalReg' | translate}}: {{count}} </label> 
           </div>
         </div>
       </div>

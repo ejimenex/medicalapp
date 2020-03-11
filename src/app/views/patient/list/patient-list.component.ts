@@ -22,6 +22,7 @@ export class PatientListComponent implements OnInit {
   patients = [];
   filters: ITableColumn[];
   filter:any={};
+  count=0;
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,private _modalService: NgbModal,
      private alert: AlertService,
@@ -70,13 +71,15 @@ export class PatientListComponent implements OnInit {
   getAll( ) {
     this.patientService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.patients = response;
+      this.patients = response['value'];
+      this.count=response['@odata.count']
     })
   }
   getFiltered(){
     this.patientService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.patients = response;
+      this.patients = response['value'];
+      this.count=response['@odata.count']
     })
   }
   newConsultaton(id) {
@@ -91,7 +94,8 @@ export class PatientListComponent implements OnInit {
     if(this.page<0) this.page=0;
     
     this.patientService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.patients = response;
+      this.patients = response['value'];
+      this.count=response['@odata.count']
     })
   }
 

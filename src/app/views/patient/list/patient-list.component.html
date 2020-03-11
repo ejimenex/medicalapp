@@ -79,7 +79,7 @@
                             <button (click)=(openEditView(item.id)) ngbDropdownItem><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
                             <a [routerLink]="['/appointment/create/',item.id]" ngbDropdownItem><i class="fa fa-plus"></i>{{ 'newAppointment' | translate }}</a>
                             <button (click)='newConsultaton(item.id)' ngbDropdownItem><i class="fa fa-hand-o-left"></i>{{ 'newConsultation' | translate }}</button>
-                            <button (click)=confirmDelete(item.id) ngbDropdownItem><i class="fa fa-trash"></i> {{ 'c.delete' | translate }}</button>
+                            <button (click)=confirmDelete(item.id) ngbDropdownItem><i class="fa fa-trash"></i>{{ 'c.delete' | translate }} </button>
                           </div>
                         </div>
                       </div>
@@ -96,7 +96,9 @@
                 <li class="page-item"><a (click)=changePage(false) class="page-link">Prev</a></li>
 
                 <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>
+              
               </ul>
+              <label>{{'totalReg' | translate}}: {{count}} </label> 
             </nav>
           </div>
         </div>

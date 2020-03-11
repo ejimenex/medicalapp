@@ -52,6 +52,7 @@ export class MedicalFormListComponent implements OnInit {
        this.router.navigate(['parameter/medical-question/add/' + id])
     }
     getAll() {
+        
         this.medicalFormService.getBySpecifiedParam(true, this.filter, this.page, 'DoctorGuid').subscribe(response => {
             this.questions = response;
         })

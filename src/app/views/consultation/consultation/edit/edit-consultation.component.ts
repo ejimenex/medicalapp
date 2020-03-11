@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
 import { ReasonConsultationService } from '../../../../service/reason-consultation.service';
 import { ConsultationService } from '../../../../service/consultation.service';
 import { ConsultationModel } from '../../../../model/consultation.model';
+import { QuestionComponent } from '../form-patient/form-patient.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { config } from '../../../../constant/param';
 
 @Component({
     templateUrl: './edit-consultation.component.html'
@@ -32,6 +35,7 @@ export class ConsultationEditComponent implements OnInit {
         private doctorOfficeService: DoctorOfficeService,
         private route: ActivatedRoute,
         private patientService: PatientService,
+        private _modalService: NgbModal
     ) {
     }
 
@@ -42,7 +46,14 @@ export class ConsultationEditComponent implements OnInit {
         this.getData();
 
     }
+    openMedicalFormList(): void {
+        let modal = this._modalService.open(
+            QuestionComponent,
+            config.modalConfig
+        )
+        modal.componentInstance.patientId = this.cons.patientId
 
+    }
     async getData() {
         this.cons = await this.consultationService.getById(this.id).toPromise();
         this.patient = await this.patientService.getById(this.cons.patientId).toPromise();

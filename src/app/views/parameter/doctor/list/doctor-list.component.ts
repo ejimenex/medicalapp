@@ -17,6 +17,7 @@ interface ITableColumn {
 export class DoctorListComponent implements OnInit {
 
   doctors = [];
+  count=0;
   filters: ITableColumn[];
   filter:any={};
   page:number=0;
@@ -52,13 +53,15 @@ export class DoctorListComponent implements OnInit {
   getAll( ) {
     this.doctorService.getAll(true,this.filter,this.page).subscribe(response => {
 
-      this.doctors = response;
+      this.doctors = response['value'];
+      this.count=response['@odata.count']
     })
   }
   getFiltered(){
     this.doctorService.getAll(false,this.filter,this.page).subscribe(response => {
 
-      this.doctors = response;
+      this.doctors = response['value'];
+      this.count=response['@odata.count']
     })
   }
   changePage(next:boolean){
@@ -69,7 +72,8 @@ export class DoctorListComponent implements OnInit {
     if(this.page<0) this.page=0;
     
     this.doctorService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.doctors = response;
+      this.doctors = response['value'];
+      this.count=response['@odata.count']
     })
   }
 

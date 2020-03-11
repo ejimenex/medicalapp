@@ -75,6 +75,7 @@ searchMedicalCenter = (text$: Observable<any[]>) =>
 
   }
   validateRequidesFileds() {
+    
     let result = (!this.office.name || !this.office.medicalCenterId)
 
     return result;

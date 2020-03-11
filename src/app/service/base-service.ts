@@ -36,10 +36,10 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
 
     if (!initialLoad) {
 
-      let url = this.baseUrl + `?$top=10&$skip=${page}&$filter=contains(${filter.field},'${filter.value}') eq true ${filter.orderBy}`
+      let url = this.baseUrl + `?$top=10&$skip=${page}&$count=true&$filter=contains(${filter.field},'${filter.value}') eq true `
       return this._httpClient.get<TEntity[]>(url);
     }
-    return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0 ' + filter.orderBy);
+    return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0&$count=true ');
 
   }
   getBySpecifiedParam(initialLoad: boolean, filter: any, page: number, specifiedField: string): Observable<TEntity[]> {
@@ -49,10 +49,10 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
 
     if (!initialLoad) {
 
-      let url = this.baseUrl + `?$top=10&$skip=${page}&$filter=contains(${filter.field} ,'${filter.value}') and ${specifiedField} eq ${filter.specifiedField} eq true ${filter.orderBy}`
+      let url = this.baseUrl + `?$top=10&$skip=${page}&$count=true&$filter=contains(${filter.field} ,'${filter.value}') and ${specifiedField} eq ${filter.specifiedField} eq true `
       return this._httpClient.get<TEntity[]>(url);
     }
-    return this._httpClient.get<TEntity[]>(this.baseUrl + `?$top=10&$skip=0&$filter=${specifiedField} eq ${filter.specifiedField} ` + filter.orderBy);
+    return this._httpClient.get<TEntity[]>(this.baseUrl + `?$top=10&$skip=0&$count=true&$filter=${specifiedField} eq ${filter.specifiedField} `);
 
   }
   get(): Observable<TEntity[]> {

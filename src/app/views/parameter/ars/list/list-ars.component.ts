@@ -20,6 +20,7 @@ interface ITableColumn {
 export class ArsListComponent implements OnInit {
 
   arss = [];
+  count=0;
   filters: ITableColumn[];
   filter:any={};
   page:number=0;
@@ -55,13 +56,16 @@ export class ArsListComponent implements OnInit {
   getAll( ) {
     this.arsService.getAll(true,this.filter,this.page).subscribe(response => {
 
-      this.arss = response;
+      this.arss = response
+      ['value'];
+      this.count=response['@odata.count']
     })
   }
   getFiltered(){
     this.arsService.getAll(false,this.filter,this.page).subscribe(response => {
 
-      this.arss = response;
+      this.arss = response['value'];
+      this.count=response['@odata.count']
     })
   }
   changePage(next:boolean){
@@ -72,7 +76,8 @@ export class ArsListComponent implements OnInit {
     if(this.page<0) this.page=0;
     
     this.arsService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.arss = response;
+      this.arss = response['value'];
+      this.count=response['@odata.count']
     })
   }
   openEditView(id: number): void {

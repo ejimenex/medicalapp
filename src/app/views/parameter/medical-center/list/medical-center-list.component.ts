@@ -19,6 +19,7 @@ interface ITableColumn {
 export class MedicalCenterListComponent implements OnInit {
 
   medicalCenter : MedicalCenter[];
+  count=0
   filters: ITableColumn[];
   filter:any={};
   page:number=0;
@@ -58,14 +59,16 @@ export class MedicalCenterListComponent implements OnInit {
     this.filter.orderBy='id';
     this.medicalCenterService.getAll(true,this.filter,this.page).subscribe(response => {
 
-      this.medicalCenter = response;
+      this.medicalCenter = response['value'];
+      this.count=response['@odata.count']
     })
   }
   getFiltered(){
     this.filter.orderBy='id';
     this.medicalCenterService.getAll(false,this.filter,this.page).subscribe(response => {
 
-      this.medicalCenter = response;
+      this.medicalCenter = response['value'];
+      this.count=response['@odata.count']
     })
   }
   changePage(next:boolean){
@@ -77,7 +80,8 @@ export class MedicalCenterListComponent implements OnInit {
     if(this.page<0) this.page=0;
     
     this.medicalCenterService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.medicalCenter = response;
+      this.medicalCenter = response['value'];
+      this.count=response['@odata.count']
     })
   }
   openEditView(id: number): void {

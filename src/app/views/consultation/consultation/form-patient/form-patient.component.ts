@@ -38,7 +38,7 @@ export class QuestionComponent implements OnInit {
         this.data.forEach(res=>{
             
             this.patientFormService.put(res.id,res).subscribe(res=>{
-                this.alert.success('');
+                this.alert.success(this.translate.instant('patientDataSaved'));
             },error=>{
                 this.alert.error('');
             })

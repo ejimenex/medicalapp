@@ -185,6 +185,8 @@
 "text":"Text",
 "number":"Number",
 "check":"Yes or No (Check)",
-"questionText":"Medical Questions Form"
+"questionText":"Medical Questions Form",
+"patientDataSaved":"Patient data saved correctly",
+"totalReg":"Total Rows"
 
   }

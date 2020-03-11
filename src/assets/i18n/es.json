@@ -185,6 +185,8 @@
 "text":"Texto",
 "number":"Número",
 "check":"Si o No (Check)",
-"questionText":"Formulario de preguntas medicas"
+"questionText":"Formulario de preguntas medicas",
+"patientDataSaved":"Datos del paciente guardados correctamente",
+"totalReg":"Total Registros"
 
   }
