@@ -25,6 +25,7 @@ export class ConsultationListComponent implements OnInit {
   consultationList = [];
   reasonList=[];
   filters: ITableColumn[];
+  count=0;
   filter:any={};
   page:number=0;
   constructor(private translate: TranslateService,
@@ -81,12 +82,14 @@ export class ConsultationListComponent implements OnInit {
   getAll( ) {
     this.consultationService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.consultationList = response;
+      this.consultationList = response['value'];
+      this.count=response['@odata.count']
     })
   }
   getFiltered(){
     this.consultationService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.consultationList = response;
+      this.consultationList = response['value'];
+      this.count=response['@odata.count']
     })
   }
   changePage(next:boolean){
@@ -97,7 +100,8 @@ export class ConsultationListComponent implements OnInit {
     if(this.page<0) this.page=0;
     
     this.consultationService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.consultationList = response;
+      this.consultationList = response['value'];
+      this.count=response['@odata.count']
     })
   }
 

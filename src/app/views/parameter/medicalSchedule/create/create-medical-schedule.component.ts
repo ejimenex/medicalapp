@@ -60,11 +60,9 @@ export class CreateMedicaScheduleComponent implements OnInit {
         })
     }
     getOffices() {
-        let doctor = JSON.parse(localStorage.getItem("currentUser")).doctorId;
         
-        this.officeService.getByDoctor(doctor).subscribe(res => {
-            
-            this.offices = res as []})
+        this.filter.specifiedField =JSON.parse(localStorage.getItem("currentUser")).doctorId;
+        this.officeService.getNotPaginated(this.filter,'DoctorId').subscribe(res => this.offices = res['value'])
     }
     //formatterMedicalCenter = (result: any) => result.name
     // searchMedicalCenter = (text$: Observable<any[]>) =>

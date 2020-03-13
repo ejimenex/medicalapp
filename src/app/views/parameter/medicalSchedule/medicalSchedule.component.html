@@ -63,7 +63,13 @@
                
               </tbody>
             </table>
-        
+            <nav>
+              <ul class="pagination">                
+                <li class="page-item"><a (click)=changePage(false) class="page-link">Prev</a></li>
+                <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>              
+              </ul>              
+            </nav>
+            <label>{{'totalReg' | translate}}: {{count}} </label> 
           </div>
         </div>
       </div>

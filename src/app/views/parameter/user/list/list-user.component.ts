@@ -20,6 +20,7 @@ interface ITableColumn {
 export class UserListComponent implements OnInit {
 
   users = [];
+  count=0;
   filters: ITableColumn[];
   filter: any = {};
   page: number = 0;
@@ -63,24 +64,28 @@ export class UserListComponent implements OnInit {
   getAll() {
     if (this.rol == 1) {
       this.userService.getAll(true, this.filter, this.page).subscribe(response => {
-        this.users = response;
+        this.users = response['value'];
+        this.count=response['@odata.count']
       })
     }
     if (this.rol == 2 || this.rol == 3) {
       this.userService.getBySpecifiedParam(true, this.filter, this.page, 'doctorId').subscribe(response => {
-        this.users = response;
+        this.users = response['value'];
+        this.count=response['@odata.count']
       })
     }
   }
   getFiltered() {
     if (this.rol == 1) {
       this.userService.getAll(false, this.filter, this.page).subscribe(response => {
-        this.users = response;
+        this.users = response['value'];
+        this.count=response['@odata.count']
       })
     }
     if (this.rol == 2 || this.rol == 3) {
       this.userService.getBySpecifiedParam(false, this.filter, this.page, 'doctorId').subscribe(response => {
-        this.users = response;
+        this.users = response['value'];
+        this.count=response['@odata.count']
       })
     }
 
@@ -93,7 +98,8 @@ export class UserListComponent implements OnInit {
     if (this.page < 0) this.page = 0;
 
     this.userService.getAll(false, this.filter, this.page).subscribe(response => {
-      this.users = response;
+      this.users = response['value'];
+      this.count=response['@odata.count']
     })
   }
   openEditView(id: number): void {

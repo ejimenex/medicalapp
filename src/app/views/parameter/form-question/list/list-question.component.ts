@@ -20,6 +20,7 @@ export class MedicalFormListComponent implements OnInit {
 
     questions: MedicalForm[];
     filters: ITableColumn[];
+    count=0;
     filter: any = {};
     page: number = 0;
     constructor(private translate: TranslateService, private router: Router,
@@ -54,12 +55,14 @@ export class MedicalFormListComponent implements OnInit {
     getAll() {
         
         this.medicalFormService.getBySpecifiedParam(true, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.questions = response;
+            this.questions = response['value'];
+            this.count=response['@odata.count']
         })
     }
     getFiltered() {
         this.medicalFormService.getBySpecifiedParam(false, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.questions = response;
+            this.questions = response['value'];
+            this.count=response['@odata.count']
         })
     }
     changePage(next: boolean) {
@@ -70,7 +73,8 @@ export class MedicalFormListComponent implements OnInit {
         if (this.page < 0) this.page = 0;
 
         this.medicalFormService.getBySpecifiedParam(false, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.questions = response;
+            this.questions = response['value'];
+            this.count=response['@odata.count']
         })
     }
 

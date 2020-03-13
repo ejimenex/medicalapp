@@ -54,7 +54,7 @@ export class DoctorOfficeEditComponent implements OnInit {
     }
 
     selectOneMedicalCenter(data: any) {
-        debugger
+        
         if (data.hasOwnProperty('item')) {
             data = data.item
         }

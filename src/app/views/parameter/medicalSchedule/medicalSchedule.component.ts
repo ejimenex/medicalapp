@@ -14,6 +14,11 @@ import { EditMedicaScheduleComponent } from './edit/edit-medical-schedule.compon
 export class MedicalScheduleComponent implements OnInit {
 
   id: number;
+  guid='';
+  count=0;
+  
+  page:number=0;
+  filter:any={};
   medicalSchedules = [];
 
   constructor(private translate: TranslateService, private router: Router,
@@ -24,6 +29,8 @@ export class MedicalScheduleComponent implements OnInit {
   }
   ngOnInit() {
     this.id = JSON.parse(localStorage.getItem("currentUser")).doctorId;
+    this.guid = JSON.parse(localStorage.getItem("currentUser")).doctorGuid;
+    this.filter.specifiedField=JSON.parse(localStorage.getItem("currentUser")).doctorId;
     this.getAll();
 
   }
@@ -36,6 +43,25 @@ export class MedicalScheduleComponent implements OnInit {
       this.getAll();
     }, error => {
       this.alert.success(this.translate.instant(''));
+    })
+  }
+  getAll( ) {
+    this.medicalScheduleService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
+
+      this.medicalSchedules = response['value'];
+      this.count=response['@odata.count']
+    })
+  }
+  changePage(next:boolean){
+    this.filter.value=!this.filter.value?'':!this.filter.value;
+    
+    if(!this.filter.field)this.filter.field='name';
+    this.page=next?this.page +=10:this.page -=10;
+    if(this.page<0) this.page=0;
+    
+    this.medicalScheduleService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
+      this.medicalSchedules = response['value'];
+      this.count=response['@odata.count']
     })
   }
   openModal(id: number): void {
@@ -58,11 +84,11 @@ export class MedicalScheduleComponent implements OnInit {
       this.getAll();
     })
   }
-  getAll() {
-    this.medicalScheduleService.getByDoctor(this.id).subscribe(response => {
-      this.medicalSchedules = response as any;
-    })
-  }
+  // getAll() {
+  //   this.medicalScheduleService.getByDoctor(this.id).subscribe(response => {
+  //     this.medicalSchedules = response as any;
+  //   })
+  // }
 
 
 }

@@ -42,6 +42,7 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
     return this._httpClient.get<TEntity[]>(this.baseUrl + '?$top=10&$skip=0&$count=true ');
 
   }
+ 
   getBySpecifiedParam(initialLoad: boolean, filter: any, page: number, specifiedField: string): Observable<TEntity[]> {
     if (filter.orderBy)
       filter.orderBy = ` &$orderby=${filter.orderBy} desc`
@@ -55,6 +56,16 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
     return this._httpClient.get<TEntity[]>(this.baseUrl + `?$top=10&$skip=0&$count=true&$filter=${specifiedField} eq ${filter.specifiedField} `);
 
   }
+
+  getNotPaginated(filter: any, specifiedField: string): Observable<TEntity[]>{
+    if (filter.orderBy)
+      filter.orderBy = ` &$orderby=${filter.orderBy} desc`
+    else 
+    filter.orderBy = ''
+
+    return this._httpClient.get<TEntity[]>(this.baseUrl + `?$filter=${specifiedField} eq ${filter.specifiedField} `);
+  }
+
   get(): Observable<TEntity[]> {
 
     return this._httpClient.get<TEntity[]>(this.baseUrl);

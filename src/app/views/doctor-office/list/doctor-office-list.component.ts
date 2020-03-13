@@ -20,6 +20,7 @@ interface ITableColumn {
 export class DoctorOfficeListComponent implements OnInit {
 
   offices = [];
+  count=0
   filters: ITableColumn[];
   filter:any={};
   page:number=0;
@@ -67,13 +68,15 @@ export class DoctorOfficeListComponent implements OnInit {
   getAll( ) {
     this.officeService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.offices = response;
+      this.offices = response['value'];
+      this.count=response['@odata.count']
     })
   }
   getFiltered(){
     this.officeService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
 
-      this.offices = response;
+      this.offices = response['value'];
+      this.count=response['@odata.count']
     })
   }
   changePage(next:boolean){
@@ -84,7 +87,8 @@ export class DoctorOfficeListComponent implements OnInit {
     if(this.page<0) this.page=0;
     
     this.officeService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.offices = response;
+      this.offices = response['value'];
+      this.count=response['@odata.count']
     })
   }
 

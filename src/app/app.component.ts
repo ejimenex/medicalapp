@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
   }
   verify(): boolean {
-    debugger
+    
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(currentUser != null && this.tokenService.isCurrentTokenValid())
     return currentUser != null && this.tokenService.isCurrentTokenValid();

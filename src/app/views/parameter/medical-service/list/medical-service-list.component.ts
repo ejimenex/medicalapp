@@ -20,6 +20,7 @@ export class MedicalServiceListComponent implements OnInit {
 
     medicalService: MedicalService[];
     filters: ITableColumn[];
+    count=0;
     filter: any = {};
     page: number = 0;
     constructor(private translate: TranslateService, private router: Router,
@@ -36,7 +37,7 @@ export class MedicalServiceListComponent implements OnInit {
 
         ];
     }
-    confirmDelete(id) {
+    confirmDelete(id) {debugger
         this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
     }
     delete(id) {
@@ -53,12 +54,14 @@ export class MedicalServiceListComponent implements OnInit {
     }
     getAll() {
         this.medicalServiceService.getBySpecifiedParam(true, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.medicalService = response;
+            this.medicalService = response['value'];
+            this.count=response['@odata.count']
         })
     }
     getFiltered() {
         this.medicalServiceService.getBySpecifiedParam(false, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.medicalService = response;
+            this.medicalService = response['value'];
+            this.count=response['@odata.count']
         })
     }
     changePage(next: boolean) {
@@ -69,7 +72,8 @@ export class MedicalServiceListComponent implements OnInit {
         if (this.page < 0) this.page = 0;
 
         this.medicalServiceService.getBySpecifiedParam(false, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.medicalService = response;
+            this.medicalService = response['value'];
+            this.count=response['@odata.count']
         })
     }
 

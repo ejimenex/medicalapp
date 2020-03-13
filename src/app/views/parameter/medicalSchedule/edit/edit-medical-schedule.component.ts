@@ -38,23 +38,25 @@ export class EditMedicaScheduleComponent implements OnInit {
         this.filter.specifiedField = JSON.parse(localStorage.getItem("currentUser")).countryId
         this.filter.field = 'name';
         this.filter.value = '';
+        this.getOffices()
         this.getOne();
 
     }
 
     getOffices() {
-        let doctor = JSON.parse(localStorage.getItem("currentUser")).doctorId;
-        this.officeService.getByDoctor(doctor).subscribe(res => this.offices = res as [])
+        
+        this.filter.specifiedField =JSON.parse(localStorage.getItem("currentUser")).doctorId;
+        this.officeService.getNotPaginated(this.filter,'DoctorId').subscribe(res => this.offices = res['value'])
     }
     getOne() {
         this.scheduleService.getById(this.id).subscribe(response => {
             this.schedule = response;
-            this.getOffices()
+          
             console.log(response)
         })
     }
 
-    edit() {debugger
+    edit() {
         this.scheduleService.put(this.id, this.schedule).subscribe(response => {
             this.alertService.success(this.translate.instant('sucessEdition'));
             this.notifyParent.emit();
