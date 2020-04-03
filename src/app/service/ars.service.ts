@@ -16,3 +16,9 @@ getByCountry(id:number){
 }
 
 }
+@Injectable()
+export class ArsListService extends BaseService<ArsModel, number> {
+  constructor(_httpClient: HttpClient) {
+    super(_httpClient, environment.url + endpoint.arsList);
+  }
+}

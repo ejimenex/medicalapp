@@ -14,3 +14,11 @@ export class AppointmentService extends BaseService<AppointmentModel, number> {
   }
 
 }
+@Injectable()
+export class AppointmentListService extends BaseService<AppointmentModel, number> {
+
+  constructor(_httpClient: HttpClient) {
+    super(_httpClient, environment.url + endpoint.appointmentList);
+  }
+
+}

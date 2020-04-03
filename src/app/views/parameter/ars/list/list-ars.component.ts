@@ -5,7 +5,7 @@ import { AlertService } from '../../../../service/alert-sweet.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { config } from '../../../../constant/param';
 import { EditArsComponent } from '../edit/edit-ars.component';
-import { ArsService } from '../../../../service/ars.service';
+import { ArsService,ArsListService } from '../../../../service/ars.service';
 
 
 
@@ -25,7 +25,7 @@ export class ArsListComponent implements OnInit {
   filter:any={};
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,
-     private alert: AlertService, private _modalService: NgbModal,
+     private alert: AlertService,private arsListService :ArsListService, private _modalService: NgbModal,
       private arsService: ArsService) {
 
 
@@ -54,7 +54,7 @@ export class ArsListComponent implements OnInit {
     this.router.navigate(['parameter/ars/add'])
   }
   getAll( ) {
-    this.arsService.getAll(true,this.filter,this.page).subscribe(response => {
+    this.arsListService.getAll(true,this.filter,this.page).subscribe(response => {
 
       this.arss = response
       ['value'];
@@ -62,7 +62,7 @@ export class ArsListComponent implements OnInit {
     })
   }
   getFiltered(){
-    this.arsService.getAll(false,this.filter,this.page).subscribe(response => {
+    this.arsListService.getAll(false,this.filter,this.page).subscribe(response => {
 
       this.arss = response['value'];
       this.count=response['@odata.count']
@@ -75,7 +75,7 @@ export class ArsListComponent implements OnInit {
     this.page=next?this.page +=10:this.page -=10;
     if(this.page<0) this.page=0;
     
-    this.arsService.getAll(false,this.filter,this.page).subscribe(response => {
+    this.arsListService.getAll(false,this.filter,this.page).subscribe(response => {
       this.arss = response['value'];
       this.count=response['@odata.count']
     })

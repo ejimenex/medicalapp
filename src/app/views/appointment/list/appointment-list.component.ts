@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router'
 import { AlertService } from '../../../service/alert-sweet.service';
-import { AppointmentService } from '../../../service/appointment.service'
+import { AppointmentService, AppointmentListService } from '../../../service/appointment.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../../../constant/param';
 interface ITableColumn {
@@ -22,7 +22,7 @@ export class AppointmentListComponent implements OnInit {
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,private _modalService: NgbModal,
      private alert: AlertService,
-      private appointmentService: AppointmentService) {
+      private appointmentService: AppointmentService, private appointmentListService:AppointmentListService) {
 
 
   }
@@ -62,7 +62,7 @@ export class AppointmentListComponent implements OnInit {
     })
   }
   getAll( ) {
-    this.appointmentService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.appointmentListService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
 
       this.appointment = response['value']
       .map(res=>{
@@ -76,7 +76,7 @@ export class AppointmentListComponent implements OnInit {
     })
   }
   getFiltered(){
-    this.appointmentService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.appointmentListService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
 
       this.appointment = response['value'];
       this.count=response['@odata.count']
@@ -89,7 +89,7 @@ export class AppointmentListComponent implements OnInit {
     this.page=next?this.page +=10:this.page -=10;
     if(this.page<0) this.page=0;
     
-    this.appointmentService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.appointmentListService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
       this.appointment = response['value'];
       this.count=response['@odata.count']
     })

@@ -20,7 +20,7 @@ import { RoleService } from '../../service/role.service';
 import { EditArsComponent } from './ars/edit/edit-ars.component';
 import { ArsListComponent } from './ars/list/list-ars.component';
 import { ArsAddComponent } from './ars/create/create-ars.component';
-import { ArsService } from '../../service/ars.service';
+import { ArsService, ArsListService } from '../../service/ars.service';
 
 
 import { MedicalCenterListComponent } from './medical-center/list/medical-center-list.component';
@@ -77,7 +77,7 @@ import { CreateQuestionComponent } from './form-question/create/create-question.
     EditMedicaScheduleComponent,
     MedicalFormListComponent
   ], entryComponents: [EditCountryComponent, EditUserComponent, EditArsComponent, EditMedicalCenterComponent,CreateMedicaScheduleComponent,EditMedicaScheduleComponent],
-  providers: [CountryService, UserService, LanguageService, RoleService, ArsService,
+  providers: [CountryService, UserService, LanguageService, RoleService, ArsService,ArsListService,
      MedicalCenterService,MedicalScheduleService, MedicalSpecilityService,DoctorService,MedicalServiceService,MedicalFormService]
 })
 export class ParamenterModule { }
