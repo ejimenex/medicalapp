@@ -22,7 +22,8 @@ export class ArsListComponent implements OnInit {
   arss = [];
   count=0;
   filters: ITableColumn[];
-  filter:any={};
+  filterOne:string;
+  dataPage:any={}
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,
      private alert: AlertService,private arsListService :ArsListService, private _modalService: NgbModal,
@@ -54,30 +55,18 @@ export class ArsListComponent implements OnInit {
     this.router.navigate(['parameter/ars/add'])
   }
   getAll( ) {
-    this.arsListService.getAll(true,this.filter,this.page).subscribe(response => {
-
-      this.arss = response
-      ['value'];
-      this.count=response['@odata.count']
-    })
-  }
-  getFiltered(){
-    this.arsListService.getAll(false,this.filter,this.page).subscribe(response => {
-
-      this.arss = response['value'];
-      this.count=response['@odata.count']
+    this.arsService.getFiltered(this.filterOne,this.page).subscribe(response => {
+      this.arss = response.data;
+      this.dataPage=response
     })
   }
   changePage(next:boolean){
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
+    this.page=next?this.page +=1:this.page -=1;
     if(this.page<0) this.page=0;
     
-    this.arsListService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.arss = response['value'];
-      this.count=response['@odata.count']
+    this.arsService.getFiltered(this.filterOne,this.page).subscribe(response => {
+      this.arss = response.data;
+      this.dataPage=response
     })
   }
   openEditView(id: number): void {

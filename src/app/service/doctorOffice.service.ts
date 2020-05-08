@@ -14,5 +14,7 @@ export class DoctorOfficeService extends BaseService<DoctorOffice, number> {
 getByDoctor(id:number){
   return this._httpClient.get(environment.url+endpoint.doctorOffice+'/getByDoctor?id='+id)
 }
-
+getFiltered(filter:string,page:number,id:number){
+  return this._httpClient.get<any>(environment.url+endpoint.doctorOffice+`/GetOfficePaginated?pagesize=10&pagenumber=${page}&parameters=${filter}&doctorId=${id}`)
+}
 }

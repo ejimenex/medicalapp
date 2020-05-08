@@ -19,8 +19,9 @@ export class DoctorListComponent implements OnInit {
   doctors = [];
   count=0;
   filters: ITableColumn[];
-  filter:any={};
-  page:number=0;
+  filterOne:string;
+  dataPage:any={};
+  page:number=1;
   constructor(private translate: TranslateService, private router: Router,
      private alert: AlertService,
       private doctorService: DoctorService) {
@@ -29,11 +30,6 @@ export class DoctorListComponent implements OnInit {
   }
   ngOnInit() {
     this.getAll();
-    this.filters = [
-      { header: this.translate.instant('name'), value: 'name' },
-      { header: this.translate.instant('country'), value: 'country' }
-    
-    ];
   }
   confirmDelete(id) {
     this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
@@ -51,29 +47,19 @@ export class DoctorListComponent implements OnInit {
     this.router.navigate(['parameter/doctor/add'])
   }
   getAll( ) {
-    this.doctorService.getAll(true,this.filter,this.page).subscribe(response => {
+    this.doctorService.getFiltered(this.filterOne,this.page).subscribe(response => {
 
-      this.doctors = response['value'];
-      this.count=response['@odata.count']
-    })
-  }
-  getFiltered(){
-    this.doctorService.getAll(false,this.filter,this.page).subscribe(response => {
-
-      this.doctors = response['value'];
-      this.count=response['@odata.count']
+      this.doctors = response.data;
+      this.dataPage=response
     })
   }
   changePage(next:boolean){
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
+    this.page=next?this.page +=1:this.page -=1;
     if(this.page<0) this.page=0;
     
-    this.doctorService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.doctors = response['value'];
-      this.count=response['@odata.count']
+    this.doctorService.getFiltered(this.filterOne,this.page).subscribe(response => {
+      this.doctors = response.data;
+      this.dataPage=response
     })
   }
 

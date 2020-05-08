@@ -46,24 +46,11 @@ export class MedicalScheduleComponent implements OnInit {
     })
   }
   getAll( ) {
-    this.medicalScheduleService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
-
-      this.medicalSchedules = response['value'];
-      this.count=response['@odata.count']
+    this.medicalScheduleService.getByDoctor(this.id).subscribe(response => {
+      this.medicalSchedules = response as any;
     })
   }
-  changePage(next:boolean){
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
-    if(this.page<0) this.page=0;
-    
-    this.medicalScheduleService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.medicalSchedules = response['value'];
-      this.count=response['@odata.count']
-    })
-  }
+ 
   openModal(id: number): void {
     let modal = this._modalService.open(
       CreateMedicaScheduleComponent,

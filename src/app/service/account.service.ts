@@ -11,6 +11,4 @@ export class AccountService extends BaseService<Account, number> {
   constructor(_httpClient: HttpClient) {
     super(_httpClient, environment.url + endpoint.account);
   }
-
-
 }

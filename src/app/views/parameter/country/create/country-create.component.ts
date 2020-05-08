@@ -4,6 +4,7 @@ import { AlertToast } from '../../../../service/alert-toast.service';
 import { AlertService } from '../../../../service/alert-sweet.service';
 import { Country } from '../../../../model/country';
 import { Router } from '@angular/router';
+
 import { CountryService } from '../../../../service/country.service';
 
 
@@ -24,7 +25,7 @@ export class CountryAddComponent {
             this.alertService.success(this.translate.instant("sucessRegister"))
         }, error => {
             console.log(this.translate.instant(error.error))
-            this.alertService.error(this.translate.instant(error.error))
+            this.alertService.znError(this.translate.instant(error.error))
         })
 
     }

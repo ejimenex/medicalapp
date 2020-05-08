@@ -14,5 +14,9 @@ export class MedicalServiceService extends BaseService<MedicalService, number> {
   getCurrency() {
     return this._httpClient.get(environment.url + endpoint.currency);
   }
-
+  getFiltered(param:string,pageNumber:number,DoctorId:string){
+    param=param==null?'':param;
+    let url= environment.url + endpoint.medicalService+`/GetMedicalServicePaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}&doctorGuid=${DoctorId}`
+    return this._httpClient.get<any>(url)
+  }
 }

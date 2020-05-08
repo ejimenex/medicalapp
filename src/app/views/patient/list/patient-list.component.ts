@@ -20,9 +20,9 @@ interface ITableColumn {
 export class PatientListComponent implements OnInit {
 
   patients = [];
-  filters: ITableColumn[];
-  filter:any={};
-  count=0;
+  filterOne='';
+  dataPage={}
+  doctorId=0
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,private _modalService: NgbModal,
      private alert: AlertService,
@@ -31,13 +31,8 @@ export class PatientListComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.filter.specifiedField=JSON.parse(localStorage.getItem("currentUser")).doctorId;
-    //this.filter.orderBy='id'
+    this.doctorId=JSON.parse(localStorage.getItem("currentUser")).doctorId;
     this.getAll();
-    this.filters = [
-      { header: this.translate.instant('name'), value: 'name' },
-      { header: this.translate.instant('phone1'), value: 'phone' }    
-    ];  
     
   }
   openEditView(id: number): void {
@@ -69,17 +64,10 @@ export class PatientListComponent implements OnInit {
     this.router.navigate(['appointment/create/'+id])
   }
   getAll( ) {
-    this.patientService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.patientService.getFiltered(this.doctorId,this.page,this.filterOne).subscribe(response => {
 
-      this.patients = response['value'];
-      this.count=response['@odata.count']
-    })
-  }
-  getFiltered(){
-    this.patientService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-
-      this.patients = response['value'];
-      this.count=response['@odata.count']
+      this.patients = response.data;
+      this.dataPage=response
     })
   }
   newConsultaton(id) {
@@ -87,16 +75,8 @@ export class PatientListComponent implements OnInit {
   
 }
   changePage(next:boolean){
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
     this.page=next?this.page +=10:this.page -=10;
-    if(this.page<0) this.page=0;
-    
-    this.patientService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.patients = response['value'];
-      this.count=response['@odata.count']
-    })
+   this.getAll()
   }
 
 }

@@ -12,7 +12,7 @@ export class MedicalScheduleService extends BaseService<MedicalSchedule, number>
     super(_httpClient, environment.url + endpoint.medicalSchedule);
   }
   getByDoctor(id: number) {
-    return this._httpClient.get(environment.url + endpoint.medicalSchedule + '/getByDoctor?id=' + id)
+    return this._httpClient.get<MedicalSchedule>(environment.url + endpoint.medicalSchedule + '/getByDoctor?id=' + id)
   }
   getByOffice(id: number) {
     return this._httpClient.get(environment.url + endpoint.medicalSchedule + '/getByOffice?id=' + id)

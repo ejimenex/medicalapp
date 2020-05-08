@@ -19,10 +19,11 @@ interface ITableColumn {
 export class MedicalFormListComponent implements OnInit {
 
     questions: MedicalForm[];
-    filters: ITableColumn[];
-    count=0;
-    filter: any = {};
-    page: number = 0;
+    count = 0;
+    filterOne="";
+    dataPage: any = {};
+    doctorId = ""
+    page: number = 1;
     constructor(private translate: TranslateService, private router: Router,
         private alert: AlertService, private _modalService: NgbModal,
         private medicalFormService: MedicalFormService) {
@@ -30,12 +31,8 @@ export class MedicalFormListComponent implements OnInit {
 
     }
     ngOnInit() {
-        this.filter.specifiedField = JSON.parse(localStorage.getItem("currentUser")).doctorGuid;
+        this.doctorId = JSON.parse(localStorage.getItem("currentUser")).doctorGuid;
         this.getAll();
-        this.filters = [
-            { header: this.translate.instant('question'), value: 'question' }
-
-        ];
     }
     confirmDelete(id) {
         this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
@@ -50,32 +47,19 @@ export class MedicalFormListComponent implements OnInit {
     }
 
     newQuestion(id) {
-       this.router.navigate(['parameter/medical-question/add/' + id])
+        this.router.navigate(['parameter/medical-question/add/' + id])
     }
     getAll() {
-        
-        this.medicalFormService.getBySpecifiedParam(true, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.questions = response['value'];
-            this.count=response['@odata.count']
-        })
-    }
-    getFiltered() {
-        this.medicalFormService.getBySpecifiedParam(false, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.questions = response['value'];
-            this.count=response['@odata.count']
+
+        this.medicalFormService.getByDoctor(this.doctorId,this.page,this.filterOne).subscribe(response => {
+            this.questions = response.data;
+            this.dataPage = response
         })
     }
     changePage(next: boolean) {
-        this.filter.value = !this.filter.value ? '' : !this.filter.value;
-
-        if (!this.filter.field) this.filter.field = 'name';
-        this.page = next ? this.page += 10 : this.page -= 10;
+        this.page = next ? this.page += 1 : this.page -= 1;
         if (this.page < 0) this.page = 0;
-
-        this.medicalFormService.getBySpecifiedParam(false, this.filter, this.page, 'DoctorGuid').subscribe(response => {
-            this.questions = response['value'];
-            this.count=response['@odata.count']
-        })
+        this.getAll()
     }
 
 }

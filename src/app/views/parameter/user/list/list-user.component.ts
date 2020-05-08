@@ -8,21 +8,15 @@ import { EditUserComponent } from '../edit/edit-user.component';
 import { UserService } from '../../../../service/users.service';
 
 
-
-interface ITableColumn {
-  header: string;
-  value?: string;
-}
-
 @Component({
   templateUrl: './list-user.component.html'
 })
 export class UserListComponent implements OnInit {
 
   users = [];
-  count=0;
-  filters: ITableColumn[];
-  filter: any = {};
+  filterOne: string="";
+  dataPage:any={}
+  doctorId=null
   page: number = 0;
   rol: number;
   constructor(private translate: TranslateService, private router: Router,
@@ -34,17 +28,10 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     this.rol = JSON.parse(localStorage.getItem("currentUser")).rol;
     if (this.rol == 2 || this.rol == 3) {
-      this.filter.specifiedField = JSON.parse(localStorage.getItem("currentUser")).doctorId     
+      this.doctorId = JSON.parse(localStorage.getItem("currentUser")).doctorId     
 
     }
     this.getAll();
-    this.filters = [
-      { header: this.translate.instant('name'), value: 'name' },
-      { header: this.translate.instant('userName'), value: 'userName' },
-      { header: this.translate.instant('mail'), value: 'mail' },
-      { header: this.translate.instant('rol'), value: 'rolName' }
-
-    ];
   }
   confirmDelete(id) {
     this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
@@ -63,44 +50,24 @@ export class UserListComponent implements OnInit {
   }
   getAll() {
     if (this.rol == 1) {
-      this.userService.getAll(true, this.filter, this.page).subscribe(response => {
-        this.users = response['value'];
-        this.count=response['@odata.count']
+      this.userService.getFiltered(this.filterOne, this.page).subscribe(response => {
+        this.users = response.data;
+        this.dataPage=response
       })
     }
     if (this.rol == 2 || this.rol == 3) {
-      this.userService.getBySpecifiedParam(true, this.filter, this.page, 'doctorId').subscribe(response => {
-        this.users = response['value'];
-        this.count=response['@odata.count']
+      this.userService.getFilteredByDoctor(this.filterOne, this.page, this.doctorId).subscribe(response => {
+        this.users = response.data;
+        this.dataPage=response
       })
     }
-  }
-  getFiltered() {
-    if (this.rol == 1) {
-      this.userService.getAll(false, this.filter, this.page).subscribe(response => {
-        this.users = response['value'];
-        this.count=response['@odata.count']
-      })
-    }
-    if (this.rol == 2 || this.rol == 3) {
-      this.userService.getBySpecifiedParam(false, this.filter, this.page, 'doctorId').subscribe(response => {
-        this.users = response['value'];
-        this.count=response['@odata.count']
-      })
-    }
-
   }
   changePage(next: boolean) {
-    this.filter.value = !this.filter.value ? '' : !this.filter.value;
 
-    if (!this.filter.field) this.filter.field = 'name';
-    this.page = next ? this.page += 10 : this.page -= 10;
+    this.page = next ? this.page += 1 : this.page -= 1;
     if (this.page < 0) this.page = 0;
 
-    this.userService.getAll(false, this.filter, this.page).subscribe(response => {
-      this.users = response['value'];
-      this.count=response['@odata.count']
-    })
+   this.getAll()
   }
   openEditView(id: number): void {
     let modal = this._modalService.open(

@@ -21,7 +21,7 @@ import { AppointmentListComponent } from './list/appointment-list.component';
 import { PatientService } from '../../service/patient.service';
 import { AppintmentRoutingModule } from './appointment.route';
 
-import { AppointmentService, AppointmentListService } from '../../service/appointment.service';
+import { AppointmentService } from '../../service/appointment.service';
 import { ApointmentAddComponent } from './create/create-appointment.component';
 import { ApointmentEditComponent } from './edit/edit-appointment.component';
 import { MedicalScheduleService } from '../../service/medicalSchedule.service';
@@ -44,6 +44,6 @@ import { MedicalScheduleService } from '../../service/medicalSchedule.service';
 
   ], entryComponents: [],
   providers: [UserService, LanguageService,MedicalScheduleService, RoleService, ArsService, PatientService,
-     AppointmentService,AppointmentListService]
+     AppointmentService]
 })
 export class AppointmentModule { }

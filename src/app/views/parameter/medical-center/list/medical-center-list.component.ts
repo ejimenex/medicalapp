@@ -8,20 +8,14 @@ import { EditMedicalCenterComponent } from '../edit/edit-medical-center.componen
 import { MedicalCenterService } from '../../../../service/medical-center.service';
 import { MedicalCenter } from '../../../../model/medicalCenter';
 
-interface ITableColumn {
-  header: string;
-  value?: string;
-}
-
 @Component({
   templateUrl: './medical-center-list.component.html'
 })
 export class MedicalCenterListComponent implements OnInit {
 
   medicalCenter : MedicalCenter[];
-  count=0
-  filters: ITableColumn[];
-  filter:any={};
+  filterOne="";
+  dataPage:any={}
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,
      private alert: AlertService, private _modalService: NgbModal,
@@ -32,13 +26,6 @@ export class MedicalCenterListComponent implements OnInit {
   ngOnInit() {
     
     this.getAll();
-    this.filters = [
-      { header: this.translate.instant('name'), value: 'name' },
-      { header: this.translate.instant('country'), value: 'countryName' },
-      { header: this.translate.instant('city'), value: 'city' },
-      { header: this.translate.instant('phone1'), value: 'phone1' }
-    
-    ];
   }
   confirmDelete(id) {
     this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
@@ -56,33 +43,18 @@ export class MedicalCenterListComponent implements OnInit {
     this.router.navigate(['parameter/medicalcenter/add'])
   }
   getAll( ) {
-    this.filter.orderBy='id';
-    this.medicalCenterService.getAll(true,this.filter,this.page).subscribe(response => {
+    this.medicalCenterService.getFiltered(this.filterOne,this.page).subscribe(response => {
 
-      this.medicalCenter = response['value'];
-      this.count=response['@odata.count']
+      this.medicalCenter = response.data;
+      this.dataPage=response
     })
   }
-  getFiltered(){
-    this.filter.orderBy='id';
-    this.medicalCenterService.getAll(false,this.filter,this.page).subscribe(response => {
-
-      this.medicalCenter = response['value'];
-      this.count=response['@odata.count']
-    })
-  }
+  
   changePage(next:boolean){
-    this.filter.orderBy='id';
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
+    this.page=next?this.page +=1:this.page -=1;
     if(this.page<0) this.page=0;
     
-    this.medicalCenterService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.medicalCenter = response['value'];
-      this.count=response['@odata.count']
-    })
+   this.getAll()
   }
   openEditView(id: number): void {
      let modal = this._modalService.open(

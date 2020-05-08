@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router'
 import { AlertService } from '../../../service/alert-sweet.service';
-import { AppointmentService, AppointmentListService } from '../../../service/appointment.service'
+import { AppointmentService } from '../../../service/appointment.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../../../constant/param';
-interface ITableColumn {
-  header: string;
-  value?: string;
-}
 
 @Component({
   templateUrl: './appointment-list.component.html'
@@ -16,25 +12,19 @@ interface ITableColumn {
 export class AppointmentListComponent implements OnInit {
 
   appointment = [];
-  filters: ITableColumn[];
-  filter:any={};
-  count=0
+  filterOne='';
+  doctorId=0
+  dataPage={}
   page:number=0;
   constructor(private translate: TranslateService, private router: Router,private _modalService: NgbModal,
      private alert: AlertService,
-      private appointmentService: AppointmentService, private appointmentListService:AppointmentListService) {
+      private appointmentService: AppointmentService) {
 
 
   }
   ngOnInit() {
-    this.filter.specifiedField=JSON.parse(localStorage.getItem("currentUser")).doctorId;
-    //this.filter.orderBy='id'
+    this.doctorId=JSON.parse(localStorage.getItem("currentUser")).doctorId;
     this.getAll();
-    this.filters = [
-      { header: this.translate.instant('patient'), value: 'patient' },
-      { header: this.translate.instant('doctorOffice'), value: 'officeName' } 
-    ];  
-    
   }
 
   confirmDelete(id) {
@@ -62,9 +52,9 @@ export class AppointmentListComponent implements OnInit {
     })
   }
   getAll( ) {
-    this.appointmentListService.getBySpecifiedParam(true,this.filter,this.page,'DoctorId').subscribe(response => {
+    this.appointmentService.getFiltered(this.filterOne,this.page,this.doctorId).subscribe(response => {
 
-      this.appointment = response['value']
+      this.appointment = response.data
       .map(res=>{
           res['class']=res.appointmentStateId==1?'badge badge-danger':res['class'];
           res['class']=res.appointmentStateId==2?'badge badge-success':res['class'];
@@ -72,27 +62,12 @@ export class AppointmentListComponent implements OnInit {
           res['class']=res.appointmentStateId==4?'badge badge-warning':res['class'];
           return res
       });
-      this.count=response['@odata.count']
-    })
-  }
-  getFiltered(){
-    this.appointmentListService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-
-      this.appointment = response['value'];
-      this.count=response['@odata.count']
+      this.dataPage=response
     })
   }
   changePage(next:boolean){
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
-    if(this.page<0) this.page=0;
-    
-    this.appointmentListService.getBySpecifiedParam(false,this.filter,this.page,'DoctorId').subscribe(response => {
-      this.appointment = response['value'];
-      this.count=response['@odata.count']
-    })
+    this.page=next?this.page +=1:this.page -=1;
+   this.getAll()
   }
 
 }

@@ -7,18 +7,28 @@
         </div>
         <div class="card-body">
           <p>{{ 'filterBy' | translate }}</p>
+          <div class="row">
+              <div class="col-md-6">
+              <label>{{ 'dateFrom' | translate }}</label>
+              <input type="date" [(ngModel)]=filterDate.dateFrom class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label>{{ 'dateTo' | translate }}</label>
+                <input type="date" [(ngModel)]=filterDate.dateTo class="form-control">
+              </div>
+          </div>
+          <br>
+          <div class="">
           <div class="input-prepend input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-search"></i></span>
             </div>
-            <select [(ngModel)]='filter.field' aria-placeholder="k" class="form-control">
-              <option *ngFor='let item of filters' [ngValue]="item.value">{{item.header}}</option>
-            </select>
-            <input [(ngModel)]="filter.value" (keydown.enter)='getFiltered()' placeholder="{{ 'valueForSearch' | translate }}" class="form-control">
+            <input [(ngModel)]="filterOne" (keydown.enter)='getAll()' placeholder="{{ 'valueForSearch' | translate }}" class="form-control">
             <span class="input-group-append">
-              <button (click)='getFiltered()' class="btn btn-info" type="button">{{ 'search' | translate }}</button>
+              <button (click)='getAll()' class="btn btn-info" type="button">{{ 'search' | translate }}</button>
             </span>
           </div>
+        </div>
         </div>
       </div>
     <div class="row">
@@ -83,15 +93,14 @@
                         </tbody>
                     </table>
                     <div class="col-xs-12 col-12 d-sm-down-none">
-                        
+                        <div class="col-md-12">
+                            <button class="btn btn-secondary" (click)=changePage(false) [disabled]='!dataPage.hasPrevious'>Prev</button>
+                            <label>Pag. {{dataPage.currentPage}} of {{dataPage.totalPage}}</label>
+                            <button class="btn btn-secondary" (click)=changePage(true) [disabled]='!dataPage.hasNext'>Next</button>
+                            <label>[Total Rows: {{dataPage.totalCount}}]</label>
+                     </div>
                       </div>
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a (click)=changePage(false) class="page-link">Prev</a></li>
-                            <li class="page-item"><a (click)=changePage(true) class="page-link">Next</a></li>
-                        </ul>
-                    </nav>
-                    <label>{{'totalReg' | translate}}: {{count}} </label> 
+                    
                 </div>
             </div>
         </div>

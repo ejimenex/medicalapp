@@ -8,6 +8,8 @@ import { EditCountryComponent } from '../edit/edit-country.component';
 import { CountryService } from '../../../../service/country.service';
 import { Country } from '../../../../model/country';
 
+import { NzMessageService } from 'ng-zorro-antd/message';
+
 
 interface ITableColumn {
   header: string;
@@ -21,20 +23,18 @@ export class CountryListComponent implements OnInit {
 
   countries = [];
   filters: ITableColumn[];
-  filter:any={};
-  page:number=0;
-  constructor(private translate: TranslateService, private router: Router, private alert: AlertService, private _modalService: NgbModal, private countryService: CountryService) {
-  
+  dataPage: any = {};
+  filterOne: string
+  page: number = 1;
+  constructor(private translate: TranslateService,
+    private router: Router, private alert: AlertService, private _modalService: NgbModal, private countryService: CountryService) {
+
   }
   ngOnInit() {
-    
+
     this.getAll();
-    this.filters = [
-      { header: this.translate.instant('name'), value: 'name' },
-      { header: this.translate.instant('code'), value: 'code' },
-    
-    ];
   }
+  
   confirmDelete(id) {
     this.alert.question(() => { this.delete(id) }, this.translate.instant('confirm'), this.translate.instant('sureTextRemove'))
   }
@@ -50,31 +50,18 @@ export class CountryListComponent implements OnInit {
   newCountry() {
     this.router.navigate(['parameter/country/add'])
   }
-  getAll( ) {
-    this.filter.orderBy='id';
-    this.countryService.getAll(true,this.filter,this.page).subscribe(response => {
-
-      this.countries = response;
+  getAll() {
+    this.countryService.getFiltered(this.filterOne, this.page).subscribe(response => {
+      this.countries = response.data;
+      this.dataPage = response
     })
   }
-  getFiltered(){
-    this.filter.orderBy='id';
-    this.countryService.getAll(false,this.filter,this.page).subscribe(response => {
 
-      this.countries = response;
-    })
-  }
-  changePage(next:boolean){
-    this.filter.orderBy='id';
-    this.filter.value=!this.filter.value?'':!this.filter.value;
-    
-    if(!this.filter.field)this.filter.field='name';
-    this.page=next?this.page +=10:this.page -=10;
-    if(this.page<0) this.page=0;
-    
-    this.countryService.getAll(false,this.filter,this.page).subscribe(response => {
-      this.countries = response;
-    })
+  changePage(next: boolean) {
+
+    this.page = next ? this.page += 1 : this.page -= 1;
+    if (this.page < 0) this.page = 0;
+    this.getAll();
   }
   openEditView(id: number): void {
     let modal = this._modalService.open(

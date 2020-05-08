@@ -56,6 +56,8 @@ import { ChartsModule } from 'ng2-charts';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertToast } from './service/alert-toast.service';
 import { AlertService } from './service/alert-sweet.service';
+import { NzModalModule } from 'ng-zorro-antd/modal';import{NzPopconfirmModule} from 'ng-zorro-antd/popconfirm'
+
 import { JwtModule } from '@auth0/angular-jwt';
 import { DoctorOfficeService } from './service/doctorOffice.service';
 import { PermissionService } from './service/permission.service';
@@ -73,6 +75,8 @@ export function token() {
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    NzModalModule,
+    NzPopconfirmModule,
     NgbModule,
 
     JwtModule.forRoot({

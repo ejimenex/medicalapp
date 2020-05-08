@@ -12,7 +12,7 @@ export class MedicalFormService extends BaseService<MedicalForm, number> {
     super(_httpClient, environment.url + endpoint.medicalForm);
   }
 
-  getByDoctor(id:string) {
-      return this._httpClient.get<MedicalForm[]>(environment.url + endpoint.medicalForm+`/getByDoctor/${id}`)
+  getByDoctor(id:string,pageNumber:number,param:string) {
+      return this._httpClient.get<any>(environment.url + endpoint.medicalForm+`/GetMedicalQuestionPaginated?pagenumber=${pageNumber}&pagesize=10&doctorGuid=${id}&parameters=${param}`)
   }
 }

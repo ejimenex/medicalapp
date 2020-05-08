@@ -78,6 +78,8 @@
   "specialties":"Especialidades",
   "treament":"Tratamiento",
   "bornDate":"Fecha Nacimiento",
+  "dateTo":"Fecha hasta",
+  "dateFrom":"Fecha desde",
   "collegeDegree":"Titulo Universitario",
   "doctors":"Médicos",
   "langPrefferApp":"Idioma en el que prefiee el sistema",
