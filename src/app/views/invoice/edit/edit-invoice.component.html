@@ -1,0 +1,177 @@
+<div class="animated fadeIn">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <i class="fa fa-plus"></i> {{ 'addNew' | translate }}
+
+
+                </div>
+                <div class="card-body">
+                    <div class="col-lg-12">
+                        <div class="text-right">
+                            <button class="btn btn-info" (click)='saveHeader()'><i class="fa fa-save"></i>
+                                {{ 'save' | translate }}</button>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
+                    </div>
+                    <fieldset>
+                        <legend>{{'headerInformation' | translate}}</legend>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="">{{ 'patient' | translate }}</label>
+                                <span *ngIf='!invoice.patientId' class="text-danger"> * </span>
+                                <select [disabled]=invoice.isBilled class="form-control"
+                                    [(ngModel)]='invoice.patientId'>
+                                    <option *ngFor='let item of patient' [value]=item.id>{{item.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="">{{ 'doctorOffice' | translate }}</label>
+                                <span *ngIf='!invoice.officeId' class="text-danger"> * </span>
+                                <select [disabled]=invoice.isBilled class="form-control" [(ngModel)]='invoice.officeId'>
+                                    <option *ngFor='let item of offices' [value]=item.id>{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="">{{ 'currency' | translate }}</label>
+                                <span *ngIf='!invoice.currencyId' class="text-danger"> * </span>
+                                <select [disabled]=invoice.isBilled class="form-control"
+                                    [(ngModel)]='invoice.currencyId'>
+                                    <option *ngFor='let item of currency' [value]=item.id>{{item.name}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="">{{ 'qty' | translate }}: {{invoice.qty}}</label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="">{{ 'discount' | translate }}: {{invoice.discount | currency}}</label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="">{{ 'total' | translate }}: {{invoice.total | currency}}</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <div class="card">
+                        <div class="card-header bg-info">
+                            <i class="fa fa-plus"></i> {{ 'billService' | translate }}
+
+
+                        </div>
+                        <div class="card-body">
+                            <div *ngIf=!invoice.isBilled class="row">
+                                <div class="col-md-6">
+                                    <label class="">{{ 'service' | translate }}</label>
+                                    <span *ngIf='!invoiceDetail.medicalServiceId' class="text-danger"> * </span>
+                                    <select [disabled]=invoice.isBilled class="form-control"
+                                        (change)=setPrice(invoiceDetail.medicalServiceId)
+                                        [(ngModel)]='invoiceDetail.medicalServiceId'>
+                                        <option *ngFor='let item of services' [value]=item.id>{{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="">{{ 'price' | translate }}</label>
+                                    <span *ngIf='!invoiceDetail.price' class="text-danger"> * </span>
+                                    <input type="number" [(ngModel)]='invoiceDetail.price' class="form-control" />
+                                </div>
+                            </div>
+                            <div *ngIf=!invoice.isBilled class="row">
+                                <div class="col-md-6">
+                                    <label class="">{{ 'qty' | translate }}</label>
+                                    <span *ngIf='!invoiceDetail.medicalServiceId' class="text-danger"> * </span>
+                                    <input type="number" [(ngModel)]='invoiceDetail.qty' class="form-control" />
+                                </div>
+                                 <div class="col-md-6">
+                                    <label class="">{{ 'total' | translate }}</label>
+                                    <input [disabled]=true type="number" [(ngModel)]='invoiceDetail.qty * invoiceDetail.price' class="form-control" />
+                                </div>
+                            </div>
+                            <div *ngIf=!invoice.isBilled class="row">
+                              
+                                <div class="col-md-6" *ngIf='invoiceDetail.price !=originalPrice' >
+                                    <label class="">{{ 'discountReason' | translate }}</label>
+
+                                    <select [disabled]=invoice.isBilled class="form-control"
+                                       
+                                        [(ngModel)]='invoiceDetail.discountReasonId'>
+                                        <option *ngFor='let item of reasonsDiscount' [value]=item.id>{{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div *ngIf=!invoice.isBilled class="row">
+                                <div class="col-md-12">
+                                    <div class="text-right">
+                                        <button class="btn btn-info" (click)='saveDetail()'><i class="fa fa-save"></i>
+                                            {{ 'c.add' | translate }}</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <th>{{ 'service' | translate }}</th>
+                                <th>{{ 'qty' | translate }}</th>
+                                <th>{{ 'price' | translate }}</th>
+                                <th>{{ 'discount' | translate }}</th>
+                                <th>{{ 'total' | translate }}</th>
+                                <th>{{ 'discountReason' | translate }}</th>
+                                <th>{{ 'actions' | translate }}</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let item of invoiceDetailList'>
+                                    <td>
+                                        <select [disabled]=invoice.isBilled class="form-control"
+                                            (change)=setPrice(invoiceDetail.medicalServiceId)
+                                            [(ngModel)]='item.medicalServiceId'>
+                                            <option *ngFor='let item of services' [value]=item.id>{{item.name}}</option>
+                                        </select>
+                                    </td>
+                                    <td><input [disabled]=invoice.isBilled type="number" [(ngModel)]='item.qty'
+                                            class="form-control" /></td>
+                                    <td><input [disabled]=invoice.isBilled type="number" [(ngModel)]='item.price'
+                                            class="form-control" /></td>
+                                    <td><input [disabled]=invoice.isBilled type="number" [(ngModel)]='item.discount'
+                                            class="form-control" /></td>
+                                    <td><b>{{item.total | currency}}</b></td>
+                                    <td> <select [disabled]=invoice.isBilled class="form-control"
+                                       
+                                        [(ngModel)]='item.discountReasonId'>
+                                        <option *ngFor='let item of reasonsDiscount' [value]=item.id>{{item.name}}
+                                        </option>
+                                    </select></td>
+                                    <td>
+
+                                        <button (click)=confirmDelete(item.id)
+                                            class="btn btn-outline-danger btn-pill"><i class="fa fa-trash"></i>
+                                        </button>
+                                        <button (click)=editDetail(item) class="btn btn-outline-primary btn-pill"><i
+                                                class="fa fa-edit"></i> </button>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>

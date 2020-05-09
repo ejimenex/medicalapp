@@ -189,6 +189,17 @@
 "check":"Yes or No (Check)",
 "questionText":"Medical Questions Form",
 "patientDataSaved":"Patient data saved correctly",
-"totalReg":"Total Rows"
-
+"totalReg":"Total Rows",
+"invoices":"Invoices",
+"invoiceNumber":"Invoice Number",
+"total":"Total",
+"discount":"Discount",
+"servicesTotal":"Total Services",
+"billedDate":"Efective Date",
+"createdDate":"Created Date",
+"headerInformation":"Header Information",
+"billService":"Service to Billed",
+"service":"Servicio",
+"discountReason":"Discount Reason",
+"qty":"Quantity"
   }

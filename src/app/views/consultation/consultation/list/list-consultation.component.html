@@ -93,12 +93,12 @@
                         </tbody>
                     </table>
                     <div class="col-xs-12 col-12 d-sm-down-none">
-                        <div class="col-md-12">
-                            <button class="btn btn-secondary" (click)=changePage(false) [disabled]='!dataPage.hasPrevious'>Prev</button>
-                            <label>Pag. {{dataPage.currentPage}} of {{dataPage.totalPage}}</label>
-                            <button class="btn btn-secondary" (click)=changePage(true) [disabled]='!dataPage.hasNext'>Next</button>
-                            <label>[Total Rows: {{dataPage.totalCount}}]</label>
-                     </div>
+                           <div class="col-md-12">
+              <button class="btn btn-secondary" (click)=changePage(false) [disabled]='!dataPage.hasPrevious'>Prev</button>
+              <label>Pag. {{dataPage.currentPage}} of {{dataPage.totalPage}}</label>
+              <button class="btn btn-secondary" (click)=changePage(true) [disabled]='!dataPage.hasNext'>Next</button>
+              <label>[Total Rows: {{dataPage.totalCount}}]</label>
+       </div>
                       </div>
                     
                 </div>

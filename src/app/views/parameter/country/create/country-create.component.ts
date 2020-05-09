@@ -25,7 +25,7 @@ export class CountryAddComponent {
             this.alertService.success(this.translate.instant("sucessRegister"))
         }, error => {
             console.log(this.translate.instant(error.error))
-            this.alertService.znError(this.translate.instant(error.error))
+            this.alertService.error(this.translate.instant(error.error))
         })
 
     }

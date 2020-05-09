@@ -55,7 +55,6 @@ export class ConsultationEditComponent implements OnInit {
 
     }
     async getData() {
-        debugger
         this.cons = await this.consultationService.getById(this.id).toPromise();
         this.patient = await this.patientService.getById(this.cons.patientId).toPromise();
         this.patient.bornDate = moment(this.patient.bornDate).format('YYYY-MM-DD') as any;

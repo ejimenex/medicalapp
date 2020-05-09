@@ -189,6 +189,21 @@
 "check":"Si o No (Check)",
 "questionText":"Formulario de preguntas medicas",
 "patientDataSaved":"Datos del paciente guardados correctamente",
-"totalReg":"Total Registros"
+"totalReg":"Total Registros",
+"invoices":"Facturas",
+"invoiceNumber":"No. Factura",
+"total":"Total",
+"discount":"Descuento",
+"servicesTotal":"Total de Servicios",
+"billedDate":"Fecha Efectiva",
+"createdDate":"Fecha Creación",
+"headerInformation":"Información Cabezera",
+"billService":"Servicios a Facturar",
+"service":"Servicio",
+"discountReason":"Motivo Descuento",
+"qty":"Cantidad"
+
+
+
 
   }

@@ -33,6 +33,9 @@ export enum Permission {
   personalScheduleCreate,
   medicalServiceList,
   medicalServiceCreate,
-  questionMedicalList,  
+  questionMedicalList,
   questionMedicalCreate,
+  invoiceCreate,
+  invoiceEdit,
+  invoiceList
 }

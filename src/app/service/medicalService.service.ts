@@ -19,4 +19,8 @@ export class MedicalServiceService extends BaseService<MedicalService, number> {
     let url= environment.url + endpoint.medicalService+`/GetMedicalServicePaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}&doctorGuid=${DoctorId}`
     return this._httpClient.get<any>(url)
   }
+  getByDoctor(DoctorId:string){
+    let url= environment.url + endpoint.medicalService+`/GetByGuid?id=${DoctorId}`
+    return this._httpClient.get<any>(url)
+  }
 }

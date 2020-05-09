@@ -83,6 +83,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/personal-schedule/personalSchedule.module').then(m => m.PersonalScheduleModule)
       },
       {
+        path: 'invoices',
+        loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule)
+      },
+      {
         path: 'parameter',
         loadChildren: () => import('./views/parameter/parameter.module').then(m => m.ParamenterModule)
       },

@@ -10,14 +10,14 @@ import { NzModalService,NzModalRef } from 'ng-zorro-antd/modal';
 export class AlertService {
   confirmModal:NzModalRef
   constructor(private translate:TranslateService,private modal: NzModalService) { }
-  error(message: string, title?: string) {
+  // error(message: string, title?: string) {
 
-    Swal.fire(
-    title || 'Error',
-       message,
-      'error'
-    );
-  }
+  //   Swal.fire(
+  //   title || 'Error',
+  //      message,
+  //     'error'
+  //   );
+  // }
   info(message: string, title?: string) {
     Swal.fire(
      title || 'Información',message,'info' );
@@ -67,12 +67,11 @@ export class AlertService {
     });
   }
 
-  znError(message:string,title?: string): void {
+  error(message:string,title?: string): void {
     this.modal.error({
       nzTitle: title || 'Error',
       nzContent: message.toUpperCase(),
-      nzOkText:'Ok'
-      
+      nzOkText:'Ok'      
     });
   }
 }
