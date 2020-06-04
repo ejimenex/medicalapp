@@ -199,7 +199,15 @@
 "createdDate":"Created Date",
 "headerInformation":"Header Information",
 "billService":"Service to Billed",
-"service":"Servicio",
+"service":"Service",
 "discountReason":"Discount Reason",
-"qty":"Quantity"
+"qty":"Quantity",
+"NotData":"There is not data with this id",
+"sureInvoice":"Are you sure you want to bill this service?",
+"invoiceSusesfully":"Services bille successfully",
+"invoicebtn":"Finish",
+"PreInvoices":"Invoices"
+,
+"seeHistorical":"See Historial",
+"historical":"Medical Historial"
   }

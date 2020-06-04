@@ -66,6 +66,7 @@ import { MenuService } from './service/menu.service';
 
 export function token() {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if(currentUser)
   return currentUser.accessToken;
 }
 

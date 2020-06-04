@@ -29,6 +29,7 @@ export const endpoint = {
     patientForm:'patientForm',    
     discountReason:'discountReason',
     invoice:'invoice',
-    invoiceDetail:'invoiceDetail'
+    invoiceDetail:'invoiceDetail',
+    analysisDoctor:'analysisDoctor'
     
   };

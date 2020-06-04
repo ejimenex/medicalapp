@@ -11,8 +11,8 @@ export class PrescriptionService extends BaseService<any, number> {
   constructor(_httpClient: HttpClient) {
     super(_httpClient, environment.url + endpoint.prescription);
   }
-getByPatient(id:number, doctor:number, page:number, filter:any){
-  return this._httpClient.get(environment.url+endpoint.prescription+`/${id}/${doctor}?$top=10&$skip=${page}&$filter=contains(${filter.field},'${filter.value}') eq true&$orderby=${filter.orderBy} desc`)
+getByPatient(id:number, doctor:number, page:number){
+  return this._httpClient.get<any>(environment.url+endpoint.prescription+`/GetPrescriptionbyDoctor?pagesize=10&pageNumber=${page}&param=${id}&doctorId=${doctor}`)
 }
 
 }

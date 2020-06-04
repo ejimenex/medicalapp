@@ -13,10 +13,10 @@ export class InvoiceService extends BaseService<invoice, number> {
     super(_httpClient, environment.url + endpoint.invoice);
   }
 
-  getFiltered(param:string,pageNumber:number,doctorGuid:string){
+  getFiltered(param:string,pageNumber:number,doctorGuid:string, patient?:number){
     param=param==null?'':param;
-    let url= environment.url + endpoint.invoice+`/GetInvoicePaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}&doctorGuid=${doctorGuid}`
-    return this._httpClient.get<any>(url)
+    let url= environment.url + endpoint.invoice+`/GetInvoicePaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}&doctorGuid=${doctorGuid}&param=${patient}`
+    return this._httpClient.get<any>(url,this.httpOptions)
   }
 }
 @Injectable()
@@ -26,7 +26,7 @@ export class InvoiceDetailService extends BaseService<invoiceDetail, number> {
     super(_httpClient, environment.url + endpoint.invoiceDetail);
   }
   getByInvoice(id){
-    return this._httpClient.get<invoiceDetail[]>(environment.url + endpoint.invoiceDetail+'/'+id)
+    return this._httpClient.get<invoiceDetail[]>(environment.url + endpoint.invoiceDetail+'/'+id,this.httpOptions)
   }
 }
 

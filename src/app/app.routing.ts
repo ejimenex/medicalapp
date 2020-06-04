@@ -71,6 +71,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/consultation/consultation.module').then(m => m.ConsultationModule)
       },
       {
+        path: 'history',
+        loadChildren: () => import('./views/history/history.module').then(m => m.HistoryModule)
+      },
+      {
         path: 'not-authorized',
         loadChildren: () => import('./views/not-auth/not-auth.module').then(m => m.NotAuthorizedModule)
       },

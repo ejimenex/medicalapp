@@ -1,7 +1,7 @@
 <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/logoMedico.png', width: 49, height: 25, alt: 'CoreUI Logo'}"
   [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
@@ -10,7 +10,10 @@
       <a class="nav-link" href="#">Dashboard</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Users</a>
+      <a class="nav-link" [routerLink]="['/patient']">{{'patient' | translate}}</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" [routerLink]="['/invoices']">{{'PreInvoices' | translate}}</a>
     </li>
 
   </ul>

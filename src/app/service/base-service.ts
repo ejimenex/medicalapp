@@ -17,9 +17,11 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
   public set baseUrl(value: string) {
     this._baseUrl = value;
   }
-  private httpOptions = {
+  public httpOptions = {
+   
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${JSON.parse(localStorage.getItem("currentUser"))==null?'':JSON.parse(localStorage.getItem("currentUser")).accessToken}`
     })
   };
   userId: number = 0;
@@ -68,11 +70,11 @@ export class BaseService<TEntity, TKey> implements IService<TEntity, TKey> {
 
   get(): Observable<TEntity[]> {
 
-    return this._httpClient.get<TEntity[]>(this.baseUrl);
+    return this._httpClient.get<TEntity[]>(this.baseUrl,this.httpOptions);
 
   }
   getById(id: TKey): Observable<TEntity> {
-    return this._httpClient.get<TEntity>(this.baseUrl + '/' + id);
+    return this._httpClient.get<TEntity>(this.baseUrl + '/' + id,this.httpOptions);
   }
 
   post(entity: TEntity): Observable<Object> {

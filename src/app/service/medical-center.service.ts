@@ -14,6 +14,6 @@ export class MedicalCenterService extends BaseService<MedicalCenter, number> {
 
   getFiltered(param:string,pageNumber:number){
     let url= environment.url + endpoint.medicalCenter+`/GetMedicalCenterPaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}`
-    return this._httpClient.get<any>(url)
+    return this._httpClient.get<any>(url,this.httpOptions)
   }
 }

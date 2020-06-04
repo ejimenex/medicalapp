@@ -13,6 +13,6 @@ export class PatientFormService extends BaseService<PatientForm, number> {
   }
 
   getByPatient(id:string,patient:number) {
-      return this._httpClient.get<PatientForm[]>(environment.url + endpoint.patientForm+`/filtered/${id}/${patient}`)
+      return this._httpClient.get<PatientForm[]>(environment.url + endpoint.patientForm+`/filtered/${id}/${patient}`,this.httpOptions)
   }
 }

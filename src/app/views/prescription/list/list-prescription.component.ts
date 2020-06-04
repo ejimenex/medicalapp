@@ -16,7 +16,8 @@ export class ListPrescripcionComponent implements OnInit {
   id: number;
   pre: any = {};
   list = [];
-  page = 0;
+  page = 1;
+  dataPage={}
   filter: any = {};
   doctor = 0;
 
@@ -60,31 +61,16 @@ export class ListPrescripcionComponent implements OnInit {
     }
 
   }
-  getAll() {
-    this.filter.orderBy = 'id';
-    this.recetaService.getByPatient(this.id, this.doctor, this.page, this.filter).subscribe(response => {
+  getAll( ) {
+    this.recetaService.getByPatient(this.id, this.doctor, this.page).subscribe(response => {
 
-      this.list = response as [];
+      this.list = response.data;
+      this.dataPage=response
     })
   }
-  getFiltered() {
-    this.filter.orderBy = 'id';
-    this.recetaService.getByPatient(this.id, this.doctor, this.page, this.filter).subscribe(response => {
-
-      this.list = response as [];
-    })
-  }
-  changePage(next: boolean) {
-    this.filter.orderBy = 'id';
-    this.filter.value = !this.filter.value ? '' : !this.filter.value;
-
-    if (!this.filter.field) this.filter.field = 'name';
-    this.page = next ? this.page += 10 : this.page -= 10;
-    if (this.page < 0) this.page = 0;
-
-    this.recetaService.getByPatient(this.id, this.doctor, this.page, this.filter).subscribe(response => {
-      this.list = response as [];
-    })
+  changePage(next:boolean){
+    this.page=next?this.page +=1:this.page -=1;
+   this.getAll()
   }
   close() { this.activeModal.close() }
 }

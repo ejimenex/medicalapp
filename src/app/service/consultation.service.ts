@@ -12,7 +12,9 @@ export class ConsultationService extends BaseService<ConsultationModel, number> 
     super(_httpClient, environment.url + endpoint.consultation);
   }
   getByDoctor(id:number,pageNumber:number,param:string,filterDate:any) {
-    return this._httpClient.get<any>(environment.url + endpoint.consultation+`/GetConsultationPaginated?pagenumber=${pageNumber}&pagesize=10&doctorId=${id}&parameters=${param}&dateTo=${filterDate.dateTo}&dateFrom=${filterDate.dateFrom}`)
+    return this._httpClient.get<any>(environment.url + endpoint.consultation+`/GetConsultationPaginated?pagenumber=${pageNumber}&pagesize=10&doctorId=${id}&parameters=${param}&dateTo=${filterDate.dateTo}&dateFrom=${filterDate.dateFrom}`,this.httpOptions)
 }
-
+getByDoctorandPatient(id:number,pageNumber:number,patient:number) {
+  return this._httpClient.get<any>(environment.url + endpoint.consultation+`/GetConsultationPaginated?pagenumber=${pageNumber}&pagesize=10&doctorId=${id}&param=${patient}`,this.httpOptions)
+}
 }

@@ -1,0 +1,141 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header bg-success">
+            <i class="fa fa-plus"></i> {{ 'historical' | translate }}
+  
+  
+          </div>
+          <div class="card-body"> 
+              <div class="row">
+                <img src="../../../../assets/icon/patient.png" width="70" height="70">
+
+              </div>
+              <br>
+            <div class="row">
+
+                <div class="col-md-6">
+                 <b><label class="">{{ 'patientName' | translate }}</label>:</b> 
+                  {{patientData.name}}
+                </div>
+                <div class="col-md-6">
+                  <b><label class="">{{ 'documentNumber' | translate }}</label>:</b>
+               
+               {{patientData.documentNumber}}
+                </div>
+              </div>       
+  
+            <hr>
+            <nz-tabset>
+                <nz-tab nzTitle= "{{'consultation' | translate}}">
+                    <table class="table table table-hover">
+                        <thead>
+                            <tr>
+                                
+                                <th>{{ 'officeName' | translate }}</th>
+                                <th>{{ 'reasonDescription' | translate }}</th>
+                                <th>{{ 'visitDate' | translate }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let item of consultationList'>
+                                <td>{{item.officeName}}</td>
+                                <td>{{item.reasonDescription | translate}}</td>
+                                <td>{{item.createdDate | date}}</td>
+                                <td>
+                                    <button (click)=(openEditView(item.id))
+                                        class="btn btn-outline-primary btn-pill"><i class="fa fa-search"></i>
+                                       </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="col-xs-12 col-12 d-sm-down-none">
+                           <div class="col-md-12">
+              <button class="btn btn-secondary" (click)=changePageCons(false) [disabled]='!dataPageCons.hasPrevious'>Prev</button>
+              <label>Pag. {{dataPageCons.currentPage}} of {{dataPageCons.totalPage}}</label>
+              <button class="btn btn-secondary" (click)=changePageCons(true) [disabled]='!dataPageCons.hasNext'>Next</button>
+              <label>[Total Rows: {{dataPageCons.totalCount}}]</label>
+       </div>
+                      </div>
+                </nz-tab>
+                <nz-tab nzTitle="{{'prescriptionM' | translate}}">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                              <th>{{ 'medicine' | translate }}</th>
+                            <th>{{ 'medicineUse' | translate }}</th>
+                            <th>{{ 'prescriptionDate' | translate }}</th>
+                          
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor='let item of recetas'>
+                            <td>{{item.id}}</td>
+                            <td>{{item.medicine}}</td>
+                            <td>{{item.medicineUse}}</td>
+                            <td>{{item.prescriptionDate | date}}</td>
+                            
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                      <div class="col-md-12">
+                        <button class="btn btn-secondary" (click)=changePageRec(false) [disabled]='!dataPageRec.hasPrevious'>Prev</button>
+                        <label>Pag. {{dataPageRec.currentPage}} of {{dataPageRec.totalPage}}</label>
+                        <button class="btn btn-secondary" (click)=changePageRec(true) [disabled]='!dataPageRec.hasNext'>Next</button>
+                        <label>[Total Rows: {{dataPageRec.totalCount}}]</label>
+                 </div>
+                </nz-tab>
+                <nz-tab nzTitle="{{'PreInvoices' | translate}}">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>{{ 'invoiceNumber' | translate }}</th>
+                            <th>{{ 'doctorOffice' | translate }}</th>
+                            <th>{{ 'servicesTotal' | translate }}</th>
+                            <th>{{ 'discount' | translate }}</th>
+                            <th>{{ 'total' | translate }}</th>                  
+                            <th>{{ 'createdDate' | translate }}</th>
+                            <th>{{ 'billedDate' | translate }}</th>
+                            <th>{{ 'actions' | translate }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor='let item of invoices'>
+                            <td>{{item.invoiceNumber}}</td>
+                            <td>{{item.officeName}}</td>
+                            <td>{{item.totalItem}}</td>
+                            <td>{{item.discount |currency }}</td>
+                            <td>{{item.total | currency}}</td>
+                            <td>{{item.createdDate | date}}</td>
+                            <td>{{item.billedDate | date}}</td>
+                            <td>
+                              <button (click)=seeInvoice(item.id) class="btn btn-outline-primary btn-pill"><i class="fa fa-search"></i> </button>
+                            </td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                      <div class="col-xs-12 col-12 d-sm-down-none">
+                        <div class="col-md-12">
+                            <button class="btn btn-secondary" (click)=changePageInv(false) [disabled]='!dataPageInv.hasPrevious'>Prev</button>
+                            <label>Pag. {{dataPageInv.currentPage}} of {{dataPageInv.totalPage}}</label>
+                            <button class="btn btn-secondary" (click)=changePageInv(true) [disabled]='!dataPageInv.hasNext'>Next</button>
+                            <label>[Total Rows: {{dataPageInv.totalCount}}]</label>
+                     </div>
+                      </div>
+                </nz-tab>
+              </nz-tabset>
+    
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>

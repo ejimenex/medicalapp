@@ -201,9 +201,13 @@
 "billService":"Servicios a Facturar",
 "service":"Servicio",
 "discountReason":"Motivo Descuento",
-"qty":"Cantidad"
-
-
-
+"qty":"Cantidad",
+"NotData":"No hay datos con este id",
+"sureInvoice":"Esta seguro deea facturar estos servicios?",
+"invoiceSusesfully":"Servicios facturados con exito",
+"invoicebtn":"Finalizar",
+"PreInvoices":"Facturas",
+"historical":"Historico Medico",
+"seeHistorical":"Ver Historico"
 
   }

@@ -14,6 +14,9 @@
                         <div class="text-right">
                             <button class="btn btn-info" (click)='saveHeader()'><i class="fa fa-save"></i>
                                 {{ 'save' | translate }}</button>
+                       
+                            <button *ngIf=!invoice.isBilled  class="btn btn-primary" (click)='finish()'><i class="fa fa-money"></i>
+                                {{ 'invoicebtn' | translate }}</button>
                         </div>
                     </div>
 
@@ -52,13 +55,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="">{{ 'qty' | translate }}: {{invoice.qty}}</label>
+                                <label class="">{{ 'qty' | translate }}: <b>{{invoice.qty}}</b></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="">{{ 'discount' | translate }}: {{invoice.discount | currency}}</label>
+                                <label class="">{{ 'discount' | translate }}: <b>{{invoice.discount | currency}}</b></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="">{{ 'total' | translate }}: {{invoice.total | currency}}</label>
+                                <label class="">{{ 'total' | translate }}: <b>{{invoice.total | currency}}</b> </label>
                             </div>
                         </div>
                     </fieldset>
@@ -153,12 +156,12 @@
                                         <option *ngFor='let item of reasonsDiscount' [value]=item.id>{{item.name}}
                                         </option>
                                     </select></td>
-                                    <td>
+                                    <td *ngIf=!invoice.isBilled>
 
-                                        <button (click)=confirmDelete(item.id)
+                                        <button *ngIf=!invoice.isBilled  (click)=confirmDelete(item.id)
                                             class="btn btn-outline-danger btn-pill"><i class="fa fa-trash"></i>
                                         </button>
-                                        <button (click)=editDetail(item) class="btn btn-outline-primary btn-pill"><i
+                                        <button *ngIf=!invoice.isBilled (click)=editDetail(item) class="btn btn-outline-primary btn-pill"><i
                                                 class="fa fa-edit"></i> </button>
 
                                     </td>

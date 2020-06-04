@@ -15,6 +15,6 @@ export class DoctorService extends BaseService<DoctorModel, number> {
   getFiltered(param:string,pageNumber:number){
     param=param==null?'':param;
     let url= environment.url + endpoint.doctor+`/GetDoctorPaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}`
-    return this._httpClient.get<any>(url)
+    return this._httpClient.get<any>(url,this.httpOptions)
   }
 }
