@@ -20,6 +20,7 @@ export class ConsultationListComponent implements OnInit {
   reasonList=[];
   doctorId=null
   filterOne='';
+  filter:any={}
   filterDate:any={};
   dataPage:any={}
   page:number=1;
@@ -42,9 +43,9 @@ export class ConsultationListComponent implements OnInit {
     
   }
   ngOnInit() {
-    this.doctorId=JSON.parse(localStorage.getItem("currentUser")).doctorId;
+    this.filter.doctorGuid=JSON.parse(localStorage.getItem("currentUser")).doctorGuid;
     //this.filter.orderBy='id'
-    this.getAll();
+    this.getAll(false);
     
   }
   openEditView(id){
@@ -57,7 +58,7 @@ export class ConsultationListComponent implements OnInit {
   delete(id) {
     this.consultationService.delete(id).subscribe(response => {
       this.alert.success(this.translate.instant('sucessDelete'));
-      this.getAll();
+      this.getAll(true);
     }, error => {
       this.alert.success(this.translate.instant(''));
     })
@@ -69,8 +70,13 @@ export class ConsultationListComponent implements OnInit {
   newAppointment(id){
     this.router.navigate(['consultation/create/'+id])
   }
-  getAll( ) {
-    this.consultationService.getByDoctor(this.doctorId,this.page,this.filterOne,this.filterDate).subscribe(response => {
+  getAll( reset:boolean) {
+    this.filter.officeName=!this.filter.officeName?'':this.filter.officeName;
+    this.filter.patientName=!this.filter.patientName?'':this.filter.patientName;
+    this.filter.dateTo=!this.filter.dateTo?'':this.filter.dateTo;
+    this.filter.dateFrom=!this.filter.dateFrom?'':this.filter.dateFrom;
+    if(reset) this.page=1
+    this.consultationService.getByDoctor(this.page,this.filter).subscribe(response => {
 
       this.consultationList = response.data;
       this.dataPage=response
@@ -79,7 +85,7 @@ export class ConsultationListComponent implements OnInit {
   changePage(next:boolean){;
     this.page=next?this.page +=1:this.page -=1;
     if(this.page<0) this.page=0;
-    this.getAll()
+    this.getAll(false)
   }
 
 }

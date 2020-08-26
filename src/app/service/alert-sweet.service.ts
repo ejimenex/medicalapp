@@ -10,15 +10,19 @@ import { NzModalService,NzModalRef } from 'ng-zorro-antd/modal';
 export class AlertService {
   confirmModal:NzModalRef
   constructor(private translate:TranslateService,private modal: NzModalService) { }
-  // error(message: string, title?: string) {
+  errorSWA(message: string, title?: string) {
 
-  //   Swal.fire(
-  //   title || 'Error',
-  //      message,
-  //     'error'
-  //   );
-  // }
+    Swal.fire(
+    title || 'Error',
+       message,
+      'error'
+    );
+  }
   info(message: string, title?: string) {
+    Swal.fire(
+     title || 'Información',message,'info' );
+  }
+  successSWA(message: string, title?: string) {
     Swal.fire(
      title || 'Información',message,'info' );
   }

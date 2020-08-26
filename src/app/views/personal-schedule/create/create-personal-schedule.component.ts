@@ -48,14 +48,14 @@ export class PersonalScheduleComponent implements OnInit {
     }
     getEvents() {
         let id = this.doctor.doctorId;
-        this.eventService.getByDoctor(id).subscribe(r => {
+        this.eventService.getByDoctor(id).subscribe(r => {debugger
             this.eventsType = r as []
         })
     }
     saveEvent() {
         this.event.doctorId =this.doctor.doctorId;
             this.eventService.post(this.event).subscribe(response => {
-                this.alertService.success('')
+                this.alertService.successSWA(this.translate.instant('sucessInsert'))
                 this.event={};
                 this.getEvents();
             })
@@ -92,9 +92,9 @@ export class PersonalScheduleComponent implements OnInit {
     add() {
 
         if (!this.per.note || !this.per.eventTypeId || !this.per.eventDate)
-            return this.alertService.error(this.translate.instant("vreqFiled"), 'Error')
+            return this.alertService.errorSWA(this.translate.instant("vreqFiled"), 'Error')
         this.personalScheduleService.post(this.per).subscribe(response => {
-            this.alertService.success(this.translate.instant('sucessInsert'));
+            this.alertService.successSWA(this.translate.instant('sucessInsert'));
             this.notifyParent.emit();
             this.close();
         }, error => {

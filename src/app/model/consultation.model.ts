@@ -15,4 +15,5 @@ export class ConsultationModel extends BaseModel {
     officeName: string
     patientName: string
     reasonDescription: string
+    doctorGuid:string
 }

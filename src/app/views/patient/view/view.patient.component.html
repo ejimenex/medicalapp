@@ -5,22 +5,17 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header bg-success">
-          <i class="fa fa-edit"></i> {{ 'c.edit' | translate }}
+          <i class="fa fa-search"></i> {{ 'viewPatient' | translate }}
 
 
         </div>
         <div class="card-body">
-          <div class="col-lg-12">
-            <div class="text-right">
-              <button class="btn btn-info" (click)='edit()'><i class="fa fa-edit"></i>
-                {{ 'c.edit' | translate }}</button>
-            </div>
-          </div>
+         
           <img src="../../../../../assets/icon/patient.png" width="70" height="70">
           <hr>
-          <div class="row">
-            <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
-          </div>
+       <div class="text-right">
+         <button class="btn btn-danger"  (click)='close()'><i class="fa fa-close"></i></button>
+       </div>
 
           <nz-tabset>
             <nz-tab nzTitle= "{{'personalInformation' | translate}}">
@@ -29,12 +24,12 @@
               <div class="col-md-6">
                 <label class="">{{ 'name' | translate }}</label>
                 <span *ngIf='!patient.name' class="text-danger"> * </span>
-                <input [(ngModel)]='patient.name' class="form-control">
+                <input readonly [(ngModel)]='patient.name' class="form-control">
               </div>
               <div class="col-md-6">
                 <label class="">{{ 'documentNumber' | translate }}</label>
              
-                <input [(ngModel)]='patient.documentNumber' class="form-control">
+                <input readonly [(ngModel)]='patient.documentNumber' class="form-control">
               </div>
             </div>
             <div class="row">
@@ -42,12 +37,12 @@
                 <span *ngIf='!patient.phone' class="text-danger"> * </span>
                 <label class="">{{ 'phone1' | translate }}</label>
        
-                <input [(ngModel)]='patient.phone' class="form-control">
+                <input readonly [(ngModel)]='patient.phone' class="form-control">
               </div>
               <div class="col-md-6">
                 <label class="">{{ 'ssn' | translate }}</label>
                
-                <input [(ngModel)]='patient.sSN' class="form-control">
+                <input readonly [(ngModel)]='patient.sSN' class="form-control">
               </div>
             </div>
           
@@ -56,12 +51,12 @@
               <div class="col-md-6">
                 <label class="">{{ 'bornDate' | translate }}</label>
                
-                <input [(ngModel)]='patient.bornDate' type="date" class="form-control">
+                <input readonly [(ngModel)]='patient.bornDate' type="date" class="form-control">
               </div>
               <div class="col-md-6">
                   <label class="">{{ 'ars' | translate }}</label>
                 <span *ngIf='arss.length==0'><label class="text-primary">({{ 'notars' | translate }})</label></span>
-                  <select class="form-control" [(ngModel)]='patient.arsId'>
+                  <select [disabled]=true class="form-control" [(ngModel)]='patient.arsId'>
                     <option value=null >N/A</option>
                     <option *ngFor='let item of arss' [ngValue]='item.id'>{{item.name}}</option>
                   </select>
@@ -71,13 +66,13 @@
               <div class="col-md-6">
                   <label class="">{{ 'mail' | translate }}</label>
                  
-                  <input [(ngModel)]='patient.mail'  class="form-control">
+                  <input readonly [(ngModel)]='patient.mail'  class="form-control">
                 </div>
                
                   <div class="col-md-6">
                     <label class="">{{ 'sex' | translate }}</label>
                    
-                    <select class="form-control" [(ngModel)]='patient.sex'>
+                    <select [disabled]=true class="form-control" [(ngModel)]='patient.sex'>
                       <option *ngFor='let item of sexList' [ngValue]='item.value'>{{item.header}}</option>
                     </select>
                   </div>
@@ -89,7 +84,7 @@
               <div class="col-md-12">
                   <label class="">{{ 'ref1' | translate }}</label>
                  
-                  <input [(ngModel)]='patient.reference1' type="text" class="form-control">
+                  <input readonly [(ngModel)]='patient.reference1' type="text" class="form-control">
                 </div>
               
 
@@ -98,7 +93,7 @@
               <div class="col-md-12">
                   <label class="">{{ 'ref2' | translate }}</label>
                  
-                  <input [(ngModel)]='patient.reference2'  class="form-control">
+                  <input readonly [(ngModel)]='patient.reference2'  class="form-control">
                 </div>            
 
             </div>
@@ -106,7 +101,7 @@
               <div class="col-md-12">
                   <label class="">{{ 'ref3' | translate }}</label>
                  
-                  <input [(ngModel)]='patient.reference3'  class="form-control">
+                  <input readonly [(ngModel)]='patient.reference3'  class="form-control">
                 </div>
               
 
@@ -118,7 +113,7 @@
               <div class="row" *ngFor='let item of questions;let i of index'>
                 <div class="col-md-12">
                   <label class="">{{item.questionName}}</label>            
-                  <input [(ngModel)]='item.answer' type="{{item.type}}" value="{{item.answer}}" class="form-control">
+                  <input readonly [(ngModel)]='item.answer' type="{{item.type}}" value="{{item.answer}}" class="form-control">
                  
                 </div>
                
@@ -129,37 +124,37 @@
               <div class="row">
                 <div class="col-md-6">
                     <label class="">{{ 'fatherName' | translate }}</label>                     
-                    <input [(ngModel)]='patient.fatherName'  class="form-control">
+                    <input readonly [(ngModel)]='patient.fatherName'  class="form-control">
                   </div>                   
                     <div class="col-md-6">
                       <label class="">{{ 'fatherAge' | translate }}</label>
-                      <input [(ngModel)]='patient.fatherAge' type=number  class="form-control">
+                      <input readonly [(ngModel)]='patient.fatherAge' type=number  class="form-control">
                     </div>    
               </div>
               <div class="row">
                 <div class="col-md-6">
                     <label class="">{{ 'motherName' | translate }}</label>                     
-                    <input [(ngModel)]='patient.motherName'  class="form-control">
+                    <input readonly [(ngModel)]='patient.motherName'  class="form-control">
                   </div>                   
                     <div class="col-md-6">
                       <label class="">{{ 'motherAge' | translate }}</label>
-                      <input [(ngModel)]='patient.motherAge' type=number  class="form-control">
+                      <input readonly [(ngModel)]='patient.motherAge' type=number  class="form-control">
                     </div>    
               </div>
               <div class="row">
                 <div class="col-md-6">
                     <label class="">{{ 'partnerName' | translate }}</label>                     
-                    <input [(ngModel)]='patient.partnerName'  class="form-control">
+                    <input readonly [(ngModel)]='patient.partnerName'  class="form-control">
                   </div>                   
                     <div class="col-md-6">
                       <label class="">{{ 'partnerAge' | translate }}</label>
-                      <input [(ngModel)]='patient.partnerAge' type=number  class="form-control">
+                      <input readonly [(ngModel)]='patient.partnerAge' type=number  class="form-control">
                     </div>    
               </div>
               <div class="row">
                 <div class="col-md-6">
                     <label class="">{{ 'civilStatus' | translate }}</label>    
-                    <select [(ngModel)]='patient.civilStatus' class="form-control">
+                    <select [disabled]=true [(ngModel)]='patient.civilStatus' class="form-control">
                       <option value='M'>Menor</option>
                       <option value='C'>Casado/a</option>
                       <option value='S'>Soltero/a</option>
@@ -167,7 +162,7 @@
                   </div>                   
                     <div class="col-md-6">
                       <label class="">{{ 'childQty' | translate }}</label>
-                      <input [(ngModel)]='patient.childQty' type=number  class="form-control">
+                      <input readonly [(ngModel)]='patient.childQty' type=number  class="form-control">
                     </div>    
               </div>
             </nz-tab>
@@ -176,13 +171,13 @@
                 <div class="col-md-6">
                   <p class="">{{ 'hasPreviouslyOperated' | translate }}</p>        
                   <label class="switch switch-label switch-pill switch-primary">
-                    <input type="checkbox"  [(ngModel)]='patient.hasPreviouslyOperated' class="switch-input" checked>
+                    <input [disabled]=true type="checkbox"  [(ngModel)]='patient.hasPreviouslyOperated' class="switch-input readonly" checked>
                     <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
                   </label>
                   </div>                   
                     <div *ngIf='patient.hasPreviouslyOperated' class="col-md-6">
                       <label class="">{{ 'howOftenOperated' | translate }}</label>
-                      <input [(ngModel)]='patient.howOftenOperated' type=number  class="form-control">
+                      <input readonly [(ngModel)]='patient.howOftenOperated' type=number  class="form-control">
                     </div>    
               </div>
               <div *ngIf='patient.hasPreviouslyOperated' class="row">
@@ -190,7 +185,7 @@
                                   
                     <div  class="col-md-12">
                       <label class="">{{ 'operatonSpecificacion' | translate }}</label>
-                     <textarea class="form-control" [(ngModel)]='patient.operationSpecification'></textarea>
+                     <textarea [disabled]=true class="form-control" [(ngModel)]='patient.operationSpecification'></textarea>
                     </div>    
               </div>
               </div>
@@ -198,13 +193,13 @@
                 <div class="col-md-4">
                   <p class="">{{ 'haveThePatientHadanAccident' | translate }}</p>        
                   <label class="switch switch-label switch-pill switch-primary">
-                    <input type="checkbox"  [(ngModel)]='patient.haveThePatientHadanAccident' class="switch-input" checked>
+                    <input [disabled]=true type="checkbox"  [(ngModel)]='patient.haveThePatientHadanAccident' class="switch-input readonly" checked>
                     <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
                   </label>
                   </div>                   
                     <div *ngIf='patient.haveThePatientHadanAccident' class="col-md-8">
                       <label class="">{{ 'accidentSpecification' | translate }}</label>
-                      <textarea [(ngModel)]='patient.accidentSpecification' class="form-control"> </textarea>
+                      <textarea [disabled]=true [(ngModel)]='patient.accidentSpecification' class="form-control"> </textarea>
                     </div>    
               </div>
             </nz-tab>
@@ -213,26 +208,26 @@
                 <div class="col-md-4">
                   <p class="">{{ 'hasAllergySomeMedicine' | translate }}</p>        
                   <label class="switch switch-label switch-pill switch-primary">
-                    <input type="checkbox"  [(ngModel)]='patient.hasAllergySomeMedicine' class="switch-input" checked>
+                    <input [disabled]=true type="checkbox"  [(ngModel)]='patient.hasAllergySomeMedicine' class="switch-input readonly" checked>
                     <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
                   </label>
                   </div>                   
                     <div *ngIf='patient.hasAllergySomeMedicine' class="col-md-8">
                       <label class="">{{ 'hasAllergySomeMedicineSpecification' | translate }}</label>
-                      <input [(ngModel)]='patient.hasAllergySomeMedicineSpecification' type=text  class="form-control">
+                      <input readonly [(ngModel)]='patient.hasAllergySomeMedicineSpecification' type=text  class="form-control">
                     </div>    
               </div>
               <div class="row">
                 <div class="col-md-4">
                   <p class="">{{ 'hasAllergySomeFood' | translate }}</p>        
                   <label class="switch switch-label switch-pill switch-primary">
-                    <input type="checkbox"  [(ngModel)]='patient.hasAllergySomeFood' class="switch-input" checked>
+                    <input [disabled]=true type="checkbox"  [(ngModel)]='patient.hasAllergySomeFood' class="switch-input readonly" checked>
                     <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
                   </label>
                   </div>                   
                     <div *ngIf='patient.hasAllergySomeFood' class="col-md-8">
                       <label class="">{{ 'hasAllergySomeFoodSpecification' | translate }}</label>
-                      <input [(ngModel)]='patient.hasAllergySomeFoodSpecification' type=text  class="form-control">
+                      <input readonly [(ngModel)]='patient.hasAllergySomeFoodSpecification' type=text  class="form-control">
                     </div>    
               </div>
             </nz-tab>

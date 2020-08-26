@@ -1,5 +1,4 @@
-import { BaseModel } from './base-model'
-
+import { BaseModel } from './base-model';
 export class PatientModel extends BaseModel{
    name:string
    mail:string
@@ -11,5 +10,23 @@ export class PatientModel extends BaseModel{
    bornDate:Date
    doctorId:number
    arsId:number
-
+   patientGuid:string
+   fatherName:string
+   fatherAge:number
+   motherName:string
+   motherAge:number
+   partnerName:string
+   partnerAge:number
+   civilStatus:string
+   childQty:number
+   age:number
+   hasPreviouslyOperated:boolean
+   howOftenOperated:number
+   operationSpecification:string
+   haveThePatientHadanAccident:boolean
+   accidentSpecification:string
+   hasAllergySomeMedicine:boolean
+   hasAllergySomeMedicineSpecification:string
+hasAllergySomeFoodSpecification:string
+HasAllergySomeFood:boolean
 }

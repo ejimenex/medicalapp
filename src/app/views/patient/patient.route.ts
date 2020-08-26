@@ -7,6 +7,8 @@ import {TranslateService} from '@ngx-translate/core';
 import { DefaultLayoutComponent } from '../../containers';
 import { RoleGuard } from '../../service/guard';
 import { Permission } from '../../model/enum/permission.enum';
+import { ViewPatientComponent } from './view/view.patient.component';
+import { EditPatientComponent } from './edit/patient-edit.component';
 
 
 
@@ -32,7 +34,17 @@ const routes: Routes = [
         data: {
           title: 'Add Patient',expectedPermission: Permission.patientCreate
         }      
-      }
+      },
+      {
+        path: 'edit/:id',
+        component: EditPatientComponent,
+        canActivate:[RoleGuard],
+        data: {
+          title: 'Edit Patient',expectedPermission: Permission.patientEdit
+        }      
+      },
+       
+      
     ]
   }
 ];

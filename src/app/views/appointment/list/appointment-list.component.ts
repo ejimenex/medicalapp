@@ -22,6 +22,9 @@ export class AppointmentListComponent implements OnInit {
 
 
   }
+  new(){
+    this.router.navigate(['appointment/create'])
+  }
   ngOnInit() {
     this.doctorId=JSON.parse(localStorage.getItem("currentUser")).doctorId;
     this.getAll();

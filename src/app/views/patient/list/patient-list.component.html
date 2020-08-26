@@ -56,7 +56,9 @@
               <thead>
                 <tr>
                     <th>{{ 'name' | translate }}</th>
+                    <th>{{'age' | translate}}</th>
                   <th>{{ 'phone1' | translate }}</th>
+                  <th>{{'consultantQty' | translate}}</th>
 
                   <th>{{ 'actions' | translate }}</th>
                 </tr>
@@ -64,8 +66,9 @@
               <tbody>
                 <tr *ngFor='let item of patients'>
                   <td>{{item.name}}</td>
+                  <td>{{item.age}}</td>
                   <td>{{item.phone}}</td>
-                
+                <td>{{item.consultantQty}}</td>
                   <td>
                  
                     <div class="row">
@@ -73,7 +76,8 @@
                         <div ngbDropdown class="d-inline-block">
                           <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{ 'actions' | translate }}</button>
                           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <button (click)=(openEditView(item.id)) ngbDropdownItem><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
+                            <button (click)=viewPatient(item.id) ngbDropdownItem><i class="fa fa-search"></i> {{ 'viewPatient' | translate }}</button>
+                            <button [routerLink]="['/patient/edit/',item.id]" ngbDropdownItem><i class="fa fa-edit"></i> {{ 'c.edit' | translate }}</button>
                             <a [routerLink]="['/appointment/create/',item.id]" ngbDropdownItem><i class="fa fa-plus"></i>{{ 'newAppointment' | translate }}</a>
                             <button (click)='newConsultaton(item.id)' ngbDropdownItem><i class="fa fa-hand-o-left"></i>{{ 'newConsultation' | translate }}</button>
                             <a [routerLink]="['/history/',item.id]" ngbDropdownItem><i class="fa fa-search"></i>{{ 'seeHistorical' | translate }}</a>

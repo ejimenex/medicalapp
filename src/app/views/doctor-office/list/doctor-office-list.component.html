@@ -67,7 +67,7 @@
                 <tr *ngFor='let item of offices'>
                   <td>{{item.name}}</td>
                   <td>{{item.specification}}</td>
-                  <td>{{item.medicalOfficeName}}</td>
+                  <td>{{item.medicalCenterName}}</td>
                   <td>
                     <button (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-pill"><i class="fa fa-trash"></i> </button>
                     <button (click)=(openEditView(item.id)) class="btn btn-outline-primary btn-pill"><i class="fa fa-edit"></i> </button>

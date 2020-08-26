@@ -63,6 +63,9 @@ import { DoctorOfficeService } from './service/doctorOffice.service';
 import { PermissionService } from './service/permission.service';
 import { RoleGuard } from './service/guard';
 import { MenuService } from './service/menu.service';
+import { FileComponent } from './views/files/create/file.create.component';
+import { ViewPatientComponent } from './views/patient/view/view.patient.component';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 export function token() {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -77,9 +80,9 @@ export function token() {
     FormsModule,
     BrowserAnimationsModule,
     NzModalModule,
+    NzTabsModule,
     NzPopconfirmModule,
     NgbModule,
-
     JwtModule.forRoot({
       config: {
         tokenGetter: token
@@ -92,7 +95,6 @@ export function token() {
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
-  
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
@@ -120,7 +122,7 @@ export function token() {
     P500Component,
     LoginComponent,
     DefaultLayoutComponent,
-    RegisterComponent,ChangePasswordComponent,DoctorOfficeComponent
+    RegisterComponent,ChangePasswordComponent,DoctorOfficeComponent,FileComponent,ViewPatientComponent
   ],
   providers: [AlertToast,  AlertService,AccountService,TokenService,DoctorOfficeService,RoleGuard,MenuService
     , {
@@ -128,7 +130,7 @@ export function token() {
     useClass: HashLocationStrategy,
 
   }
-],entryComponents:[ChangePasswordComponent,DoctorOfficeComponent],
+],entryComponents:[ChangePasswordComponent,DoctorOfficeComponent,FileComponent,ViewPatientComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,6 +16,7 @@ import {ListPrescripcionComponent} from '../../../prescription/list/list-prescri
 import { config } from '../../../../constant/param';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionComponent } from '../form-patient/form-patient.component';
+import { ViewPatientComponent } from '../../../patient/view/view.patient.component';
 
 @Component({
     templateUrl: './consultation-create.component.html'
@@ -45,12 +46,20 @@ export class ConsultationAddComponent implements OnInit {
     ngOnInit() {
         this.patientId =parseInt(this.route.snapshot.paramMap.get('id') )
         this.cons.doctorId = JSON.parse(localStorage.getItem("currentUser")).doctorId;
+        this.cons.doctorGuid = JSON.parse(localStorage.getItem("currentUser")).doctorGuid;
         this.cons.patientId = this.patientId;
         console.log(this.cons)
         this.getReasons();
         this.getPatient();
 
     }
+    openMedicalFormList(): void {
+        let modal = this._modalService.open(
+          ViewPatientComponent,
+          config.modalConfig
+        );
+        modal.componentInstance.id =this.cons.patientId;
+      }
     openPrescriptionList(): void {
         let modal = this._modalService.open(
           ListPrescripcionComponent,
@@ -59,14 +68,14 @@ export class ConsultationAddComponent implements OnInit {
         modal.componentInstance.id = this.cons.patientId
         
       }
-      openMedicalFormList(): void {
-        let modal = this._modalService.open(
-            QuestionComponent,
-          config.modalConfig
-        )
-        modal.componentInstance.patientId = this.cons.patientId
+    //   openMedicalFormList(): void {
+    //     let modal = this._modalService.open(
+    //         QuestionComponent,
+    //       config.modalConfig
+    //     )
+    //     modal.componentInstance.patientId = this.cons.patientId
         
-      }
+    //   }
       
     async getPatient() {
         this.patient = await this.patientService.getById(this.patientId).toPromise();

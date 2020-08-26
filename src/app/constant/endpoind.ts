@@ -30,6 +30,7 @@ export const endpoint = {
     discountReason:'discountReason',
     invoice:'invoice',
     invoiceDetail:'invoiceDetail',
-    analysisDoctor:'analysisDoctor'
+    analysisDoctor:'analysisDoctor',
+    medicalFile:'medicalFile'
     
   };

@@ -21,6 +21,7 @@ export class HistoryComponent implements OnInit {
   pageRec: number = 1;
   pageInv: number = 1;
   patient = 0;
+  filterConsultation:any={}
   patientData:any={}
   constructor(
     private translate: TranslateService,
@@ -36,6 +37,8 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     this.doctorId = JSON.parse(localStorage.getItem("currentUser")).doctorId;
+    this.filterConsultation.doctorGuid=JSON.parse(localStorage.getItem("currentUser")).doctorGuid;
+    this.filterConsultation.patientId=this.patient;
     this.getAllConsultation();
     this.getAllRec();
     this.getAllInvoices();
@@ -60,7 +63,7 @@ export class HistoryComponent implements OnInit {
   }
   getAllConsultation() {
     this.consultationService
-      .getByDoctorandPatient(this.doctorId, this.pageCons, this.patient)
+      .getByDoctorandPatient( this.pageCons, this.filterConsultation)
       .subscribe((response) => {
         this.consultationList = response.data;
         this.dataPageCons = response;

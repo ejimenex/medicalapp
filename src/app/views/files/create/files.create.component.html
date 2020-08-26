@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title"><strong>{{ 'files' | translate }}</strong> </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="animated fadeIn">
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{{'selectFiles' | translate}}</label>
+                <input #file type="file" multiple />
+                <span class="text-success" *ngIf="progress > 0 && progress < 100">
+                    {{ progress }}%
+                </span>
+                <span style="font-weight:bold;color:green;" *ngIf="message">
+                    {{ message }}
+                </span>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-info" (click)='upload(file.files)'><i class="fa fa-upload"></i>
+            {{ 'save' | translate }}</button>
+        <a type="button" class="btn btn-danger" (click)="close()">{{ 'close' | translate }}</a>
+
+    </div>
+</div>
+<!--/.col-->

@@ -22,6 +22,9 @@
               <label class="text-danger">(*) {{ 'reqField' | translate }}</label>
             </div>
   
+            <nz-tabset>
+              <nz-tab nzTitle= "{{'personalInformation' | translate}}">
+               
               <div class="row">
                 <div class="col-md-6">
                   <label class="">{{ 'name' | translate }}</label>
@@ -108,6 +111,133 @@
                 
   
               </div>
+        
+              </nz-tab>
+              <nz-tab nzTitle="{{'interrogation' | translate}}">
+              
+                <div class="row" *ngFor='let item of questions;let i of index'>
+                  <div class="col-md-12">
+                    <label class="">{{item.question}}</label>            
+                    <input [(ngModel)]='item.answer' type="{{item.type}}" value="{{item.answer}}" class="form-control">
+                   
+                  </div>
+                 
+                </div>
+
+              </nz-tab>
+              <nz-tab nzTitle="{{'familiarInformation' | translate}}">
+                <div class="row">
+                  <div class="col-md-6">
+                      <label class="">{{ 'fatherName' | translate }}</label>                     
+                      <input [(ngModel)]='patient.fatherName'  class="form-control">
+                    </div>                   
+                      <div class="col-md-6">
+                        <label class="">{{ 'fatherAge' | translate }}</label>
+                        <input [(ngModel)]='patient.fatherAge' type=number  class="form-control">
+                      </div>    
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <label class="">{{ 'motherName' | translate }}</label>                     
+                      <input [(ngModel)]='patient.motherName'  class="form-control">
+                    </div>                   
+                      <div class="col-md-6">
+                        <label class="">{{ 'motherAge' | translate }}</label>
+                        <input [(ngModel)]='patient.motherAge' type=number  class="form-control">
+                      </div>    
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <label class="">{{ 'partnerName' | translate }}</label>                     
+                      <input [(ngModel)]='patient.partnerName'  class="form-control">
+                    </div>                   
+                      <div class="col-md-6">
+                        <label class="">{{ 'partnerAge' | translate }}</label>
+                        <input [(ngModel)]='patient.partnerAge' type=number  class="form-control">
+                      </div>    
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <label class="">{{ 'civilStatus' | translate }}</label>    
+                      <select [(ngModel)]='patient.civilStatus' class="form-control">
+                        <option value='M'>Menor</option>
+                        <option value='C'>Casado/a</option>
+                        <option value='S'>Soltero/a</option>
+                      </select>
+                    </div>                   
+                      <div class="col-md-6">
+                        <label class="">{{ 'childQty' | translate }}</label>
+                        <input [(ngModel)]='patient.childQty' type=number  class="form-control">
+                      </div>    
+                </div>
+              </nz-tab>
+              <nz-tab  nzTitle="{{'medicalhistory' | translate}}">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="">{{ 'hasPreviouslyOperated' | translate }}</p>        
+                    <label class="switch switch-label switch-pill switch-primary">
+                      <input type="checkbox"  [(ngModel)]='patient.hasPreviouslyOperated' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                    </div>                   
+                      <div *ngIf='patient.hasPreviouslyOperated' class="col-md-6">
+                        <label class="">{{ 'howOftenOperated' | translate }}</label>
+                        <input [(ngModel)]='patient.howOftenOperated' type=number  class="form-control">
+                      </div>    
+                </div>
+                <div *ngIf='patient.hasPreviouslyOperated' class="row">
+                  <div class="col-md-12">
+                                    
+                      <div  class="col-md-12">
+                        <label class="">{{ 'operatonSpecificacion' | translate }}</label>
+                       <textarea class="form-control" [(ngModel)]='patient.operationSpecification'></textarea>
+                      </div>    
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="">{{ 'haveThePatientHadanAccident' | translate }}</p>        
+                    <label class="switch switch-label switch-pill switch-primary">
+                      <input type="checkbox"  [(ngModel)]='patient.haveThePatientHadanAccident' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                    </div>                   
+                      <div *ngIf='patient.haveThePatientHadanAccident' class="col-md-8">
+                        <label class="">{{ 'accidentSpecification' | translate }}</label>
+                        <textarea [(ngModel)]='patient.accidentSpecification' class="form-control"> </textarea>
+                      </div>    
+                </div>
+              </nz-tab>
+              <nz-tab nzTitle="{{'allergies' | translate}}">
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="">{{ 'hasAllergySomeMedicine' | translate }}</p>        
+                    <label class="switch switch-label switch-pill switch-primary">
+                      <input type="checkbox"  [(ngModel)]='patient.hasAllergySomeMedicine' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                    </div>                   
+                      <div *ngIf='patient.hasAllergySomeMedicine' class="col-md-8">
+                        <label class="">{{ 'hasAllergySomeMedicineSpecification' | translate }}</label>
+                        <input [(ngModel)]='patient.hasAllergySomeMedicineSpecification' type=text  class="form-control">
+                      </div>    
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="">{{ 'hasAllergySomeFood' | translate }}</p>        
+                    <label class="switch switch-label switch-pill switch-primary">
+                      <input type="checkbox"  [(ngModel)]='patient.hasAllergySomeFood' class="switch-input" checked>
+                      <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                    </label>
+                    </div>                   
+                      <div *ngIf='patient.hasAllergySomeFood' class="col-md-8">
+                        <label class="">{{ 'hasAllergySomeFoodSpecification' | translate }}</label>
+                        <input [(ngModel)]='patient.hasAllergySomeFoodSpecification' type=text  class="form-control">
+                      </div>    
+                </div>
+              </nz-tab>
+            </nz-tabset>
+
           </div>
         </div>
       </div>
