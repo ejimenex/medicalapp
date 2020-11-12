@@ -1,0 +1,114 @@
+<div class="animated fadeIn">
+
+ 
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card" *ngIf='filterVisible'>
+          <div class="card-header bg-success animated fadeIn">
+            <i class="fa fa-search"></i> {{ 'filter' | translate }}
+      
+        
+          </div>
+          <div class="card-body">
+            <p>{{ 'filterBy' | translate }}</p>
+            <div class="row">
+              <div class="col-md-6">
+              <label>{{ 'dateFrom' | translate }}</label>
+              <input type="date" [(ngModel)]=filter.dateFrom class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label>{{ 'dateTo' | translate }}</label>
+                <input type="date" [(ngModel)]=filter.toDate class="form-control">
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+            <label>{{ 'patientName' | translate }}</label>
+            <input type="text" [(ngModel)]=filter.patientName class="form-control">
+          </div>
+        </div>
+            <div class="input-prepend input-group">
+  
+                <button (click)='getAll()' class="btn btn-info" type="button">{{ 'search' | translate }}</button>
+   
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header bg-success">
+            <i class="fa fa-align-justify"></i> {{ 'Process' | translate }}
+
+        
+          </div>
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="text-right">
+                <button class="btn btn-success btn-square" (click)='newProcess()'><i class="fa fa-plus"></i> {{ 'new' | translate }}</button>
+              </div>
+            </div>
+            <hr>
+           
+            <p>{{ 'filters' | translate }}</p>
+        
+          <label class="switch switch-label switch-pill switch-primary">
+            <input type="checkbox"  [(ngModel)]='filterVisible' class="switch-input" checked>
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+           
+            <div class="card" *ngIf='filterVisible'>
+              <div class="card-header">
+                <i class="fa fa-search"></i> {{ 'filter' | translate }}
+    
+            
+              </div>
+         
+            </div>
+           
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>{{ 'officeName' | translate }}</th>
+                  <th>{{ 'processDate' | translate }}</th>
+                  <th>{{ 'patientName' | translate }}</th>
+                  <th>{{ 'processDescription' | translate }}</th>
+                  <th>{{ 'status' | translate }}</th>
+                  <th>{{ 'processPlace' | translate }}</th>
+                  <th>{{ 'observation' | translate }}</th>
+                
+                  <th>{{ 'actions' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let item of processList'>
+                  <td>{{item.officeName}}</td>
+                  <td>{{item.processDate | date}}</td>
+                  <td>{{item.patient.name}}</td>
+                  <td>{{item.medicalServicesName}}</td>
+                  <td>{{item.medicalProcessStatusName}}</td>
+                  <td>{{item.place}}</td>
+                  <td>{{item.observation }}</td>
+                  
+                  <td>
+                    <button *ngIf='item.processStatus==1'  (click)=confirmDelete(item.id) class="btn btn-outline-danger btn-pill"><i class="fa fa-trash"></i> </button>
+                    <button *ngIf='item.processStatus==1'  (click)=edit(item.id) class="btn btn-outline-primary btn-pill"><i class="fa fa-edit"></i> </button>
+                  </td>
+                </tr>
+               
+              </tbody>
+            </table>
+            <div class="col-xs-12 col-12 d-sm-down-none">
+              <div class="col-md-12">
+                  <button class="btn btn-secondary" (click)=changePage(false) [disabled]='!dataPage.hasPrevious'>Prev</button>
+                  <label>Pag. {{dataPage.currentPage}} of {{dataPage.totalPage}}</label>
+                  <button class="btn btn-secondary" (click)=changePage(true) [disabled]='!dataPage.hasNext'>Next</button>
+                  <label>[Total Rows: {{dataPage.totalCount}}]</label>
+           </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+  

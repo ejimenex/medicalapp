@@ -31,6 +31,7 @@ export const endpoint = {
     invoice:'invoice',
     invoiceDetail:'invoiceDetail',
     analysisDoctor:'analysisDoctor',
-    medicalFile:'medicalFile'
+    medicalFile:'medicalFile',
+    medicalProcess:'medicalProcess'
     
   };

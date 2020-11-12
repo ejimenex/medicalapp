@@ -13,39 +13,42 @@ import {
   InvoiceDetailService,
   CurrencyService,
 } from "../../service/invoice.service";
-import { InvoiceListComponent } from "./list/list-invoice.component";
-import { InvoiceAddComponent } from "./create/create-inoice.component";
-import { InvoiceRoutingModule } from "./invoice.routing";
+import { MedicalProcessListComponent } from "./list/medical-process-list.component";
+import { MedicalProcessAddComponent } from "./create/medicalProcess.add.component";
+import { MedicalProcessRoutingModule } from "./medicalProcess.routing";
 import { DoctorOfficeService } from "../../service/doctorOffice.service";
 import { LanguageService } from "../../service/language.service";
 import { PatientService } from "../../service/patient.service";
-import { InvoiceEditComponent } from "./edit/edit-invoice.component";
-import { PatientInvoiceComponent } from './patient-service/patient-service.component';
+import { MedicalProcessEditComponent } from "./edit/medicalProcess.edit.component";
+import { MedicalCenterAddComponent } from "../parameter/medical-center/create/create-medical-center.component";
+import { MedicalCenterListComponent } from "../parameter/medical-center/list/medical-center-list.component";
+import { MedicalProcessService } from '../../service/medicalProcess.service';
+import { ArsService } from '../../service/ars.service';
+import { PatientFormService } from '../../service/patientForm.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgbModule,
-    InvoiceRoutingModule,
+    MedicalProcessRoutingModule,
     TranslateModule,
   ],
   declarations: [
-    InvoiceAddComponent,
-    InvoiceListComponent,
-    InvoiceEditComponent,
-    PatientInvoiceComponent
+    MedicalProcessAddComponent,
+    MedicalProcessListComponent,
+    MedicalProcessEditComponent,
   ],
   providers: [
-    InvoiceDetailService,
+    MedicalProcessService,
     LanguageService,
     DoctorOfficeService,
+    ArsService,
+    PatientFormService,
     CurrencyService,
     PatientService,
-    InvoiceService,
     DescountReasonService,
     MedicalServiceService,
   ],
-  entryComponents:[PatientInvoiceComponent]
 })
-export class InvoiceModule {}
+export class MedicalProcessModule {}

@@ -239,6 +239,20 @@
 "viewPatient":"See patient data",
 "medicalOffice":"Medical Office",
 "minordate":"The appointment date can not be less than current date",
-"timeRequired":"The time is required"
-  
+"timeRequired":"The time is required",
+"Process":"Medical Process",
+"processDate":"Process Date",
+"processDescription":" Process Description",
+"observation":"Observation",
+"processPlace":"Process Place",
+"processToDo":"Procedure to Perform",
+"selPatient":"Please you hace to select a patient",
+"servToInvoice":"Service to bill",
+"proccessName":"Proccess Name",
+"amountToInvoice":"Amount to Invoice",
+"detailToBill":"Detail to Invoice",
+"totalQtyToInvoice":"Total Quantity to Invoice",
+"amounts":"Amounts",
+"l.inlyOneConsultation":"Each doctor should only have one basic consultation added",
+"ppalServiceConsultation":"Principal Consultation Service"
   }

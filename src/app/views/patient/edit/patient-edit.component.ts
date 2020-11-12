@@ -12,8 +12,8 @@ import { ArsService } from "../../../service/ars.service";
 import { PatientService } from "../../../service/patient.service";
 import { TranslateService } from "@ngx-translate/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { PatientFormService } from '../../../service/patientForm.service';
-import { PatientForm } from '../../../model/medicalForm';
+import { PatientFormService } from "../../../service/patientForm.service";
+import { PatientForm } from "../../../model/medicalForm";
 
 @Component({
   selector: "edit-patient-app",
@@ -23,7 +23,7 @@ export class EditPatientComponent implements OnInit {
   id: number;
   patient: PatientModel = new PatientModel();
   arss = [];
-  questions: PatientForm[] = []
+  questions: PatientForm[] = [];
   sexList = [];
 
   constructor(
@@ -40,10 +40,9 @@ export class EditPatientComponent implements OnInit {
 
   ngOnInit() {
     this.getOne(this.id);
-    this.getQuestions()
+    this.getQuestions();
     this.getArs();
     this.sexList = [
-
       { header: this.translate.instant("male"), value: "M" },
       { header: this.translate.instant("female"), value: "F" },
     ];
@@ -88,7 +87,7 @@ export class EditPatientComponent implements OnInit {
     this.patientService.put(this.id, this.patient).subscribe(
       (response) => {
         this.alertService.success(this.translate.instant("sucessEdition"));
-        this.updateQuestion()
+        this.updateQuestion();
         this.router.navigate(["/patient"]);
       },
       (error) => {}

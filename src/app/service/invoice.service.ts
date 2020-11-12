@@ -12,7 +12,10 @@ export class InvoiceService extends BaseService<invoice, number> {
   constructor(_httpClient: HttpClient) {
     super(_httpClient, environment.url + endpoint.invoice);
   }
-
+billProccess(items:[],data){
+  let url=environment.url + endpoint.invoice+`/BillToPatient`;
+  return this._httpClient.post(url,items,data);
+}
   getFiltered(param:string,pageNumber:number,doctorGuid:string, patient?:number){
     param=param==null?'':param;
     let url= environment.url + endpoint.invoice+`/GetInvoicePaginated?pagenumber=${pageNumber}&pagesize=10&parameters=${param}&doctorGuid=${doctorGuid}&param=${patient}`

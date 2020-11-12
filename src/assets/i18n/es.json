@@ -239,5 +239,20 @@
 "viewPatient":"Ver Datos del Paciente",
 "medicalOffice":"Oficina Medica",
 "minordate":"La fecha de la cita no puede ser menor a la fecha del momento",
-"timeRequired":"La hora es requerida"
+"timeRequired":"La hora es requerida",
+"Process":"Procedimientos Medicos",
+"processDate":"Fecha de Proceso",
+"processDescription":" Descripción del Proceso",
+"observation":"Observación",
+"processPlace":"Lugar del Procedimiento",
+"processToDo":"Procedimiento a Realizar",
+"selPatient":"Por favor seleccionar un paciente",
+"servToInvoice":"Servicios a facturar",
+"proccessName":"Nombre del Proceso",
+"amountToInvoice":"Monto a Facturar",
+"detailToBill":"Detalle a facturar",
+"totalQtyToInvoice":"Total cantidad de procesos",
+"amounts":"Montos",
+"l.inlyOneConsultation":"Cada Doctor solo debe tener una consulta bascia agregada",
+"ppalServiceConsultation":"Servicio de Consulta principal"
   }

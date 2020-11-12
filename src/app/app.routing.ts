@@ -69,6 +69,10 @@ export const routes: Routes = [
       {
         path: 'consultation',
         loadChildren: () => import('./views/consultation/consultation.module').then(m => m.ConsultationModule)
+      }, 
+      {
+        path: 'medical-process',
+        loadChildren: () => import('./views/medicalProcess/medicalProcess.module').then(m => m.MedicalProcessModule)
       },
       {
         path: 'history',

@@ -56,6 +56,14 @@
                   <option *ngFor='let item of currency' [ngValue]='item.code'>{{item.name}}</option>
               </select>
             </div>
+            <div class="col-md-6">
+              <p class=""> {{ 'ppalServiceConsultation' | translate }}</p> 
+                <label class="switch switch-label switch-primary">
+                    <input type="checkbox" [(ngModel)]='serviceModel.isBasicConsultation' class="switch-input" checked>
+                    <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                  </label>
+              </div>
+          
           </div>
           </div>
         </div>

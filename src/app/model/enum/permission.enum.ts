@@ -37,5 +37,8 @@ export enum Permission {
   questionMedicalCreate,
   invoiceCreate,
   invoiceEdit,
-  invoiceList
+  invoiceList,
+  ProcessCreate,
+  ProcessEdit,
+  ProcessList
 }

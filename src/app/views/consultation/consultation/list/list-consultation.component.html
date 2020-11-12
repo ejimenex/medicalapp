@@ -71,6 +71,7 @@
                     <table class="table table table-hover">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>{{ 'patientName' | translate }}</th>
                                 <th>{{ 'officeName' | translate }}</th>
                                 <th>{{ 'reasonDescription' | translate }}</th>
@@ -80,6 +81,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor='let item of consultationList'>
+                                <td>{{item.consultationNumber}}</td>
                                 <td>{{item.patientName}}</td>
                                 <td>{{item.officeName}}</td>
                                 <td>{{item.reasonDescription | translate}}</td>

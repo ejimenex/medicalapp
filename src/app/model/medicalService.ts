@@ -9,4 +9,5 @@ export class MedicalService extends BaseModel{
    insurancePrice:number
    currencyId:string
    currencyName:string
+   isBasicConsultation:boolean
 }
